@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "dataset_id": "samaha-local-2026-11-02-visual",
+  "faqs": [
+    {
+      "id": "faq_bd8318c9883d22",
+      "company_id": "company_legal",
+      "kind": "faq",
+      "title": {
+        "en": "What services does your law firm offer?",
+        "ar": "ما هي الخدمات التي يقدمها مكتبكم للمحاماة؟"
+      },
+      "summary": {},
+      "body": {
+        "en": "Our law firm provides legal consultations, corporate law, criminal defense, family law, arbitration, real estate disputes, tax law, labor law and more.",
+        "ar": "يقدّم مكتبنا للمحاماة استشارات قانونية، وخدمات في قانون الشركات، والدفاع الجنائي، وقانون الأحوال الشخصية، والتحكيم، وتسوية المنازعات العقارية، وقانون الضرائب، وقانون العمل، وغيرها."
+      },
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 34,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_bd8318c9883d22",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_d57f2a562994a5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Matching bilingual published FAQ. No page-relative form instruction, free-consultation guarantee or payment-plan assertion imported.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "faq_deeec482ab3044",
+      "company_id": "company_legal",
+      "kind": "faq",
+      "title": {
+        "en": "Do you handle international cases?",
+        "ar": "هل تتولون القضايا الدولية؟"
+      },
+      "summary": {},
+      "body": {
+        "en": "Yes, we specialize in international arbitration, cross-border business disputes and legal matters involving foreign entities.",
+        "ar": "نعم، نحن متخصصون في التحكيم الدولي، وتسوية المنازعات التجارية العابرة للحدود، والقضايا القانونية المتعلقة بالجهات الأجنبية."
+      },
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 35,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_deeec482ab3044",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_cc134d2d4c68d5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Matching bilingual published FAQ. No page-relative form instruction, free-consultation guarantee or payment-plan assertion imported.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "faq_576fd9e4700a2f",
+      "company_id": "company_legal",
+      "kind": "faq",
+      "title": {
+        "en": "What is the cost of a legal consultation?",
+        "ar": "ما هي تكلفة الاستشارة القانونية؟"
+      },
+      "summary": {},
+      "body": {
+        "en": "The cost varies depending on the type and complexity of the case. Please contact us to receive a customized quote.",
+        "ar": "تختلف تكلفة الاستشارة القانونية حسب نوع القضية ومدى تعقيدها. يرجى التواصل معنا للحصول على عرض أسعار مناسب."
+      },
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 36,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_576fd9e4700a2f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/legal-services/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_1b0ee41eea09bb",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%ae%d8%af%d9%85%d8%a7%d8%aa-%d8%a7%d9%84%d9%82%d8%a7%d9%86%d9%88%d9%86%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Matching bilingual published FAQ. No page-relative form instruction, free-consultation guarantee or payment-plan assertion imported.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    }
+  ]
+}

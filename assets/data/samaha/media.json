@@ -1,0 +1,823 @@
+{
+  "schema_version": 1,
+  "dataset_id": "samaha-local-2026-11-02-visual",
+  "media": [
+    {
+      "id": "media_team_live_7a6664b",
+      "company_id": "company_legal",
+      "entry_id": "team_live_7a6664b",
+      "asset_path": "assets/images/samaha/portrait_team_live_7a6664b.png",
+      "alt_text": {
+        "en": "Gomaa Samaha"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-2-rd5cymnoguwq6besm59b3cmy2ektujmqyo2292csa4.png",
+      "original_sha256": "1021247bbc1c8a694bec5f5272cdcf90f7cbfc62e9f4bca0013d98d04bc80a12",
+      "source_card_sha256": "38dc3f9519684e885950bf021ee70c13fd0a755533f8da229a8f431d8b6dba5d",
+      "source_element": "[data-id=\"7f979fb\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_7a6664b",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_1c2e535",
+      "company_id": "company_legal",
+      "entry_id": "team_live_1c2e535",
+      "asset_path": "assets/images/samaha/portrait_team_live_1c2e535.jpg",
+      "alt_text": {
+        "en": "Shaaban Samaha"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-08-30-at-1.21.30-PM-1-rsny8tqm148y5ulkd6ob9kt91x2h3t7mc9gaejwlkc.jpeg",
+      "original_sha256": "3ac08761162a6dbe6493914ec2137c25838e7e690f851f0da772c0345d7237cc",
+      "source_card_sha256": "ff0b822618fbefdfa24570fe1993a728ef3c1ede0539c864dfe275d01fb34bd3",
+      "source_element": "[data-id=\"615ff93\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_1c2e535",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_a97f12c",
+      "company_id": "company_legal",
+      "entry_id": "team_live_a97f12c",
+      "asset_path": "assets/images/samaha/portrait_team_live_a97f12c.jpg",
+      "alt_text": {
+        "en": "Jassim Al-Balushi"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-13-at-3.04.03-PM-rd5a7kg07faulrax2bqrbck4aiu8mwd4ocxvh98g18.jpeg",
+      "original_sha256": "4111431378f8c8d170bfae793eb2e799c6b73265024b8e8055bede375763e949",
+      "source_card_sha256": "c6d98f855935ed8cfb031becc658f70971bcd868a7eeff1dc261db31ce686ca7",
+      "source_element": "[data-id=\"f06e6fa\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_a97f12c",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_9c188eb",
+      "company_id": "company_legal",
+      "entry_id": "team_live_9c188eb",
+      "asset_path": "assets/images/samaha/portrait_team_live_9c188eb.jpg",
+      "alt_text": {
+        "en": "Nouf Awlaqi"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-13-at-3.04.03-PM-1-rd5a7zhf8rvfrip2mi8sf8rhsos4220u2fdn5om59o.jpeg",
+      "original_sha256": "11dc1aaa9fc26d0f3132dd4905ac799237f69398bd0203101568513832289bfd",
+      "source_card_sha256": "880e257df9cd78477afc7bb5ca1d9ec4bcf795a863cf1e13f4933685b9afa187",
+      "source_element": "[data-id=\"cbf34a5\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_9c188eb",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_ac6ff7a2d5ac93",
+      "company_id": "company_legal",
+      "entry_id": "team_ac6ff7a2d5ac93",
+      "asset_path": "assets/images/samaha/portrait_team_ac6ff7a2d5ac93.jpg",
+      "alt_text": {
+        "en": "Yazan Al bakheet",
+        "ar": "يزن البخيت"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-3-rd5cq9vbpvgyz3jpej8oxgjfz3rdfegn5baooiqrl8.jpg",
+      "original_sha256": "157d4dca3dac814d78181fbb60059eb6d08210cb95eeb2175436e5a49e9f0fe3",
+      "source_card_sha256": "f35cf72c41b1d08a90fee95e55380068172cd9c9659f0bbee33e30b032d08a88",
+      "source_element": "[data-id=\"1f1d0b5\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_27b931b",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_75991c3",
+      "company_id": "company_legal",
+      "entry_id": "team_live_75991c3",
+      "asset_path": "assets/images/samaha/portrait_team_live_75991c3.jpg",
+      "alt_text": {
+        "en": "Abdallah Foad"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-13-at-3.04.03-PM-6-rd5c1b9m89aunvsz5qtcpras2qsh0rd91rmhvzr4to.jpeg",
+      "original_sha256": "cf81503c3a62f51eb480beadd95ac6db449173219c4e84ee2801ec04662e8cab",
+      "source_card_sha256": "181e93f31e1335c9eb30c5f988c98d12843f113053c6721ac1348077c687912b",
+      "source_element": "[data-id=\"a81c78b\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_75991c3",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_8e1710ea71e3d7",
+      "company_id": "company_legal",
+      "entry_id": "team_8e1710ea71e3d7",
+      "asset_path": "assets/images/samaha/portrait_team_8e1710ea71e3d7.jpg",
+      "alt_text": {
+        "en": "Dr. Abdelkreem Alsafi",
+        "ar": "الدكتور عبد الكريم الصافي"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-4-rd5csoch6mrcn823dkmdaupumjx53jzy57bctz6jos.jpg",
+      "original_sha256": "7c5e4b350c64206f79bcb2fd6e7d5eefd31a6ec42f4631b1d7ea4a6534542116",
+      "source_card_sha256": "4667881b05093fe20fba57a90ed37228e1377e57aedb80d350255b657475d940",
+      "source_element": "[data-id=\"ce36912\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_9687f0c",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_6df947a",
+      "company_id": "company_legal",
+      "entry_id": "team_live_6df947a",
+      "asset_path": "assets/images/samaha/portrait_team_live_6df947a.jpg",
+      "alt_text": {
+        "en": "Esraa Refai"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-2-rd5cls732dbni62jmlcv0lc5stw8ngmt73364xehbg.jpg",
+      "original_sha256": "bec7d61394042d1193e05fd6206a6b416f974d66f73a2f3e287a4fb30e7878ea",
+      "source_card_sha256": "87e85b0719baa392d09386c67a6d169c8b3ca68a6013994777bf9bede8c4e73b",
+      "source_element": "[data-id=\"3a23fb3\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_6df947a",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_e0a49c8",
+      "company_id": "company_legal",
+      "entry_id": "team_live_e0a49c8",
+      "asset_path": "assets/images/samaha/portrait_team_live_e0a49c8.jpg",
+      "alt_text": {
+        "en": "Emad Al-Shaer"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-28-at-4.19.05-PM-rr49pr2ahefuazho1as74offejod68t467fyostcfg.jpeg",
+      "original_sha256": "c551c9c30eb80d2b9eb1bfff0dbec070c650ff46741a7ee86fe5190b634c6f02",
+      "source_card_sha256": "80ecf4b85a2ac95a84469ad4899827f10375d66875227da5c7724da52e644c45",
+      "source_element": "[data-id=\"266ce5a\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_e0a49c8",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_db5d309",
+      "company_id": "company_legal",
+      "entry_id": "team_live_db5d309",
+      "asset_path": "assets/images/samaha/portrait_team_live_db5d309.jpg",
+      "alt_text": {
+        "en": "Sayed Elshaeer"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-13-at-3.04.03-PM-4-rd5bklowqafc9g2sqis4dz3rw55k6h11f23qqwj3fw.jpeg",
+      "original_sha256": "c72770d05b147d84ba3fa24d0553a6e8558c8a31d3c3bec2c8efa223e2bdcf27",
+      "source_card_sha256": "8b29b9fdc4278c00fef9b344cc56f97ed4849176d897b75ed6fd22cac46336dc",
+      "source_element": "[data-id=\"3ce9f94\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_db5d309",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_3fdf7ddc2692ca",
+      "company_id": "company_legal",
+      "entry_id": "team_3fdf7ddc2692ca",
+      "asset_path": "assets/images/samaha/portrait_team_3fdf7ddc2692ca.png",
+      "alt_text": {
+        "en": "Mahmoud Elgemeay",
+        "ar": "محمود الجامعي"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/8-reqfkjs494oe4fs9lbl9lb44qxz18x7gzzcuokcj70.png",
+      "original_sha256": "6a5da97e8cb70bb975a4032b41a047917cb282c3dd34620fb9053c854ddc9a10",
+      "source_card_sha256": "4bcdb7f4cd0e0752aadf56c2bc61add098176f6a39ec9bd145c750bdff517c57",
+      "source_element": "[data-id=\"15b7d4a\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_9b2d615",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_c45334a8d40516",
+      "company_id": "company_legal",
+      "entry_id": "team_c45334a8d40516",
+      "asset_path": "assets/images/samaha/portrait_team_c45334a8d40516.jpg",
+      "alt_text": {
+        "en": "Ahmed nagdy",
+        "ar": "أحمد نجدي"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-13-at-3.04.03-PM-3-rd5bji7or8xapto551psh92exyk576ob9mpcla5mp8.jpeg",
+      "original_sha256": "9484e38997107d8b8faaa80cbd0118de5870694ccad280c377df11bc1de80efd",
+      "source_card_sha256": "96b03abd1c81bfe69e74a9105e085e1e3e6c39f7b6308b73194f5597f23d8982",
+      "source_element": "[data-id=\"9f8b5bd\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_f7a977e",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_aead4ae569f1a0",
+      "company_id": "company_legal",
+      "entry_id": "team_aead4ae569f1a0",
+      "asset_path": "assets/images/samaha/portrait_team_aead4ae569f1a0.jpg",
+      "alt_text": {
+        "en": "islam atris",
+        "ar": "إسلام أطرس"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-1-rd5cie02dwodkv01g4jd0g68kqmiut5peaa1qyfnsc.jpg",
+      "original_sha256": "ed286d2d12c184debd7ec42b423e70cbb16ed11f888424c0b988aa2430f025a6",
+      "source_card_sha256": "1df70761815f805b2bf7adbd14311a6ac2e5ac9ce387bc1279c4a3218f6549b1",
+      "source_element": "[data-id=\"7320756\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_537a3e5",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_aa0ea1b96ff5e9",
+      "company_id": "company_legal",
+      "entry_id": "team_aa0ea1b96ff5e9",
+      "asset_path": "assets/images/samaha/portrait_team_aa0ea1b96ff5e9.png",
+      "alt_text": {
+        "en": "chakya Hadunge",
+        "ar": "تشاكيا هادونجي"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/11-reqflwnq4ijaw5t9nwpv6ys3mza4d6liipa3myc27g.png",
+      "original_sha256": "7183e295437872965c611db3d504acf0e275dc8c49cb18212d8fc5ac7f203ab8",
+      "source_card_sha256": "186fa63fc42c8852cdb98136492cb0dbaf0089d0c327b13c9a33a9a8829cc7e9",
+      "source_element": "[data-id=\"0deda6c\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_45f4899",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_9ec458b",
+      "company_id": "company_legal",
+      "entry_id": "team_live_9ec458b",
+      "asset_path": "assets/images/samaha/portrait_team_live_9ec458b.png",
+      "alt_text": {
+        "en": "yasith vihan"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-12-rf4pu8hynsioebmenyqgdfzynad9g39d2810g9x4x8.png",
+      "original_sha256": "5a16f9b61b97bdd01d712df49ff525956d596b996183c7004f68e8a9b5d5cfb7",
+      "source_card_sha256": "0065d41f39a679c2a3ae4f371b02bbf92d1bacb036b77e0360025d0faaddb7ac",
+      "source_element": "[data-id=\"57a06e0\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_9ec458b",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_b744b98a293e3b",
+      "company_id": "company_legal",
+      "entry_id": "team_b744b98a293e3b",
+      "asset_path": "assets/images/samaha/portrait_team_b744b98a293e3b.jpg",
+      "alt_text": {
+        "en": "Ahmed Medwar",
+        "ar": "أحمد مدور"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/2-rep5k4mwnh5umdttxbp7natr2m9cupbylgldakc84s.jpeg",
+      "original_sha256": "366a90f4466abd419935a0846fba070cb993494a29ab3b3f4ba0c05664e730e5",
+      "source_card_sha256": "179d6b18f4ee272b3f2165325af827630b79ca4b4914a82a9c8800859df93a75",
+      "source_element": "[data-id=\"3c97cc7\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_e4bb029",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_8b74019898bbf1",
+      "company_id": "company_legal",
+      "entry_id": "team_8b74019898bbf1",
+      "asset_path": "assets/images/samaha/portrait_team_8b74019898bbf1.jpg",
+      "alt_text": {
+        "en": "Haitham AlNahas",
+        "ar": "هيثم النحاس"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-13-at-3.04.03-PM-2-rd5bhb98t5x7mkuty3l4nszp1ldb8lyuyrwka1ep7w.jpeg",
+      "original_sha256": "80799362f7fa4e77326502c3744686171e36083eb97a62931dbeb78570e7af25",
+      "source_card_sha256": "f9a778cb108fa68dd9df1393344acd827a329f867adc3ccc64a80627d44f9342",
+      "source_element": "[data-id=\"271062d\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_4a65374",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_db36764",
+      "company_id": "company_legal",
+      "entry_id": "team_live_db36764",
+      "asset_path": "assets/images/samaha/portrait_team_live_db36764.png",
+      "alt_text": {
+        "en": "Ikrami Abdel-Jalil"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/9-reqfkwxuwt6emz95gha1k7sl2c668onppshneft0rw.png",
+      "original_sha256": "435f9e6d6a85f53facc0cf314dba3af5e2bef4e0a1e0f4a8ce8c316142bbaee7",
+      "source_card_sha256": "95c0c3bf1f1b11fe5c76201b05f08e35528c165de272ee55416cdbd22ea1b597",
+      "source_element": "[data-id=\"ebc61c5\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_db36764",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_9c0752d0df0c38",
+      "company_id": "company_legal",
+      "entry_id": "team_9c0752d0df0c38",
+      "asset_path": "assets/images/samaha/portrait_team_9c0752d0df0c38.png",
+      "alt_text": {
+        "en": "Magdy Abdulghany",
+        "ar": "مجدي عبد الغني"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/10-reqfl87x6tluiasrmm5ke4y46ymkt1whrcbh5rcap8.png",
+      "original_sha256": "c99eb78fe1687061ef6cd1fad89a38bb83fc0b06d5f9365a67b3eb342ed525dd",
+      "source_card_sha256": "72e9fe2439924d9665e2b357728c82e615ca56070ceaff17014321017c95003d",
+      "source_element": "[data-id=\"0cb0efb\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_7988f18",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_1993881407665d",
+      "company_id": "company_legal",
+      "entry_id": "team_1993881407665d",
+      "asset_path": "assets/images/samaha/portrait_team_1993881407665d.jpg",
+      "alt_text": {
+        "en": "Hakima belarabi",
+        "ar": "حكيمة العربي"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-rd5cfcysd4j463ef4temz7oro1jy1x4ubalq2uxbu4.jpg",
+      "original_sha256": "2effb7baaa821b7ac6fcd5f1465cf1c00e65c2bf508ca528fcb2baf732bf1a2d",
+      "source_card_sha256": "4f122982e788da8bd8e2fa2bd70772bd98140c30d31aa8e917d14b9a9c02f4f9",
+      "source_element": "[data-id=\"a405a8f\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_67cb0b7",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_6e4126dd6493de",
+      "company_id": "company_legal",
+      "entry_id": "team_6e4126dd6493de",
+      "asset_path": "assets/images/samaha/portrait_team_6e4126dd6493de.jpg",
+      "alt_text": {
+        "en": "Rushel virina",
+        "ar": "روشيل فيرينا"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/3-rep5ldr5rivm3o0alv7ayzfvl42z46b2rnwobuhbu4.jpeg",
+      "original_sha256": "faf7bad4e52c77b8c550181a17d5794d439f3b3520f94ea65d68a3d1acdb85fa",
+      "source_card_sha256": "89d57e0c22efb7a512d7538cf6a9ea6d3b03288c90e1a0ff318e8ce101b0b0b6",
+      "source_element": "[data-id=\"4805154\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_f75593b",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_6869347",
+      "company_id": "company_legal",
+      "entry_id": "team_live_6869347",
+      "asset_path": "assets/images/samaha/portrait_team_live_6869347.png",
+      "alt_text": {
+        "en": "JENNA KADHUM"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-rk0ad0ml33yg2euhzurzntpv38odumg6qmk4zrwg18.png",
+      "original_sha256": "d7887a89735a914dc2112d76663264093b20c51cd4597703dc405911e13f61f3",
+      "source_card_sha256": "3456d46b350afb91c04dcd816493cdcbcd82b1a6d41035d94b3d0040bbedafc5",
+      "source_element": "[data-id=\"38d5c66\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_6869347",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_0049e36",
+      "company_id": "company_legal",
+      "entry_id": "team_live_0049e36",
+      "asset_path": "assets/images/samaha/portrait_team_live_0049e36.png",
+      "alt_text": {
+        "en": "Amani Emara"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-1-rk5tbgxi9stc26zgav4ibelhztux12w2th62i8271o.png",
+      "original_sha256": "87d21283b35a8f76efcec2fd58648ca0eabe762afb7e4407727f29f0fc6da4dd",
+      "source_card_sha256": "09fa6eeaff6aeee4533f9283cb5fac18ce1b358522ddb8d8bd1cd062fe121301",
+      "source_element": "[data-id=\"81fd7d0\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_0049e36",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_ff0ed86",
+      "company_id": "company_legal",
+      "entry_id": "team_live_ff0ed86",
+      "asset_path": "assets/images/samaha/portrait_team_live_ff0ed86.jpg",
+      "alt_text": {
+        "en": "Saeed Ali"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-24-at-10.03.03-PM-rr0ij9bewckt60ccxqblwpyki601k9633awnfweuy4.jpeg",
+      "original_sha256": "98a2112f4c7a47dac7ddedc19037f95e632188f32d1328e26894a8ea7169bb65",
+      "source_card_sha256": "58b5d05d544f7a5fb4bc373661b264e29d9531795949c625056e33aec5a4ae3c",
+      "source_element": "[data-id=\"11bcb4c\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_ff0ed86",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_8907264",
+      "company_id": "company_legal",
+      "entry_id": "team_live_8907264",
+      "asset_path": "assets/images/samaha/portrait_team_live_8907264.jpg",
+      "alt_text": {
+        "en": "Mohammed Asif Abdulla"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-24-at-11.43.07-PM-rr0in94py01oicjglyhj07o3e4b79y10n2pxv8hmi4.jpeg",
+      "original_sha256": "0e888aa3566b28e44e4601357eaaaff620699d61e453b749cf08cc04fc55bff9",
+      "source_card_sha256": "2342ebad62c77142a8b87d3ad4c18b2bdc88e4e3e970ff837afa36121cc9effb",
+      "source_element": "[data-id=\"8fcc067\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_8907264",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "media_team_live_2617466",
+      "company_id": "company_legal",
+      "entry_id": "team_live_2617466",
+      "asset_path": "assets/images/samaha/portrait_team_live_2617466.jpg",
+      "alt_text": {
+        "en": "Ahmed Al-Tarras"
+      },
+      "media_role": "portrait",
+      "rights_status": "unverified",
+      "permission_evidence": "On 2026-11-02 the requester selected \"I have permission to use the photos\" for the 26 clearly associated portraits. This is a user declaration; no permission document, licensing URL, rights-holder identity or detailed licence scope was supplied or independently verified. It is not a claim of an open licence. See docs/SAMAHA_MEDIA_RIGHTS.md.",
+      "display_policy": "user_declared_permission",
+      "association_status": "verified_source_card",
+      "association_evidence": "Name, role and img are adjacent in one live homepage card; original archive has matching EN name. This verifies the published association, not identity, employment or credentials.",
+      "source_page_url": "https://samaha-group.com/",
+      "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-28-at-4.20.26-PM-rr49o8jnh0d7llouvn7u426oy752rssomplsur26gc.jpeg",
+      "original_sha256": "7ce09cc0c9ac2c91af9bd1e02c688b2af83214848665b5fee5ef20d0b76a48bb",
+      "source_card_sha256": "cc4819d2b26acd74fe6b8c60144fbef4bf604639c705b92e545ef8c4ed178bb6",
+      "source_element": "[data-id=\"3cdd52a\"]",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_2617466",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "publication_status": "approved",
+      "review_basis": "Original photo bytes and the published name/role/image-card association are reviewed. Display follows the requester's explicit permission declaration on 2026-11-02; licensing documentation remains unverified. No identity, employment, credential or open-licence claim is made.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    }
+  ]
+}

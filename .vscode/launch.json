@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Admin Web",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "device": "chrome",
+      "dartDefineFromFile": "supabase.local.json",
+      "preLaunchTask": "Validate Supabase Config"
+    },
+    {
+      "name": "Android",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "dartDefineFromFile": "supabase.local.json",
+      "preLaunchTask": "Validate Supabase Config"
+    }
+  ]
+}

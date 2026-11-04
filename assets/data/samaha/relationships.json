@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "dataset_id": "samaha-local-2026-11-02-visual",
+  "relationships": [
+    {
+      "id": "link_service_9a43143bf49c49_faq_bd8318c9883d22",
+      "company_id": "company_legal",
+      "from_id": "service_9a43143bf49c49",
+      "from_kind": "service",
+      "to_id": "faq_bd8318c9883d22",
+      "to_kind": "faq",
+      "relation_kind": "service_faq",
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_bd8318c9883d22",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_d57f2a562994a5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        },
+        {
+          "record_id": "service_9a43143bf49c49",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/legal-consultations/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_a283b00a737d48",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%a7%d8%b3%d8%aa%d8%b4%d8%a7%d8%b1%d8%a7%d8%aa-%d8%a7%d9%84%d9%82%d8%a7%d9%86%d9%88%d9%86%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "The selected FAQ expressly describes this practice or consultation scope; no location/person assignment inferred."
+    },
+    {
+      "id": "link_service_6e18073db0b2d2_faq_bd8318c9883d22",
+      "company_id": "company_legal",
+      "from_id": "service_6e18073db0b2d2",
+      "from_kind": "service",
+      "to_id": "faq_bd8318c9883d22",
+      "to_kind": "faq",
+      "relation_kind": "service_faq",
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_bd8318c9883d22",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_d57f2a562994a5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        },
+        {
+          "record_id": "service_6e18073db0b2d2",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/business-corporate-law/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_cb9d110679a318",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%84%d8%aa%d8%ac%d8%a7%d8%b1%d9%8a-%d9%88%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%84%d8%b4%d8%b1%d9%83%d8%a7%d8%aa/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "The selected FAQ expressly describes this practice or consultation scope; no location/person assignment inferred."
+    },
+    {
+      "id": "link_service_2672b64b2fd28f_faq_bd8318c9883d22",
+      "company_id": "company_legal",
+      "from_id": "service_2672b64b2fd28f",
+      "from_kind": "service",
+      "to_id": "faq_bd8318c9883d22",
+      "to_kind": "faq",
+      "relation_kind": "service_faq",
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_bd8318c9883d22",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_d57f2a562994a5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        },
+        {
+          "record_id": "service_2672b64b2fd28f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/personal-status-family-law/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_7c24857b695e61",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%a3%d8%ad%d9%88%d8%a7%d9%84-%d8%a7%d9%84%d8%b4%d8%ae%d8%b5%d9%8a%d8%a9-%d9%88%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%84%d8%a3%d8%b3%d8%b1%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "The selected FAQ expressly describes this practice or consultation scope; no location/person assignment inferred."
+    },
+    {
+      "id": "link_service_b7c421e015bafd_faq_bd8318c9883d22",
+      "company_id": "company_legal",
+      "from_id": "service_b7c421e015bafd",
+      "from_kind": "service",
+      "to_id": "faq_bd8318c9883d22",
+      "to_kind": "faq",
+      "relation_kind": "service_faq",
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_bd8318c9883d22",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_d57f2a562994a5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        },
+        {
+          "record_id": "service_b7c421e015bafd",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/criminal-law/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_055adddfda611f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%84%d8%ac%d9%86%d8%a7%d8%a6%d9%8a/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "The selected FAQ expressly describes this practice or consultation scope; no location/person assignment inferred."
+    },
+    {
+      "id": "link_service_79a6535a3e380f_faq_bd8318c9883d22",
+      "company_id": "company_legal",
+      "from_id": "service_79a6535a3e380f",
+      "from_kind": "service",
+      "to_id": "faq_bd8318c9883d22",
+      "to_kind": "faq",
+      "relation_kind": "service_faq",
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_bd8318c9883d22",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_d57f2a562994a5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        },
+        {
+          "record_id": "service_79a6535a3e380f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/international-arbitration/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_e0a5fab573fcfe",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%aa%d8%ad%d9%83%d9%8a%d9%85-%d8%a7%d9%84%d8%af%d9%88%d9%84%d9%8a/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "The selected FAQ expressly describes this practice or consultation scope; no location/person assignment inferred."
+    },
+    {
+      "id": "link_service_c7862c05fe7f44_faq_bd8318c9883d22",
+      "company_id": "company_legal",
+      "from_id": "service_c7862c05fe7f44",
+      "from_kind": "service",
+      "to_id": "faq_bd8318c9883d22",
+      "to_kind": "faq",
+      "relation_kind": "service_faq",
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_bd8318c9883d22",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_d57f2a562994a5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        },
+        {
+          "record_id": "service_c7862c05fe7f44",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/real-estate-disputes/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_1e62a11f2f7db8",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%86%d8%b2%d8%a7%d8%b9%d8%a7%d8%aa-%d8%a7%d9%84%d8%b9%d9%82%d8%a7%d8%b1%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "The selected FAQ expressly describes this practice or consultation scope; no location/person assignment inferred."
+    },
+    {
+      "id": "link_service_46532981305b66_faq_bd8318c9883d22",
+      "company_id": "company_legal",
+      "from_id": "service_46532981305b66",
+      "from_kind": "service",
+      "to_id": "faq_bd8318c9883d22",
+      "to_kind": "faq",
+      "relation_kind": "service_faq",
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_bd8318c9883d22",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_d57f2a562994a5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        },
+        {
+          "record_id": "service_46532981305b66",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/labor-law/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_0acc6aee5d63d0",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%84%d8%b9%d9%85%d9%84/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "The selected FAQ expressly describes this practice or consultation scope; no location/person assignment inferred."
+    },
+    {
+      "id": "link_service_09271203d24479_faq_bd8318c9883d22",
+      "company_id": "company_legal",
+      "from_id": "service_09271203d24479",
+      "from_kind": "service",
+      "to_id": "faq_bd8318c9883d22",
+      "to_kind": "faq",
+      "relation_kind": "service_faq",
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_bd8318c9883d22",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_d57f2a562994a5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        },
+        {
+          "record_id": "service_09271203d24479",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/taxes/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_8c4ecf71e93e6c",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b6%d8%b1%d8%a7%d8%a6%d8%a8/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "The selected FAQ expressly describes this practice or consultation scope; no location/person assignment inferred."
+    },
+    {
+      "id": "link_service_79a6535a3e380f_faq_deeec482ab3044",
+      "company_id": "company_legal",
+      "from_id": "service_79a6535a3e380f",
+      "from_kind": "service",
+      "to_id": "faq_deeec482ab3044",
+      "to_kind": "faq",
+      "relation_kind": "service_faq",
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_deeec482ab3044",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_cc134d2d4c68d5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        },
+        {
+          "record_id": "service_79a6535a3e380f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/international-arbitration/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_e0a5fab573fcfe",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%aa%d8%ad%d9%83%d9%8a%d9%85-%d8%a7%d9%84%d8%af%d9%88%d9%84%d9%8a/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "The selected FAQ expressly describes this practice or consultation scope; no location/person assignment inferred."
+    },
+    {
+      "id": "link_service_9a43143bf49c49_faq_576fd9e4700a2f",
+      "company_id": "company_legal",
+      "from_id": "service_9a43143bf49c49",
+      "from_kind": "service",
+      "to_id": "faq_576fd9e4700a2f",
+      "to_kind": "faq",
+      "relation_kind": "service_faq",
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "faq_576fd9e4700a2f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/legal-services/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "faq_1b0ee41eea09bb",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/faqs.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%ae%d8%af%d9%85%d8%a7%d8%aa-%d8%a7%d9%84%d9%82%d8%a7%d9%86%d9%88%d9%86%d9%8a%d8%a9/",
+          "language": "ar"
+        },
+        {
+          "record_id": "service_9a43143bf49c49",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/legal-consultations/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_a283b00a737d48",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%a7%d8%b3%d8%aa%d8%b4%d8%a7%d8%b1%d8%a7%d8%aa-%d8%a7%d9%84%d9%82%d8%a7%d9%86%d9%88%d9%86%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "The selected FAQ expressly describes this practice or consultation scope; no location/person assignment inferred."
+    }
+  ]
+}

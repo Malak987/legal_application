@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "dataset_id": "samaha-local-2026-11-02-visual",
+  "companies": [
+    {
+      "id": "company_group",
+      "slug": "group",
+      "kind": "group",
+      "parent_id": null,
+      "name": {
+        "en": "Samaha Group",
+        "ar": "سماحة جروب"
+      },
+      "summary": {
+        "en": "Legal and professional services through five published divisions.",
+        "ar": "خدمات قانونية ومهنية من خلال خمسة أقسام منشورة على موقع المجموعة."
+      },
+      "description": {
+        "en": "Samaha Group's published directory brings together five divisions: legal consultancy, business services, debt collection, immigration services and legal translation. The group describes services for individuals and businesses, with each division presenting its own area of work.",
+        "ar": "يضم الدليل المنشور لسماحة جروب خمسة أقسام: الاستشارات القانونية، وخدمات رجال الأعمال، وتحصيل الديون، وخدمات الهجرة، والترجمة القانونية. تعرض المجموعة خدمات للأفراد والشركات، ويختص كل قسم بمجال العمل المبين في وصفه."
+      },
+      "website_url": "https://samaha-group.com/",
+      "sort_order": 0,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "company_group",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "company_group",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Local-content packaging review of the unchanged, approved Phase 2 projection and the checksum-pinned Phase 1 companies/team observations. Expanded company descriptions are neutral paraphrases of their separately sourced EN/AR division descriptions; no marketing superlatives, credentials or performance guarantees added. Names, published roles, contacts and company associations are unchanged. No founder identity, biography, specialty, office assignment or media permission is inferred.",
+      "reviewed_at": "2026-11-02",
+      "website_unavailable_reason": {}
+    },
+    {
+      "id": "company_legal",
+      "slug": "legal",
+      "kind": "division",
+      "parent_id": "company_group",
+      "name": {
+        "en": "Samaha Lawyers & Legal Consultants",
+        "ar": "سماحة للمحاماة والاستشارات القانونية"
+      },
+      "summary": {
+        "en": "Legal consultations and support in commercial, corporate, civil, criminal and Sharia law.",
+        "ar": "استشارات ودعم قانوني في القانون التجاري وقانون الشركات والقانون المدني والجنائي والقانون الشرعي."
+      },
+      "description": {
+        "en": "Samaha Lawyers & Legal Consultants is the legal-services division listed by Samaha Group. Its published overview covers commercial law, corporate law, civil and criminal law, and Sharia law. The reviewed service records below describe its published legal consultation and support areas.",
+        "ar": "سماحة للمحاماة والاستشارات القانونية هي قسم الخدمات القانونية المدرج لدى سماحة جروب. تشمل نبذتها المنشورة القانون التجاري، وقانون الشركات، والقانون المدني والجنائي، والقانون الشرعي. توضح سجلات الخدمات المعتمدة للعرض أدناه مجالات الاستشارات والدعم القانوني المنشورة."
+      },
+      "website_url": "https://samaha-group.com/",
+      "sort_order": 1,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "company_legal",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "company_legal",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Local-content packaging review of the unchanged, approved Phase 2 projection and the checksum-pinned Phase 1 companies/team observations. Expanded company descriptions are neutral paraphrases of their separately sourced EN/AR division descriptions; no marketing superlatives, credentials or performance guarantees added. Names, published roles, contacts and company associations are unchanged. No founder identity, biography, specialty, office assignment or media permission is inferred.",
+      "reviewed_at": "2026-11-02",
+      "website_unavailable_reason": {}
+    },
+    {
+      "id": "company_debt",
+      "slug": "debt",
+      "kind": "division",
+      "parent_id": "company_group",
+      "name": {
+        "en": "Samaha Debt Collection Services",
+        "ar": "سماحة لخدمات تحصيل الديون"
+      },
+      "summary": {
+        "en": "Debt collection services for individuals and businesses.",
+        "ar": "خدمات تحصيل الديون للأفراد والشركات."
+      },
+      "description": {
+        "en": "Samaha Group lists Samaha Debt Collection Services as its debt-collection division. The published overview describes recovering outstanding debts for individuals and businesses. A more detailed division catalogue has not been approved for this directory.",
+        "ar": "تدرج سماحة جروب سماحة لخدمات تحصيل الديون بوصفها قسم تحصيل الديون. تتناول النبذة المنشورة استرداد الديون المستحقة للأفراد والشركات. لم يُعتمد كتالوج أكثر تفصيلًا لخدمات هذا القسم للعرض في الدليل."
+      },
+      "website_url": null,
+      "sort_order": 2,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "company_debt",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "company_debt",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Local-content packaging review of the unchanged, approved Phase 2 projection and the checksum-pinned Phase 1 companies/team observations. Expanded company descriptions are neutral paraphrases of their separately sourced EN/AR division descriptions; no marketing superlatives, credentials or performance guarantees added. Names, published roles, contacts and company associations are unchanged. No founder identity, biography, specialty, office assignment or media permission is inferred.",
+      "reviewed_at": "2026-11-02",
+      "website_unavailable_reason": {
+        "en": "No reviewed HTTPS website is available for this division. Its published site could not be accessed during source collection.",
+        "ar": "لا يتوفر موقع HTTPS معتمد للعرض لهذا القسم. تعذّر الوصول إلى موقعه المنشور أثناء جمع المصادر."
+      }
+    },
+    {
+      "id": "company_businessmen",
+      "slug": "businessmen",
+      "kind": "division",
+      "parent_id": "company_group",
+      "name": {
+        "en": "Samaha Businessmen Services",
+        "ar": "سماحة لخدمات رجال الأعمال"
+      },
+      "summary": {
+        "en": "Company setup and business development support in Dubai and other UAE emirates.",
+        "ar": "دعم تأسيس الشركات وتطوير الأعمال في دبي وبقية إمارات دولة الإمارات العربية المتحدة."
+      },
+      "description": {
+        "en": "Samaha Businessmen Services is the division listed for company setup and business development. The group's published overview describes support for investors and entrepreneurs in Dubai and other emirates of the United Arab Emirates. Only this reviewed scope is included here; unrelated material from the division's website is excluded.",
+        "ar": "سماحة لخدمات رجال الأعمال هي القسم المدرج لتأسيس الشركات وتطوير الأعمال. تصف نبذة المجموعة المنشورة دعم المستثمرين ورواد الأعمال في دبي وبقية إمارات دولة الإمارات العربية المتحدة. يقتصر العرض هنا على هذا النطاق المعتمد، مع استبعاد المحتوى غير ذي الصلة من موقع القسم."
+      },
+      "website_url": null,
+      "sort_order": 3,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "company_businessmen",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "company_businessmen",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Local-content packaging review of the unchanged, approved Phase 2 projection and the checksum-pinned Phase 1 companies/team observations. Expanded company descriptions are neutral paraphrases of their separately sourced EN/AR division descriptions; no marketing superlatives, credentials or performance guarantees added. Names, published roles, contacts and company associations are unchanged. No founder identity, biography, specialty, office assignment or media permission is inferred.",
+      "reviewed_at": "2026-11-02",
+      "website_unavailable_reason": {
+        "en": "The division's website link is withheld pending a source-quality review. It has not been replaced with the group's website.",
+        "ar": "رابط موقع القسم محجوب لحين مراجعة جودة المصدر، ولم يُستبدل بموقع المجموعة."
+      }
+    },
+    {
+      "id": "company_immigration",
+      "slug": "immigration",
+      "kind": "division",
+      "parent_id": "company_group",
+      "name": {
+        "en": "Samaha Immigration Services",
+        "ar": "سماحة لخدمات الهجرة"
+      },
+      "summary": {
+        "en": "Immigration support for individuals and families seeking opportunities abroad.",
+        "ar": "دعم الهجرة للأفراد والعائلات الباحثين عن فرص في الخارج."
+      },
+      "description": {
+        "en": "Samaha Group lists Samaha Immigration Services for individuals and families seeking new opportunities abroad. Its published overview describes immigration and relocation support. No destinations, visa categories, eligibility rules or approval guarantees are inferred from that overview.",
+        "ar": "تدرج سماحة جروب سماحة لخدمات الهجرة للأفراد والعائلات الباحثين عن فرص جديدة في الخارج. تصف النبذة المنشورة دعم الهجرة والانتقال. لا تُستنتج منها وجهات أو فئات تأشيرات أو شروط أهلية أو ضمانات للموافقة."
+      },
+      "website_url": null,
+      "sort_order": 4,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "company_immigration",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "company_immigration",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Local-content packaging review of the unchanged, approved Phase 2 projection and the checksum-pinned Phase 1 companies/team observations. Expanded company descriptions are neutral paraphrases of their separately sourced EN/AR division descriptions; no marketing superlatives, credentials or performance guarantees added. Names, published roles, contacts and company associations are unchanged. No founder identity, biography, specialty, office assignment or media permission is inferred.",
+      "reviewed_at": "2026-11-02",
+      "website_unavailable_reason": {
+        "en": "The division's published website was unavailable during source collection. An active website has not been verified.",
+        "ar": "كان موقع القسم المنشور غير متاح أثناء جمع المصادر، ولم يُتحقق من موقع عامل."
+      }
+    },
+    {
+      "id": "company_translation",
+      "slug": "translation",
+      "kind": "division",
+      "parent_id": "company_group",
+      "name": {
+        "en": "Samaha Legal Translation",
+        "ar": "سماحة للترجمة القانونية"
+      },
+      "summary": {
+        "en": "Legal, commercial, medical, scientific and general translation services.",
+        "ar": "خدمات الترجمة القانونية والتجارية والطبية والعلمية والعامة."
+      },
+      "description": {
+        "en": "Samaha Legal Translation's published scope includes general, legal, literary, commercial, medical, scientific and project-based translation. Its reviewed service catalogue covers document translation, translation for official submission, interpretation, multimedia translation, transcription and website/app localization. Acceptance requirements for official documents should be confirmed with the receiving authority.",
+        "ar": "يشمل نطاق سماحة للترجمة القانونية المنشور الترجمة العامة والقانونية والأدبية والتجارية والطبية والعلمية وترجمة المشاريع. يغطي كتالوج الخدمات المعتمد ترجمة المستندات، والترجمة للتقديم الرسمي، والترجمة الشفهية، وترجمة الوسائط المتعددة، والتفريغ النصي، وتوطين المواقع والتطبيقات. ينبغي التأكد من متطلبات قبول الوثائق الرسمية لدى الجهة المستقبلة."
+      },
+      "website_url": "https://samaha-translations.com/",
+      "sort_order": 5,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "company_translation",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "company_translation",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Local-content packaging review of the unchanged, approved Phase 2 projection and the checksum-pinned Phase 1 companies/team observations. Expanded company descriptions are neutral paraphrases of their separately sourced EN/AR division descriptions; no marketing superlatives, credentials or performance guarantees added. Names, published roles, contacts and company associations are unchanged. No founder identity, biography, specialty, office assignment or media permission is inferred.",
+      "reviewed_at": "2026-11-02",
+      "website_unavailable_reason": {}
+    }
+  ]
+}

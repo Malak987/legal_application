@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Validate Supabase Config",
+      "type": "shell",
+      "command": "dart",
+      "args": ["run", "tool/supabase_flutter.dart", "validate", "--file-only"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

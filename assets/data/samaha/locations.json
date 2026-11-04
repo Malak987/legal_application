@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "dataset_id": "samaha-local-2026-11-02-visual",
+  "locations": [
+    {
+      "id": "branch_cee76c848c472a",
+      "company_id": "company_legal",
+      "kind": "branch",
+      "title": {
+        "en": "Mansoura Branch",
+        "ar": "فرع المنصورة"
+      },
+      "summary": {
+        "en": "Published address in Mansoura, Egypt.",
+        "ar": "عنوان منشور في المنصورة، مصر."
+      },
+      "body": {},
+      "details": {
+        "address": {
+          "en": "Arab Republic of Egypt / Dakahlia Governorate / Mansoura City / El Guish Street / Al-Dahab Tower / floor: 10 / Office No. 1001 / next to EgyptAir",
+          "ar": "جمهورية مصر العربية / محافظة الدقهلية / مدينة المنصورة / شارع الجيش / برج الدهب / الدور العاشر / مكتب رقم 1001 / بجوار مصر للطيران"
+        },
+        "city": {
+          "en": "Mansoura",
+          "ar": "المنصورة"
+        },
+        "country": {
+          "en": "Egypt",
+          "ar": "مصر"
+        },
+        "location_type": "published_address",
+        "operational_status": "unverified"
+      },
+      "parent_entry_id": null,
+      "sort_order": 33,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "branch_cee76c848c472a",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/branches.json",
+          "url": "https://samaha-group.com/mansoura-branch/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "branch_2eb85951cc05fc",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/branches.json",
+          "url": "https://samaha-group.com/ar/%d9%81%d8%b1%d8%b9-%d8%a7%d9%84%d9%85%d9%86%d8%b5%d9%88%d8%b1%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Corresponding Mansoura pages agree on city, street, building, floor, office number and phone. Exact displayed addresses retained. This is published information, not confirmation of an operating office. Never used for Muscat.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    }
+  ]
+}

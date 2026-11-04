@@ -1,0 +1,762 @@
+{
+  "schema_version": 1,
+  "dataset_id": "samaha-local-2026-11-02-visual",
+  "services": [
+    {
+      "id": "service_9a43143bf49c49",
+      "company_id": "company_legal",
+      "kind": "service",
+      "title": {
+        "en": "Legal Consultations",
+        "ar": "الاستشارات القانونية"
+      },
+      "summary": {
+        "en": "Advice for individuals and businesses on legal rights, obligations and compliance.",
+        "ar": "استشارات للأفراد والشركات بشأن الحقوق والالتزامات القانونية والامتثال للأنظمة."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 0,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_9a43143bf49c49",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/legal-consultations/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_a283b00a737d48",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%a7%d8%b3%d8%aa%d8%b4%d8%a7%d8%b1%d8%a7%d8%aa-%d8%a7%d9%84%d9%82%d8%a7%d9%86%d9%88%d9%86%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_6e18073db0b2d2",
+      "company_id": "company_legal",
+      "kind": "service",
+      "title": {
+        "en": "Business & Corporate Law",
+        "ar": "القانون التجاري وقانون الشركات"
+      },
+      "summary": {
+        "en": "Legal support for companies and commercial transactions throughout the business lifecycle.",
+        "ar": "دعم قانوني للشركات والمعاملات التجارية في مختلف مراحل دورة الأعمال."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 1,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_6e18073db0b2d2",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/business-corporate-law/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_cb9d110679a318",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%84%d8%aa%d8%ac%d8%a7%d8%b1%d9%8a-%d9%88%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%84%d8%b4%d8%b1%d9%83%d8%a7%d8%aa/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_2672b64b2fd28f",
+      "company_id": "company_legal",
+      "kind": "service",
+      "title": {
+        "en": "Personal Status & Family Law",
+        "ar": "الأحوال الشخصية وقانون الأسرة"
+      },
+      "summary": {
+        "en": "Legal support on marriage, divorce, child custody and parental rights.",
+        "ar": "دعم قانوني في مسائل الزواج والطلاق وحضانة الأطفال وحقوق الوالدين."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 2,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_2672b64b2fd28f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/personal-status-family-law/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_7c24857b695e61",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%a3%d8%ad%d9%88%d8%a7%d9%84-%d8%a7%d9%84%d8%b4%d8%ae%d8%b5%d9%8a%d8%a9-%d9%88%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%84%d8%a3%d8%b3%d8%b1%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_b7c421e015bafd",
+      "company_id": "company_legal",
+      "kind": "service",
+      "title": {
+        "en": "Criminal Law",
+        "ar": "القانون الجنائي"
+      },
+      "summary": {
+        "en": "Legal consultations and representation through the stages of criminal proceedings.",
+        "ar": "استشارات وتمثيل قانوني خلال مراحل الإجراءات الجنائية."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 3,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_b7c421e015bafd",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/criminal-law/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_055adddfda611f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%84%d8%ac%d9%86%d8%a7%d8%a6%d9%8a/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_91f6349f126397",
+      "company_id": "company_legal",
+      "kind": "service",
+      "title": {
+        "en": "Civil & Commercial Cases",
+        "ar": "القضايا المدنية والتجارية"
+      },
+      "summary": {
+        "en": "Litigation and dispute resolution involving companies, partners and external parties.",
+        "ar": "التقاضي وتسوية النزاعات المتعلقة بالشركات والشركاء والأطراف الخارجية."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 4,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_91f6349f126397",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/civil-commercial-cases/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_c1249b2d100eb0",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%82%d8%b6%d8%a7%d9%8a%d8%a7-%d8%a7%d9%84%d9%85%d8%af%d9%86%d9%8a%d8%a9-%d9%88%d8%a7%d9%84%d8%aa%d8%ac%d8%a7%d8%b1%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_79a6535a3e380f",
+      "company_id": "company_legal",
+      "kind": "service",
+      "title": {
+        "en": "International Arbitration",
+        "ar": "التحكيم الدولي"
+      },
+      "summary": {
+        "en": "Arbitration and amicable settlements as alternatives to traditional court proceedings.",
+        "ar": "التحكيم والتسويات الودية كبدائل للإجراءات القضائية التقليدية."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 5,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_79a6535a3e380f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/international-arbitration/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_e0a5fab573fcfe",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%aa%d8%ad%d9%83%d9%8a%d9%85-%d8%a7%d9%84%d8%af%d9%88%d9%84%d9%8a/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_c7862c05fe7f44",
+      "company_id": "company_legal",
+      "kind": "service",
+      "title": {
+        "en": "Real Estate Disputes",
+        "ar": "النزاعات العقارية"
+      },
+      "summary": {
+        "en": "Dispute resolution support, including negotiation, mediation and arbitration options.",
+        "ar": "دعم تسوية النزاعات، بما يشمل خيارات التفاوض والوساطة والتحكيم."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 6,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_c7862c05fe7f44",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/real-estate-disputes/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_1e62a11f2f7db8",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%86%d8%b2%d8%a7%d8%b9%d8%a7%d8%aa-%d8%a7%d9%84%d8%b9%d9%82%d8%a7%d8%b1%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_11c21acb37055f",
+      "company_id": "company_legal",
+      "kind": "service",
+      "title": {
+        "en": "Financial Law",
+        "ar": "القانون المالي"
+      },
+      "summary": {
+        "en": "Legal support for banking and financial disputes, loans, mortgages and debt collection.",
+        "ar": "دعم قانوني في المنازعات المصرفية والمالية والقروض والرهون وتحصيل الديون."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 7,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_11c21acb37055f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/financial-law/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_727057640341ad",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%84%d9%85%d8%a7%d9%84%d9%8a/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_dd437d9d0b8010",
+      "company_id": "company_legal",
+      "kind": "service",
+      "title": {
+        "en": "Maritime Law",
+        "ar": "القانون البحري"
+      },
+      "summary": {
+        "en": "Maritime legal services for ship owners, charterers, cargo owners and insurers.",
+        "ar": "خدمات قانونية بحرية لمالكي السفن والمستأجرين وأصحاب البضائع وشركات التأمين."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 8,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_dd437d9d0b8010",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/maritime-law/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_173e75daeeff6f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%84%d8%a8%d8%ad%d8%b1%d9%8a/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_46532981305b66",
+      "company_id": "company_legal",
+      "kind": "service",
+      "title": {
+        "en": "Labor Law",
+        "ar": "قانون العمل"
+      },
+      "summary": {
+        "en": "Employment contract drafting and review, labour disputes and legal advice.",
+        "ar": "صياغة عقود العمل ومراجعتها ودعم المنازعات العمالية والاستشارات القانونية."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 9,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_46532981305b66",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/labor-law/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_0acc6aee5d63d0",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d9%82%d8%a7%d9%86%d9%88%d9%86-%d8%a7%d9%84%d8%b9%d9%85%d9%84/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_09271203d24479",
+      "company_id": "company_legal",
+      "kind": "service",
+      "title": {
+        "en": "Taxes",
+        "ar": "الضرائب"
+      },
+      "summary": {
+        "en": "Legal advice and support on tax matters.",
+        "ar": "استشارات ودعم قانوني في المسائل الضريبية."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 10,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_09271203d24479",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/taxes/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_8c4ecf71e93e6c",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b6%d8%b1%d8%a7%d8%a6%d8%a8/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_813a50548dd502",
+      "company_id": "company_legal",
+      "kind": "service",
+      "title": {
+        "en": "Trademark Laws",
+        "ar": "قوانين العلامات التجارية"
+      },
+      "summary": {
+        "en": "Legal support for intellectual property rights and technology-related matters.",
+        "ar": "دعم قانوني في حقوق الملكية الفكرية والمسائل المتعلقة بالتكنولوجيا."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 11,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_813a50548dd502",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/trademark-laws/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_b7c9549868d4a3",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-group.com/ar/%d9%82%d9%88%d8%a7%d9%86%d9%8a%d9%86-%d8%a7%d9%84%d8%b9%d9%84%d8%a7%d9%85%d8%a7%d8%aa-%d8%a7%d9%84%d8%aa%d8%ac%d8%a7%d8%b1%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_9aebb5e88a6d4f",
+      "company_id": "company_translation",
+      "kind": "service",
+      "title": {
+        "en": "Document Translation Services",
+        "ar": "خدمات ترجمة المستندات"
+      },
+      "summary": {
+        "en": "Translation of written materials for individuals, businesses and institutions.",
+        "ar": "ترجمة المواد المكتوبة للأفراد والشركات والمؤسسات."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 12,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_9aebb5e88a6d4f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-translations.com/document-translation-services/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_04363ad4984c27",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-translations.com/ar/%d8%ae%d8%af%d9%85%d8%a7%d8%aa-%d8%aa%d8%b1%d8%ac%d9%85%d8%a9-%d8%a7%d9%84%d9%85%d8%b3%d8%aa%d9%86%d8%af%d8%a7%d8%aa/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_cfed3b793ff3ec",
+      "company_id": "company_translation",
+      "kind": "service",
+      "title": {
+        "en": "Certified Translation",
+        "ar": "ترجمة معتمدة"
+      },
+      "summary": {
+        "en": "A published translation service for documents intended for official submission. Confirm acceptance requirements with the receiving authority.",
+        "ar": "خدمة ترجمة منشورة للوثائق المقدمة إلى الجهات الرسمية. يُرجى التحقق من متطلبات القبول لدى الجهة المستقبلة."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 13,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_cfed3b793ff3ec",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-translations.com/certified-translation/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_10dc26178f0ce8",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-translations.com/ar/%d8%aa%d8%b1%d8%ac%d9%85%d8%a9-%d9%85%d8%b9%d8%aa%d9%85%d8%af%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_4c79e204862855",
+      "company_id": "company_translation",
+      "kind": "service",
+      "title": {
+        "en": "Interpretation Services",
+        "ar": "خدمات الترجمة الفورية"
+      },
+      "summary": {
+        "en": "Simultaneous and consecutive interpretation for spoken communication across languages.",
+        "ar": "الترجمة الفورية والتتابعية للتواصل الشفهي بين اللغات."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 14,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_4c79e204862855",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-translations.com/interpretation-services/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_63d78c2206a5be",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-translations.com/ar/%d8%ae%d8%af%d9%85%d8%a7%d8%aa-%d8%a7%d9%84%d8%aa%d8%b1%d8%ac%d9%85%d8%a9-%d8%a7%d9%84%d9%81%d9%88%d8%b1%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_c3f43556ce4c1d",
+      "company_id": "company_translation",
+      "kind": "service",
+      "title": {
+        "en": "Multimedia Translation Services",
+        "ar": "خدمات ترجمة الوسائط المتعددة"
+      },
+      "summary": {
+        "en": "Translation and localization of video, audio, presentations and interactive material.",
+        "ar": "ترجمة وتوطين الفيديو والصوت والعروض التقديمية والمواد التفاعلية."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 15,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_c3f43556ce4c1d",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-translations.com/multimedia-translation-services/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_bb442531b83caa",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-translations.com/ar/%d8%ae%d8%af%d9%85%d8%a7%d8%aa-%d8%aa%d8%b1%d8%ac%d9%85%d8%a9-%d8%a7%d9%84%d9%88%d8%b3%d8%a7%d8%a6%d8%b7-%d8%a7%d9%84%d9%85%d8%aa%d8%b9%d8%af%d8%af%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_cc097b23f0ce9c",
+      "company_id": "company_translation",
+      "kind": "service",
+      "title": {
+        "en": "Transcription Service",
+        "ar": "خدمة التفريغ الصوتي والفيديو"
+      },
+      "summary": {
+        "en": "Conversion of audio and video speech into written transcripts.",
+        "ar": "تحويل الكلام في ملفات الصوت والفيديو إلى نصوص مكتوبة."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 16,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_cc097b23f0ce9c",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-translations.com/transcription-service/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_00c94adb87a302",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-translations.com/ar/%d8%ae%d8%af%d9%85%d8%a9-%d8%a7%d9%84%d8%aa%d9%81%d8%b1%d9%8a%d8%ba-%d8%a7%d9%84%d8%b5%d9%88%d8%aa%d9%8a-%d9%88%d8%a7%d9%84%d9%81%d9%8a%d8%af%d9%8a%d9%88/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_2b1114d83ada6e",
+      "company_id": "company_translation",
+      "kind": "service",
+      "title": {
+        "en": "Website & App Localization",
+        "ar": "توطين لغة الموقع الإلكتروني والتطبيقات"
+      },
+      "summary": {
+        "en": "Adapting website and app content, interfaces and user experiences to different languages and cultures.",
+        "ar": "تكييف محتوى المواقع والتطبيقات وواجهاتها وتجربة المستخدم مع اللغات والثقافات المختلفة."
+      },
+      "body": {},
+      "details": {},
+      "parent_entry_id": null,
+      "sort_order": 17,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "service_2b1114d83ada6e",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-translations.com/website-app-localization/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "service_f7c6ebd6eb5209",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/services.json",
+          "url": "https://samaha-translations.com/ar/%d8%aa%d9%88%d8%b7%d9%8a%d9%86-%d9%84%d8%ba%d8%a9-%d8%a7%d9%84%d9%85%d9%88%d9%82%d8%b9-%d8%a7%d9%84%d8%a5%d9%84%d9%83%d8%aa%d8%b1%d9%88%d9%86%d9%8a-%d9%88%d8%a7%d9%84%d8%aa%d8%b7%d8%a8%d9%8a%d9%82/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicitly reviewed EN/AR service pair. Original titles and neutral summaries; guarantees, credential claims and template/marketing material are not republished.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "service_debt_collection_scope",
+      "company_id": "company_debt",
+      "kind": "service",
+      "title": {
+        "en": "Debt collection",
+        "ar": "تحصيل الديون"
+      },
+      "summary": {
+        "en": "Debt collection services for individuals and businesses.",
+        "ar": "خدمات تحصيل الديون للأفراد والشركات."
+      },
+      "body": {},
+      "details": {
+        "scope_only": true
+      },
+      "parent_entry_id": null,
+      "sort_order": 18,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "company_debt",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "company_debt",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "Service scope explicitly stated in the Group's bilingual division description. No detail, pricing, jurisdiction, contact or credentials inferred from an inaccessible/contaminated division site."
+    },
+    {
+      "id": "service_company_setup_scope",
+      "company_id": "company_businessmen",
+      "kind": "service",
+      "title": {
+        "en": "Company setup",
+        "ar": "تأسيس الشركات"
+      },
+      "summary": {
+        "en": "Company setup support for investors and entrepreneurs in Dubai and other UAE emirates.",
+        "ar": "دعم تأسيس الشركات للمستثمرين ورواد الأعمال في دبي وبقية إمارات دولة الإمارات العربية المتحدة."
+      },
+      "body": {},
+      "details": {
+        "scope_only": true
+      },
+      "parent_entry_id": null,
+      "sort_order": 19,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "company_businessmen",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "company_businessmen",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "Service scope explicitly stated in the Group's bilingual division description. No detail, pricing, jurisdiction, contact or credentials inferred from an inaccessible/contaminated division site."
+    },
+    {
+      "id": "service_business_development_scope",
+      "company_id": "company_businessmen",
+      "kind": "service",
+      "title": {
+        "en": "Business development",
+        "ar": "تطوير الأعمال"
+      },
+      "summary": {
+        "en": "Business development support for investors and entrepreneurs in Dubai and other UAE emirates.",
+        "ar": "دعم تطوير الأعمال للمستثمرين ورواد الأعمال في دبي وبقية إمارات دولة الإمارات العربية المتحدة."
+      },
+      "body": {},
+      "details": {
+        "scope_only": true
+      },
+      "parent_entry_id": null,
+      "sort_order": 20,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "company_businessmen",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "company_businessmen",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "Service scope explicitly stated in the Group's bilingual division description. No detail, pricing, jurisdiction, contact or credentials inferred from an inaccessible/contaminated division site."
+    },
+    {
+      "id": "service_immigration_scope",
+      "company_id": "company_immigration",
+      "kind": "service",
+      "title": {
+        "en": "Immigration services",
+        "ar": "خدمات الهجرة"
+      },
+      "summary": {
+        "en": "Immigration support for individuals and families seeking opportunities abroad.",
+        "ar": "دعم الهجرة للأفراد والعائلات الباحثين عن فرص في الخارج."
+      },
+      "body": {},
+      "details": {
+        "scope_only": true
+      },
+      "parent_entry_id": null,
+      "sort_order": 21,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "company_immigration",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "company_immigration",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/companies.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d8%b1%d8%a6%d9%8a%d8%b3%d9%8a%d8%a9/",
+          "language": "ar"
+        }
+      ],
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+      "review_basis": "Service scope explicitly stated in the Group's bilingual division description. No detail, pricing, jurisdiction, contact or credentials inferred from an inaccessible/contaminated division site."
+    }
+  ]
+}

@@ -1,0 +1,1192 @@
+{
+  "schema_version": 1,
+  "dataset_id": "samaha-local-2026-11-02-visual",
+  "people": [
+    {
+      "id": "team_ac6ff7a2d5ac93",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Yazan Al bakheet",
+        "ar": "يزن البخيت"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Lawyer – partner- Jordan office",
+          "ar": "محامي – شريك – مكتب الأردن"
+        },
+        "office": {
+          "en": "Jordan office",
+          "ar": "مكتب الأردن"
+        },
+        "team_category": "partner",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-3-rd5cq9vbpvgyz3jpej8oxgjfz3rdfegn5baooiqrl8.jpg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 4,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "team_ac6ff7a2d5ac93",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/team/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "team_b10060d5042ec2",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%81%d8%b1%d9%8a%d9%82/",
+          "language": "ar"
+        },
+        {
+          "record_id": "live_home_20261102_27b931b",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit editorial selection of original EN/AR team-page records with corresponding names and compatible, consistent published roles. Never inferred from portraits, position in a carousel, or application user records. Repeated occurrences remain separate audit records, not additional people. Pairs with title/name conflicts or shared-photo identity ambiguity are withheld. Only published names, roles and explicit office wording; no portrait, biography, credential verification or app-user association.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "team_8e1710ea71e3d7",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Dr. Abdelkreem Alsafi",
+        "ar": "الدكتور عبد الكريم الصافي"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Director- Abu Dhabi office",
+          "ar": "مدير مكتب أبوظبي"
+        },
+        "office": {
+          "en": "Abu Dhabi office",
+          "ar": "مكتب أبوظبي"
+        },
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-4-rd5csoch6mrcn823dkmdaupumjx53jzy57bctz6jos.jpg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 6,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "team_8e1710ea71e3d7",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/team/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "team_3c81fe7f041292",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%81%d8%b1%d9%8a%d9%82/",
+          "language": "ar"
+        },
+        {
+          "record_id": "live_home_20261102_9687f0c",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit editorial selection of original EN/AR team-page records with corresponding names and compatible, consistent published roles. Never inferred from portraits, position in a carousel, or application user records. Repeated occurrences remain separate audit records, not additional people. Pairs with title/name conflicts or shared-photo identity ambiguity are withheld. Only published names, roles and explicit office wording; no portrait, biography, credential verification or app-user association.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "team_3fdf7ddc2692ca",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Mahmoud Elgemeay",
+        "ar": "محمود الجامعي"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "CFO",
+          "ar": "المدير المالي (CFO)"
+        },
+        "office": {},
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/8-reqfkjs494oe4fs9lbl9lb44qxz18x7gzzcuokcj70.png",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 10,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "team_3fdf7ddc2692ca",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/team/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "team_a45ec6bd94ea1f",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%81%d8%b1%d9%8a%d9%82/",
+          "language": "ar"
+        },
+        {
+          "record_id": "live_home_20261102_9b2d615",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit editorial selection of original EN/AR team-page records with corresponding names and compatible, consistent published roles. Never inferred from portraits, position in a carousel, or application user records. Repeated occurrences remain separate audit records, not additional people. Pairs with title/name conflicts or shared-photo identity ambiguity are withheld. Only published names, roles and explicit office wording; no portrait, biography, credential verification or app-user association.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "team_c45334a8d40516",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Ahmed nagdy",
+        "ar": "أحمد نجدي"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Senior Legal Researcher",
+          "ar": "باحث قانوني أول"
+        },
+        "office": {},
+        "team_category": "legal_professional",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-13-at-3.04.03-PM-3-rd5bji7or8xapto551psh92exyk576ob9mpcla5mp8.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 11,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "team_c45334a8d40516",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/team/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "team_847ec15b8247a9",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%81%d8%b1%d9%8a%d9%82/",
+          "language": "ar"
+        },
+        {
+          "record_id": "live_home_20261102_f7a977e",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit editorial selection of original EN/AR team-page records with corresponding names and compatible, consistent published roles. Never inferred from portraits, position in a carousel, or application user records. Repeated occurrences remain separate audit records, not additional people. Pairs with title/name conflicts or shared-photo identity ambiguity are withheld. Only published names, roles and explicit office wording; no portrait, biography, credential verification or app-user association.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "team_aead4ae569f1a0",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "islam atris",
+        "ar": "إسلام أطرس"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Senior Legal Researcher",
+          "ar": "باحث قانوني أول"
+        },
+        "office": {},
+        "team_category": "legal_professional",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-1-rd5cie02dwodkv01g4jd0g68kqmiut5peaa1qyfnsc.jpg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 12,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "team_aead4ae569f1a0",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/team/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "team_955abcc2d7c07b",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%81%d8%b1%d9%8a%d9%82/",
+          "language": "ar"
+        },
+        {
+          "record_id": "live_home_20261102_537a3e5",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit editorial selection of original EN/AR team-page records with corresponding names and compatible, consistent published roles. Never inferred from portraits, position in a carousel, or application user records. Repeated occurrences remain separate audit records, not additional people. Pairs with title/name conflicts or shared-photo identity ambiguity are withheld. Only published names, roles and explicit office wording; no portrait, biography, credential verification or app-user association.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "team_aa0ea1b96ff5e9",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "chakya Hadunge",
+        "ar": "تشاكيا هادونجي"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Senior Legal Researcher",
+          "ar": "باحث قانوني أول"
+        },
+        "office": {},
+        "team_category": "legal_professional",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/11-reqflwnq4ijaw5t9nwpv6ys3mza4d6liipa3myc27g.png",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 13,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "team_aa0ea1b96ff5e9",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/team/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "team_c48f4f5d229b4e",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%81%d8%b1%d9%8a%d9%82/",
+          "language": "ar"
+        },
+        {
+          "record_id": "live_home_20261102_45f4899",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit editorial selection of original EN/AR team-page records with corresponding names and compatible, consistent published roles. Never inferred from portraits, position in a carousel, or application user records. Repeated occurrences remain separate audit records, not additional people. Pairs with title/name conflicts or shared-photo identity ambiguity are withheld. Only published names, roles and explicit office wording; no portrait, biography, credential verification or app-user association.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "team_b744b98a293e3b",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Ahmed Medwar",
+        "ar": "أحمد مدور"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Legal consultant",
+          "ar": "مستشار قانوني"
+        },
+        "office": {},
+        "team_category": "legal_professional",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/2-rep5k4mwnh5umdttxbp7natr2m9cupbylgldakc84s.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 16,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "team_b744b98a293e3b",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/team/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "team_f33c06e512c81c",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%81%d8%b1%d9%8a%d9%82/",
+          "language": "ar"
+        },
+        {
+          "record_id": "live_home_20261102_e4bb029",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit editorial selection of original EN/AR team-page records with corresponding names and compatible, consistent published roles. Never inferred from portraits, position in a carousel, or application user records. Repeated occurrences remain separate audit records, not additional people. Pairs with title/name conflicts or shared-photo identity ambiguity are withheld. Only published names, roles and explicit office wording; no portrait, biography, credential verification or app-user association.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "team_8b74019898bbf1",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Haitham AlNahas",
+        "ar": "هيثم النحاس"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Legal consultant",
+          "ar": "مستشار قانوني"
+        },
+        "office": {},
+        "team_category": "legal_professional",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-13-at-3.04.03-PM-2-rd5bhb98t5x7mkuty3l4nszp1ldb8lyuyrwka1ep7w.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 17,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "team_8b74019898bbf1",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/team/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "team_ecc93ce0fdb6dd",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%81%d8%b1%d9%8a%d9%82/",
+          "language": "ar"
+        },
+        {
+          "record_id": "live_home_20261102_4a65374",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit editorial selection of original EN/AR team-page records with corresponding names and compatible, consistent published roles. Never inferred from portraits, position in a carousel, or application user records. Repeated occurrences remain separate audit records, not additional people. Pairs with title/name conflicts or shared-photo identity ambiguity are withheld. Only published names, roles and explicit office wording; no portrait, biography, credential verification or app-user association.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "team_9c0752d0df0c38",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Magdy Abdulghany",
+        "ar": "مجدي عبد الغني"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "legal consultant",
+          "ar": "مستشار قانوني"
+        },
+        "office": {},
+        "team_category": "legal_professional",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/10-reqfl87x6tluiasrmm5ke4y46ymkt1whrcbh5rcap8.png",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 19,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "team_9c0752d0df0c38",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/team/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "team_19f7da0960cd9a",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%81%d8%b1%d9%8a%d9%82/",
+          "language": "ar"
+        },
+        {
+          "record_id": "live_home_20261102_7988f18",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit editorial selection of original EN/AR team-page records with corresponding names and compatible, consistent published roles. Never inferred from portraits, position in a carousel, or application user records. Repeated occurrences remain separate audit records, not additional people. Pairs with title/name conflicts or shared-photo identity ambiguity are withheld. Only published names, roles and explicit office wording; no portrait, biography, credential verification or app-user association.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "team_1993881407665d",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Hakima belarabi",
+        "ar": "حكيمة العربي"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Executive Secretary",
+          "ar": "سكرتيرة تنفيذية"
+        },
+        "office": {},
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-rd5cfcysd4j463ef4temz7oro1jy1x4ubalq2uxbu4.jpg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 20,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "team_1993881407665d",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/team/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "team_841cd80eb5be65",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%81%d8%b1%d9%8a%d9%82/",
+          "language": "ar"
+        },
+        {
+          "record_id": "live_home_20261102_67cb0b7",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit editorial selection of original EN/AR team-page records with corresponding names and compatible, consistent published roles. Never inferred from portraits, position in a carousel, or application user records. Repeated occurrences remain separate audit records, not additional people. Pairs with title/name conflicts or shared-photo identity ambiguity are withheld. Only published names, roles and explicit office wording; no portrait, biography, credential verification or app-user association.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "team_6e4126dd6493de",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Rushel virina",
+        "ar": "روشيل فيرينا"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Admin",
+          "ar": "إداري"
+        },
+        "office": {},
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/3-rep5ldr5rivm3o0alv7ayzfvl42z46b2rnwobuhbu4.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 21,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "team_6e4126dd6493de",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/team/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "team_f8d3bb1c226b1b",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/team_members.json",
+          "url": "https://samaha-group.com/ar/%d8%a7%d9%84%d9%81%d8%b1%d9%8a%d9%82/",
+          "language": "ar"
+        },
+        {
+          "record_id": "live_home_20261102_f75593b",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit editorial selection of original EN/AR team-page records with corresponding names and compatible, consistent published roles. Never inferred from portraits, position in a carousel, or application user records. Repeated occurrences remain separate audit records, not additional people. Pairs with title/name conflicts or shared-photo identity ambiguity are withheld. Only published names, roles and explicit office wording; no portrait, biography, credential verification or app-user association.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "team_live_7a6664b",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Gomaa Samaha"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Chairman"
+        },
+        "office": {},
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-2-rd5cymnoguwq6besm59b3cmy2ektujmqyo2292csa4.png",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 0,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_7a6664b",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_1c2e535",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Shaaban Samaha"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "CEO"
+        },
+        "office": {},
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-08-30-at-1.21.30-PM-1-rsny8tqm148y5ulkd6ob9kt91x2h3t7mc9gaejwlkc.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 1,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_1c2e535",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_a97f12c",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Jassim Al-Balushi"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "lawyer , partner / Dubai office"
+        },
+        "office": {},
+        "team_category": "partner",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-13-at-3.04.03-PM-rd5a7kg07faulrax2bqrbck4aiu8mwd4ocxvh98g18.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 2,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_a97f12c",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_9c188eb",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Nouf Awlaqi"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "lawyer , partner – Ras Al Khaimah Office"
+        },
+        "office": {},
+        "team_category": "partner",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-13-at-3.04.03-PM-1-rd5a7zhf8rvfrip2mi8sf8rhsos4220u2fdn5om59o.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 3,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_9c188eb",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_75991c3",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Abdallah Foad"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Director- sharjah office"
+        },
+        "office": {},
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-13-at-3.04.03-PM-6-rd5c1b9m89aunvsz5qtcpras2qsh0rd91rmhvzr4to.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 5,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_75991c3",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_6df947a",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Esraa Refai"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Director- dubai office"
+        },
+        "office": {},
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-2-rd5cls732dbni62jmlcv0lc5stw8ngmt73364xehbg.jpg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 7,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_6df947a",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_e0a49c8",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Emad Al-Shaer"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Legal Consultant"
+        },
+        "office": {},
+        "team_category": "legal_professional",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-28-at-4.19.05-PM-rr49pr2ahefuazho1as74offejod68t467fyostcfg.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 8,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_e0a49c8",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_db5d309",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Sayed Elshaeer"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Business Officer"
+        },
+        "office": {},
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-13-at-3.04.03-PM-4-rd5bklowqafc9g2sqis4dz3rw55k6h11f23qqwj3fw.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 9,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_db5d309",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_e97bf38",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Hassan Ali"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Business Officer"
+        },
+        "office": {},
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "association_under_review",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/4-reqfjanv52ymn5lsws369mi08g5ezg8cts1jna7fho.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00",
+        "source_note": {
+          "en": "The English source names Hassan Ali, while an archived Arabic card associates this image with a different name. The photograph is withheld; the identities have not been merged.",
+          "ar": "يسمي المصدر الإنجليزي Hassan Ali، بينما تربط بطاقة عربية مؤرشفة الصورة باسم مختلف. حُجبت الصورة ولم تُدمج الهويات."
+        }
+      },
+      "parent_entry_id": null,
+      "sort_order": 14,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_e97bf38",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_9ec458b",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "yasith vihan"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Business Officer"
+        },
+        "office": {},
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-12-rf4pu8hynsioebmenyqgdfzynad9g39d2810g9x4x8.png",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 15,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_9ec458b",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_db36764",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Ikrami Abdel-Jalil"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "legal consultant"
+        },
+        "office": {},
+        "team_category": "legal_professional",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/9-reqfkwxuwt6emz95gha1k7sl2c668onppshneft0rw.png",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 18,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_db36764",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_6869347",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "JENNA KADHUM"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "BDM"
+        },
+        "office": {},
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-rk0ad0ml33yg2euhzurzntpv38odumg6qmk4zrwg18.png",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 22,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_6869347",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_0049e36",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Amani Emara"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {},
+        "office": {},
+        "team_category": "other",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-1-rk5tbgxi9stc26zgav4ibelhztux12w2th62i8271o.png",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00",
+        "published_role_variants": [
+          {
+            "en": "Lawyer- Director -Mansoura office"
+          },
+          {
+            "en": "Lawyer- mansoura office"
+          }
+        ],
+        "source_note": {
+          "en": "The same named profile appears twice with different role wording. The director designation remains under review; both original wordings are retained in provenance.",
+          "ar": "يظهر الملف بالاسم نفسه مرتين بصياغتين مختلفتين للمسمى. صفة المدير قيد المراجعة، وحُفظت الصياغتان الأصليتان في التوثيق."
+        }
+      },
+      "parent_entry_id": null,
+      "sort_order": 23,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_0049e36",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_a1af742",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Sherif El-Sebaie"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Lawyer – Partner, Mansoura Office"
+        },
+        "office": {},
+        "team_category": "partner",
+        "specialties": [],
+        "portrait_status": "association_under_review",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%A8%D8%AF%D9%88%D9%86-%D8%B9%D9%86%D9%88%D8%A7%D9%86-2-rk7d14zx7ef9cdn0ltqapa5hi469ep97wm4b5e8i7g.png",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00",
+        "source_note": {
+          "en": "The archive associates this photograph with more than one English name. The photograph is withheld pending identity clarification.",
+          "ar": "يربط الأرشيف هذه الصورة بأكثر من اسم إنجليزي. حُجبت الصورة إلى حين توضيح نسبتها."
+        }
+      },
+      "parent_entry_id": null,
+      "sort_order": 24,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_a1af742",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_ff0ed86",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Saeed Ali"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "legal consultant"
+        },
+        "office": {},
+        "team_category": "legal_professional",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-24-at-10.03.03-PM-rr0ij9bewckt60ccxqblwpyki601k9633awnfweuy4.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 25,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_ff0ed86",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_8907264",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Mohammed Asif Abdulla"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "legal consultant"
+        },
+        "office": {},
+        "team_category": "legal_professional",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-24-at-11.43.07-PM-rr0in94py01oicjglyhj07o3e4b79y10n2pxv8hmi4.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 26,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_8907264",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    },
+    {
+      "id": "team_live_2617466",
+      "company_id": "company_legal",
+      "kind": "person",
+      "title": {
+        "en": "Ahmed Al-Tarras"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "role": {
+          "en": "Legal Researcher"
+        },
+        "office": {},
+        "team_category": "legal_professional",
+        "specialties": [],
+        "portrait_status": "source_reference",
+        "source_page_url": "https://samaha-group.com/",
+        "original_image_url": "https://samaha-group.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-28-at-4.20.26-PM-rr49o8jnh0d7llouvn7u426oy752rssomplsur26gc.jpeg",
+        "image_rights_status": "unverified",
+        "live_verified_at": "2026-11-02T11:22:13.642301+00:00"
+      },
+      "parent_entry_id": null,
+      "sort_order": 27,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "live_home_20261102_2617466",
+          "archive_member": "docs/samaha/redesign/live_team_occurrences.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit live homepage card review: adjacent name and published role, compared with the Phase 1 source occurrences. A published profile is not proof of unique identity, current employment, credentials or platform registration. No new Arabic identity translation is inferred.",
+      "reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+    }
+  ]
+}

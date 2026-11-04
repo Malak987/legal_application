@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "dataset_id": "samaha-local-2026-11-02-visual",
+  "packaged_on": "2026-11-02",
+  "original_content_reviewed_at": "2026-11-01T16:22:23.443271+00:00",
+  "source_archive_sha256": "bdaeb94ca2310ba452c86c94a1381602edc805c9ffee44f310864d0809cf62cc",
+  "source_projection_sha256": "e12afaeb562bc254df6cd9c0c8b36bf4b68eebc15164759cbf8b17551a4bf00f",
+  "files": [
+    "companies.json",
+    "services.json",
+    "team.json",
+    "locations.json",
+    "faqs.json",
+    "contacts.json",
+    "relationships.json",
+    "media.json"
+  ],
+  "counts": {
+    "companies": 6,
+    "services": 22,
+    "people": 28,
+    "locations": 1,
+    "faqs": 3,
+    "contacts": 12,
+    "relationships": 10,
+    "media": 26
+  },
+  "relationship_policy": "Stable local IDs. Every service/person/location/FAQ/contact has an explicit company_id. Company parent_id links only to the group. No person, contact or office assignment is inherited from a parent, name match or photograph.",
+  "people_policy": "Informational source-listed people only, not registered Legal platform lawyers or users. No account, booking, chat, case, review, availability or payment mapping.",
+  "media_policy": "Source-attributed photographs with verified card association. Reuse rights are UNVERIFIED and visibly disclosed; restricted or ambiguous photographs are not displayed.",
+  "update_policy": "Versioned app assets, not live data. New reviews ship in a new app release. No runtime API, database, Storage or website scraping.",
+  "visual_content_reviewed_at": "2026-11-02T11:22:13.642301+00:00"
+}

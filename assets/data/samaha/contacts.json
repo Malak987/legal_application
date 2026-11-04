@@ -1,0 +1,366 @@
+{
+  "schema_version": 1,
+  "dataset_id": "samaha-local-2026-11-02-visual",
+  "contacts": [
+    {
+      "id": "contact_d498652bad94e5",
+      "company_id": "company_legal",
+      "kind": "contact",
+      "title": {
+        "en": "Phone",
+        "ar": "الهاتف"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "contact_kind": "phone",
+        "display_value": "+971544447773",
+        "action_uri": "tel:+971544447773"
+      },
+      "parent_entry_id": null,
+      "sort_order": 37,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "contact_d498652bad94e5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-group.com/author/g1pq9/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit published contact, reviewed only for this company/branch. Display spelling and digits retained; action removes formatting spaces only. No contact is submitted by import or preview.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "contact_e09ce871890365",
+      "company_id": "company_legal",
+      "kind": "contact",
+      "title": {
+        "en": "Phone",
+        "ar": "الهاتف"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "contact_kind": "phone",
+        "display_value": "+971 4 578 0666",
+        "action_uri": "tel:+97145780666"
+      },
+      "parent_entry_id": null,
+      "sort_order": 38,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "contact_e09ce871890365",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-group.com/author/g1pq9/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit published contact, reviewed only for this company/branch. Display spelling and digits retained; action removes formatting spaces only. No contact is submitted by import or preview.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "contact_bba5ce345222a0",
+      "company_id": "company_legal",
+      "kind": "contact",
+      "title": {
+        "en": "Email",
+        "ar": "البريد الإلكتروني"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "contact_kind": "email",
+        "display_value": "info@samaha-legal.com",
+        "action_uri": "mailto:info@samaha-legal.com"
+      },
+      "parent_entry_id": null,
+      "sort_order": 39,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "contact_bba5ce345222a0",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-group.com/author/g1pq9/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit published contact, reviewed only for this company/branch. Display spelling and digits retained; action removes formatting spaces only. No contact is submitted by import or preview.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "contact_f479ed36f351d0",
+      "company_id": "company_legal",
+      "kind": "contact",
+      "title": {
+        "en": "WhatsApp",
+        "ar": "واتساب"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "contact_kind": "whatsapp",
+        "display_value": "+971544447773",
+        "action_uri": "https://api.whatsapp.com/send/?phone=971544447773&text&type=phone_number&app_absent=0"
+      },
+      "parent_entry_id": null,
+      "sort_order": 40,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "contact_f479ed36f351d0",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-group.com/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit published contact, reviewed only for this company/branch. Display spelling and digits retained; action removes formatting spaces only. No contact is submitted by import or preview.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "contact_e202047b82c832",
+      "company_id": "company_legal",
+      "kind": "contact",
+      "title": {
+        "en": "Facebook",
+        "ar": "Facebook"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "contact_kind": "social",
+        "display_value": "https://www.facebook.com/samaha.legal.consultants/",
+        "action_uri": "https://www.facebook.com/samaha.legal.consultants/"
+      },
+      "parent_entry_id": null,
+      "sort_order": 41,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "contact_e202047b82c832",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-group.com/author/g1pq9/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit published contact, reviewed only for this company/branch. Display spelling and digits retained; action removes formatting spaces only. No contact is submitted by import or preview.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "contact_e46ac4e1567eb5",
+      "company_id": "company_legal",
+      "kind": "contact",
+      "title": {
+        "en": "TikTok",
+        "ar": "TikTok"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "contact_kind": "social",
+        "display_value": "https://www.tiktok.com/@samaha.group",
+        "action_uri": "https://www.tiktok.com/@samaha.group"
+      },
+      "parent_entry_id": null,
+      "sort_order": 42,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "contact_e46ac4e1567eb5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-group.com/author/g1pq9/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit published contact, reviewed only for this company/branch. Display spelling and digits retained; action removes formatting spaces only. No contact is submitted by import or preview.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "contact_97abaa3516d8f0",
+      "company_id": "company_legal",
+      "kind": "contact",
+      "title": {
+        "en": "LinkedIn",
+        "ar": "LinkedIn"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "contact_kind": "social",
+        "display_value": "https://www.linkedin.com/company/samaha-groups",
+        "action_uri": "https://www.linkedin.com/company/samaha-groups"
+      },
+      "parent_entry_id": null,
+      "sort_order": 43,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "contact_97abaa3516d8f0",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-group.com/author/g1pq9/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit published contact, reviewed only for this company/branch. Display spelling and digits retained; action removes formatting spaces only. No contact is submitted by import or preview.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "contact_7e052eb57369a5",
+      "company_id": "company_legal",
+      "kind": "contact",
+      "title": {
+        "en": "Phone",
+        "ar": "الهاتف"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "contact_kind": "phone",
+        "display_value": "+201556666493",
+        "action_uri": "tel:+201556666493"
+      },
+      "parent_entry_id": "branch_cee76c848c472a",
+      "sort_order": 44,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "contact_7e052eb57369a5",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-group.com/cairo-branch/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit published contact, reviewed only for this company/branch. Display spelling and digits retained; action removes formatting spaces only. No contact is submitted by import or preview.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "contact_2dd62f23ecabda",
+      "company_id": "company_legal",
+      "kind": "contact",
+      "title": {
+        "en": "Email",
+        "ar": "البريد الإلكتروني"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "contact_kind": "email",
+        "display_value": "Info@samaha-legal.com",
+        "action_uri": "mailto:Info@samaha-legal.com"
+      },
+      "parent_entry_id": "branch_cee76c848c472a",
+      "sort_order": 45,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "contact_2dd62f23ecabda",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-group.com/cairo-branch/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit published contact, reviewed only for this company/branch. Display spelling and digits retained; action removes formatting spaces only. No contact is submitted by import or preview.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "contact_c108d9924c5d9c",
+      "company_id": "company_legal",
+      "kind": "contact",
+      "title": {
+        "en": "Published map",
+        "ar": "الخريطة المنشورة"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "contact_kind": "map",
+        "display_value": "Arab Republic of Egypt / Dakahlia Governorate / Mansoura City / El Guish Street / El Dahab Tower / floor: 10 / Office No. 1001 / next to EgyptAir",
+        "action_uri": "https://maps.google.com/maps?q=Arab%20Republic%20of%20Egypt%20%2F%20Dakahlia%20Governorate%20%2F%20Mansoura%20City%20%2F%20El%20Guish%20Street%20%2F%20El%20Dahab%20Tower%20%2F%20floor%3A%2010%20%2F%20Office%20No.%201001%20%2F%20next%20to%20EgyptAir&t=m&z=11&output=embed&iwloc=near"
+      },
+      "parent_entry_id": "branch_cee76c848c472a",
+      "sort_order": 46,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "contact_c108d9924c5d9c",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-group.com/mansoura-branch/",
+          "language": "en-US"
+        }
+      ],
+      "review_basis": "Explicit published contact, reviewed only for this company/branch. Display spelling and digits retained; action removes formatting spaces only. No contact is submitted by import or preview.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "contact_7a7fea211f7e3c",
+      "company_id": "company_translation",
+      "kind": "contact",
+      "title": {
+        "en": "Phone",
+        "ar": "الهاتف"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "contact_kind": "phone",
+        "display_value": "+971 4 578 0666",
+        "action_uri": "tel:+97145780666"
+      },
+      "parent_entry_id": null,
+      "sort_order": 47,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "contact_7a7fea211f7e3c",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-translations.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "contact_ff3b1e1801220a",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-translations.com/ar/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicit published contact, reviewed only for this company/branch. Display spelling and digits retained; action removes formatting spaces only. No contact is submitted by import or preview.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    },
+    {
+      "id": "contact_98c71fd5522ea2",
+      "company_id": "company_translation",
+      "kind": "contact",
+      "title": {
+        "en": "Email",
+        "ar": "البريد الإلكتروني"
+      },
+      "summary": {},
+      "body": {},
+      "details": {
+        "contact_kind": "email",
+        "display_value": "info@samaha-translation.com",
+        "action_uri": "mailto:info@samaha-translation.com"
+      },
+      "parent_entry_id": null,
+      "sort_order": 48,
+      "publication_status": "approved",
+      "source_refs": [
+        {
+          "record_id": "contact_98c71fd5522ea2",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-translations.com/",
+          "language": "en-US"
+        },
+        {
+          "record_id": "contact_e87b0bd76edf49",
+          "archive_member": "2026-11-01_phase1_public_site_extraction/contacts.json",
+          "url": "https://samaha-translations.com/ar/",
+          "language": "ar"
+        }
+      ],
+      "review_basis": "Explicit published contact, reviewed only for this company/branch. Display spelling and digits retained; action removes formatting spaces only. No contact is submitted by import or preview.",
+      "reviewed_at": "2026-11-01T16:22:23.443271+00:00"
+    }
+  ]
+}
