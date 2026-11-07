@@ -59,7 +59,13 @@ SessionController createSupabaseSession(
     config: config,
     client: httpClient,
     idTokenProvider: () => gateway.getAccessToken(),
-    forceRefreshTokenProvider: () => gateway.getAccessToken(forceRefresh: true),
+    // The rejected token is handed back to the session so two concurrent 401s
+    // rotate the refresh token once instead of signing the user out.
+    forceRefreshTokenProvider:
+        (staleToken) => gateway.getAccessToken(
+          forceRefresh: true,
+          staleToken: staleToken,
+        ),
     currentUidProvider: () => gateway.currentUser?.uid,
   );
   return SessionController(

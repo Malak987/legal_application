@@ -490,7 +490,31 @@ class SupabaseAuthGateway implements AuthGateway {
   bool get isPasswordRecovery => _isPasswordRecovery;
 
   /// Current bearer token, refreshed before expiry or on an explicit 401 retry.
-  Future<String?> getAccessToken({bool forceRefresh = false}) async {
+  ///
+  /// [staleToken] is the token a request already sent when the server rejected
+  /// it with `401`. It is what makes the retry path concurrency-safe:
+  ///
+  /// * if the session already holds a *different* token, another in-flight
+  ///   request refreshed it first and that token is returned as-is;
+  /// * otherwise the refresh is performed through [_refreshSession], which
+  ///   shares one in-flight request per (refresh token, session generation),
+  ///   so simultaneous 401s rotate the refresh token exactly once.
+  ///
+  /// Without this, two parallel requests could each rotate a rotating refresh
+  /// token; Supabase accepts a replayed token only for its short reuse window,
+  /// after which the losing request signs the whole session out.
+  Future<String?> getAccessToken({
+    bool forceRefresh = false,
+    String? staleToken,
+  }) async {
+    final current = _accessToken;
+    final alreadyRefreshed =
+        staleToken != null &&
+        staleToken.isNotEmpty &&
+        current != null &&
+        current != staleToken;
+    if (forceRefresh && alreadyRefreshed) return current;
+
     final expiresAt = _accessTokenExpiresAt;
     final stillFresh =
         _accessToken != null &&
