@@ -10,6 +10,16 @@ import '../models/paginated_result.dart';
 /// Supplies the signed-in Supabase Auth access token.
 typedef IdTokenProvider = Future<String?> Function();
 
+/// Supplies an access token after a request was rejected with `401`.
+///
+/// [staleToken] is the token that was rejected. Passing it lets the provider
+/// return the session's *current* token when another request already refreshed
+/// it, instead of rotating the refresh token a second time. Supabase rotates
+/// refresh tokens, so a redundant rotation is what can turn a transient 401
+/// into a signed-out user.
+typedef ForceRefreshTokenProvider =
+    Future<String?> Function(String? staleToken);
+
 /// Supabase-only HTTP client for Auth-backed PostgREST, RPC, Storage and Edge
 /// Function requests. Resource paths are never sent to an application API
 /// server; authorization remains in Postgres RLS or trusted Edge Functions.
@@ -17,7 +27,7 @@ class ApiClient {
   ApiClient({
     http.Client? client,
     IdTokenProvider? idTokenProvider,
-    IdTokenProvider? forceRefreshTokenProvider,
+    ForceRefreshTokenProvider? forceRefreshTokenProvider,
     String? Function()? currentUidProvider,
     SupabaseClientConfig? config,
     String? supabaseUrl,
@@ -39,7 +49,7 @@ class ApiClient {
 
   final http.Client _client;
   final IdTokenProvider? _idTokenProvider;
-  final IdTokenProvider? _forceRefreshTokenProvider;
+  final ForceRefreshTokenProvider? _forceRefreshTokenProvider;
   final String? Function()? _currentUidProvider;
 
   /// Validated configuration shared with [SupabaseAuthGateway].
@@ -97,7 +107,11 @@ class ApiClient {
     _lastSupabaseProfile = null;
   }
 
-  Future<String?> _freshToken({bool force = false, String? expectedUid}) async {
+  Future<String?> _freshToken({
+    bool force = false,
+    String? expectedUid,
+    String? staleToken,
+  }) async {
     final uid = _authUid;
     if (expectedUid != null && uid != expectedUid) return null;
     if (_tokenUid != uid) {
@@ -105,9 +119,14 @@ class ApiClient {
       _tokenUid = uid;
     }
 
+    // A forced refresh passes the rejected token through, so a session that
+    // another request already refreshed is reused instead of rotated again.
+    final forceProvider = _forceRefreshTokenProvider;
     final custom =
         force
-            ? _forceRefreshTokenProvider ?? _idTokenProvider
+            ? (forceProvider != null
+                  ? () => forceProvider(staleToken)
+                  : _idTokenProvider)
             : _idTokenProvider;
     if (custom != null) {
       try {
@@ -125,6 +144,45 @@ class ApiClient {
       }
     }
     return _authUid == uid ? _token : null;
+  }
+
+  /// The access token to use for [attempt].
+  ///
+  /// Attempt `0` uses the current session token. Attempt `1` is the single
+  /// permitted retry after a `401`: it asks for a refreshed token and refuses
+  /// to replay the token that was just rejected, so a refresh that cannot
+  /// produce a new credential becomes an explicit session-expired error rather
+  /// than a second identical request or a silent anonymous downgrade.
+  Future<String> _tokenForAttempt(
+    int attempt, {
+    String? expectedUid,
+    String? rejectedToken,
+  }) async {
+    final token =
+        attempt == 0
+            ? await _freshToken(expectedUid: expectedUid)
+            : await _freshToken(
+              force: true,
+              expectedUid: expectedUid,
+              staleToken: rejectedToken,
+            );
+    if (token == null || token.isEmpty) {
+      throw ApiException(
+        attempt == 0
+            ? 'You are not signed in.'
+            : 'Your session has expired. Please sign in again.',
+        401,
+      );
+    }
+    if (attempt > 0 && token == rejectedToken) {
+      // The refresh returned the same rejected credential (or the session was
+      // cleared while the request was in flight). Replaying it cannot succeed.
+      throw ApiException(
+        'Your session has expired. Please sign in again.',
+        401,
+      );
+    }
+    return token;
   }
 
   Uri _supabaseResourceUri(String resource, {Map<String, String>? query}) {
@@ -151,17 +209,16 @@ class ApiClient {
     }
 
     final requestUid = _authUid;
+    String? rejectedToken;
     for (var attempt = 0; attempt < 2; attempt++) {
-      final token = await _freshToken(
-        force: attempt == 1,
-        expectedUid: requestUid,
-      );
       if (_authUid != requestUid) {
         throw ApiException('Your session changed. Please retry.', 401);
       }
-      if (token == null || token.isEmpty) {
-        throw ApiException('You are not signed in.', 401);
-      }
+      final token = await _tokenForAttempt(
+        attempt,
+        expectedUid: requestUid,
+        rejectedToken: rejectedToken,
+      );
       final headers = <String, String>{
         'Content-Type': 'application/json',
         'apikey': _supabaseAnonKey,
@@ -196,7 +253,10 @@ class ApiClient {
       if (_authUid != requestUid) {
         throw ApiException('Your session changed. Please retry.', 401);
       }
-      if (response.statusCode == 401 && attempt == 0) continue;
+      if (response.statusCode == 401 && attempt == 0) {
+        rejectedToken = token;
+        continue;
+      }
       final decoded = _decodeSupabaseResponse(response);
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return decoded;
@@ -611,17 +671,16 @@ class ApiClient {
       throw ApiException(config.errorMessage, 503);
     }
     final requestUid = _authUid;
+    String? rejectedToken;
     for (var attempt = 0; attempt < 2; attempt++) {
-      final token = await _freshToken(
-        force: attempt == 1,
-        expectedUid: requestUid,
-      );
       if (_authUid != requestUid) {
         throw ApiException('Your session changed. Please retry.', 401);
       }
-      if (token == null || token.isEmpty) {
-        throw ApiException('You are not signed in.', 401);
-      }
+      final token = await _tokenForAttempt(
+        attempt,
+        expectedUid: requestUid,
+        rejectedToken: rejectedToken,
+      );
       final headers = <String, String>{
         'apikey': _supabaseAnonKey,
         'Authorization': 'Bearer $token',
@@ -648,7 +707,10 @@ class ApiClient {
         if (_authUid != requestUid) {
           throw ApiException('Your session changed. Please retry.', 401);
         }
-        if (response.statusCode == 401 && attempt == 0) continue;
+        if (response.statusCode == 401 && attempt == 0) {
+          rejectedToken = token;
+          continue;
+        }
         return response;
       } on TimeoutException {
         throw ApiException.timeout(
@@ -687,12 +749,31 @@ class ApiClient {
                 ?.toString()
             : null;
     final code = decoded is Map ? decoded['code']?.toString() : null;
+    final safeMessage =
+        message?.isNotEmpty == true
+            ? message!
+            : 'Supabase request failed (${response.statusCode}).';
     return ApiException(
-      message?.isNotEmpty == true
-          ? message!
-          : 'Supabase request failed (${response.statusCode}).',
+      _displayMessage(safeMessage, code),
       response.statusCode,
     ).withCode(code);
+  }
+
+  /// Replaces machine codes that a database function raises as the *message*
+  /// with an actionable sentence.
+  ///
+  /// `rpc_*` guards signal an unresolvable caller as
+  /// `ERROR 42501 AUTHENTICATION_REQUIRED`, which PostgREST returns verbatim as
+  /// `{"code":"42501","message":"AUTHENTICATION_REQUIRED"}`. Showing that
+  /// uppercase token to a user (as the booking/availability screen did) is not
+  /// an explanation. The HTTP status and the code stay unchanged, so callers
+  /// can still branch on them.
+  static String _displayMessage(String message, String? code) {
+    if (code == '42501' && message == 'AUTHENTICATION_REQUIRED') {
+      return 'Your account could not be verified for this action. Sign out and '
+          'sign in again; if it continues, contact support.';
+    }
+    return message;
   }
 
   Future<String> _requireSupabaseApplicationUid() async {

@@ -89,14 +89,6 @@ class _MyAppState extends State<MyApp> {
     // with an actionable auth error rather than falling back to Firebase.
     if (_ownsSession) {
       _session.start();
-    } else {
-      // If we have an injected session, it's already been started by
-      // bootstrapApp, but we still need to listen for auth changes.
-      _session.addListener(_syncRealtimeSession);
-      _authSessionSubscription = _session.authSessionChanges.listen(
-        _syncRealtimeSession,
-      );
-      _syncRealtimeSession();
     }
 
     // One Realtime connection for the whole app. Each socket handshake gets a
@@ -111,9 +103,15 @@ class _MyAppState extends State<MyApp> {
       tokenProvider: repository.realtimeAccessToken,
     );
     _chatRealtime = realtime;
-    // Do not open a privileged-by-role channel until the client profile has
-    // been validated. Token-only refresh events update the socket without
-    // forcing a duplicate profile read.
+
+    // Exactly one listener and one subscription for this widget's lifetime.
+    // These used to be registered from `didChangeDependencies` as well, which
+    // runs again whenever an inherited widget changes: every duplicate asked
+    // Realtime for another access token and re-entered `setSession`, and the
+    // previous `authSessionChanges` subscription was replaced without being
+    // cancelled. Do not open a privileged-by-role channel until the client
+    // profile has been validated; token-only refresh events update the socket
+    // without forcing a duplicate profile read.
     session.addListener(_syncRealtimeSession);
     _authSessionSubscription = session.authSessionChanges.listen(
       _syncRealtimeSession,
@@ -169,20 +167,6 @@ class _MyAppState extends State<MyApp> {
     _chatRealtime?.dispose();
     if (_ownsSession) _ownedSession?.dispose();
     super.dispose();
-  }
-
-  /// Ensures injected sessions (from tests or bootstrap) are started when
-  /// attached to the widget tree.
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_ownsSession || widget.session != null) {
-      _session.addListener(_syncRealtimeSession);
-      _authSessionSubscription = _session.authSessionChanges.listen(
-        _syncRealtimeSession,
-      );
-      _syncRealtimeSession();
-    }
   }
 
   @override
