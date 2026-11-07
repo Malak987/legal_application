@@ -200,14 +200,30 @@ class _HomePageState extends State<HomePage> {
                   );
                   final width = constraints.maxWidth - padding * 2;
                   final scale = MediaQuery.textScalerOf(context).scale(1);
-                  // Two-column layout for all screens where cards fit comfortably.
-// Minimum card width adjusted to fit two columns on mobile devices
-// while maintaining readability and avoiding overflow.
-                  final minCardWidth = 150.0;
-                  final columns = width >= minCardWidth * 2 + 16 ? 2 : 1;
-                  final cardWidth = (width - (columns - 1) * 16) / columns;
+                  // ---- Two-column mobile grid ------------------------------
+                  // Phones were showing one wide card per row because the
+                  // breakpoint demanded 200 logical pixels of card width. The
+                  // grid is now two columns on every mobile-portrait width
+                  // (320/360/390/430), which keeps each card ~136-207 dp: wide
+                  // enough for the thumbnail, a two-line title and the
+                  // rating/price wrap that `ProductCard` already does.
+                  //
+                  // Wider layouts stay at two columns as well; the extra width
+                  // becomes a wider gutter instead of an oversized card.
+                  const spacing = 12.0;
+                  const minCardWidth = 128.0;
+                  final maxColumnsByWidth =
+                      ((width + spacing) / (minCardWidth + spacing)).floor();
+                  final columns = maxColumnsByWidth.clamp(1, 2);
+                  final cardWidth = (width - (columns - 1) * spacing) / columns;
+                  // Height follows the real card contents. `ProductCard` is a
+                  // 3:4-ish tile (thumbnail on top of a text block), so ~1.3x
+                  // the width fits the image, the two-line Arabic title, the
+                  // specialty line and the rating/price row without clipping.
+                  // The 360 dp floor keeps the text block tappable at 320 dp;
+                  // enlarged system text adds room because the block grows.
                   final cardHeight =
-                      math.min(520.0, math.max(340.0, cardWidth * .92)) +
+                      math.min(420.0, math.max(318.0, cardWidth * 1.32)) +
                       math.max(0.0, scale - 1) * 160;
                   return RefreshIndicator(
                     onRefresh: _refreshHome,
@@ -323,8 +339,8 @@ class _HomePageState extends State<HomePage> {
                                     gridDelegate:
                                         SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: columns,
-                                          crossAxisSpacing: 16,
-                                          mainAxisSpacing: 16,
+                                          crossAxisSpacing: spacing,
+                                          mainAxisSpacing: spacing,
                                           mainAxisExtent: cardHeight,
                                         ),
                                     delegate: SliverChildBuilderDelegate((

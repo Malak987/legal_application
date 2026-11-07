@@ -4,10 +4,42 @@
          to allow setting breakpoints, to provide hot reload, etc.
     -->
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <!-- Development only. The local backend is served over plain HTTP
          (http://10.0.2.2:5000 for the Android emulator, or a LAN address for a
          physical device), so cleartext must be permitted for debug/profile
          builds. It is deliberately absent from src/main, which means RELEASE
          builds require an HTTPS backend. -->
-    <application android:usesCleartextTraffic="true"/>
+    <application android:usesCleartextTraffic="true">
+        <!-- DEBUG/PROFILE ONLY: reversible-app-scheme auth callback.
+
+             Why this exists:
+             `src/main` declares only the HTTPS App Link
+             (https://legal-dashboard-1.web.app/auth/callback) with
+             android:autoVerify="true". Android can only hand that link to the
+             app once
+             https://legal-dashboard-1.web.app/.well-known/assetlinks.json is
+             served with this app's signing-certificate SHA-256. Until that file
+             is published, Android resolves the link to the browser, so an email
+             confirmation link never opens the app in a local debug build.
+
+             A custom scheme requires no association document, so debug builds
+             can complete the PKCE callback today. Supabase Auth must list
+             `legalserviceapp://auth-callback` in its redirect allow-list.
+
+             This block is deliberately absent from src/main: release builds
+             keep exactly one callback URI, the verified HTTPS App Link. -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="legalserviceapp"
+                    android:host="auth-callback" />
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/app_profile.dart';
 
 /// Encapsulates SharedPreferences-based caching for essential user profile data.
 ///

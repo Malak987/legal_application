@@ -23,6 +23,10 @@ const List<String> defineNames = <String>[
   'SUPABASE_URL',
   'SUPABASE_ANON_KEY',
   'SUPABASE_AUTH_REDIRECT_URL',
+  // Client registration is compiled out of the app unless this is 'true'.
+  // Without it a Debug build can never exercise the signup + confirmation
+  // journey, so the helper must be able to forward it like the others.
+  'ENABLE_CLIENT_SIGNUP',
 ];
 const List<String> serverOnlyVariables = <String>[
   'SUPABASE_SERVICE_ROLE_KEY',
@@ -214,6 +218,11 @@ Future<int> runTool(
       '  SUPABASE_AUTH_REDIRECT_URL '
       '${resolved.values['SUPABASE_AUTH_REDIRECT_URL']!.isEmpty ? '(not set)' : resolved.values['SUPABASE_AUTH_REDIRECT_URL']} '
       '[${resolved.sources['SUPABASE_AUTH_REDIRECT_URL']}]',
+    )
+    ..writeln(
+      '  ENABLE_CLIENT_SIGNUP '
+      '${resolved.values['ENABLE_CLIENT_SIGNUP']!.isEmpty ? '(not set)' : resolved.values['ENABLE_CLIENT_SIGNUP']} '
+      '[${resolved.sources['ENABLE_CLIENT_SIGNUP']}]',
     );
   if (validateOnly) return 0;
 

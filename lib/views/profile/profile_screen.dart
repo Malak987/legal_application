@@ -11,6 +11,7 @@ import '../../widgets/customapp_bar.dart';
 import '../authentication/login_screen.dart';
 import 'ManageAddress/address_book_screeen.dart';
 import 'change_password.dart';
+import 'delete_account.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -72,6 +73,16 @@ class ProfileScreen extends StatelessWidget {
               title: 'Sign Out',
               onTap: () => _signOut(context),
             ),
+            ProfileRow(
+              leadingIcon: Icons.delete_forever,
+              title: 'حذف الحساب',
+              titleColor: Colors.red.shade700,
+              iconColor: Colors.red.shade700,
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const DeleteAccountScreen()));
+              },
+            ),
           ],
         ),
       ),
@@ -85,10 +96,17 @@ class ProfileRow extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
 
+  /// Optional overrides so a destructive row can be visually distinct without
+  /// changing the appearance of every existing row.
+  final Color? titleColor;
+  final Color? iconColor;
+
   const ProfileRow({
     required this.leadingIcon,
     required this.title,
     required this.onTap,
+    this.titleColor,
+    this.iconColor,
     super.key,
   });
 
@@ -103,12 +121,12 @@ class ProfileRow extends StatelessWidget {
           padding: const EdgeInsets.all(12.0),
           child: Row(
             children: [
-              Icon(leadingIcon,color: AppColors.text3Color,),
+              Icon(leadingIcon,color: iconColor ?? AppColors.text3Color,),
               const SizedBox(width: 16),
               Expanded(
                 child: Text(
                   title,
-                  style: const TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 16, color: titleColor),
                 ),
               ),
               const Icon(Icons.arrow_forward_ios, size: 16,color: AppColors.text3Color,),

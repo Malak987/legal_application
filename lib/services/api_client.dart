@@ -686,12 +686,13 @@ class ApiClient {
                     decoded['error'])
                 ?.toString()
             : null;
+    final code = decoded is Map ? decoded['code']?.toString() : null;
     return ApiException(
       message?.isNotEmpty == true
           ? message!
           : 'Supabase request failed (${response.statusCode}).',
       response.statusCode,
-    );
+    ).withCode(code);
   }
 
   Future<String> _requireSupabaseApplicationUid() async {
@@ -833,6 +834,33 @@ class ApiClient {
     }
   }
 
+  /// Permanently deletes the signed-in account through the `delete-my-account`
+  /// Edge Function.
+  ///
+  /// The request deliberately carries **no** user id: the server derives the
+  /// deletion target from the verified JWT subject, so this client can never
+  /// name another account. A non-2xx response throws [ApiException] with the
+  /// server's safe code in [ApiException.code]; no local state is changed here.
+  Future<void> deleteMyAccount() async {
+    final response = await _supabaseAuthenticatedCall(
+      'POST',
+      _supabaseResourceUri('functions/v1/delete-my-account'),
+      contentType: 'application/json',
+      body: jsonEncode(const <String, dynamic>{}),
+      timeout: defaultEdgeFunctionTimeout,
+    );
+    final decoded = _decodeSupabaseResponse(response);
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+      throw _supabaseResponseError(response, decoded);
+    }
+    if (decoded is! Map || decoded['deleted'] != true) {
+      throw ApiException.invalidResponse(
+        'The account deletion could not be confirmed.',
+        statusCode: response.statusCode,
+      );
+    }
+  }
+
   void dispose() => _client.close();
 }
 
@@ -891,6 +919,20 @@ class ApiException implements Exception {
       kind == ApiErrorKind.network || kind == ApiErrorKind.timeout;
   bool get isTransient =>
       isNetworkFailure || statusCode == 0 || statusCode >= 500;
+
+  /// Stable machine-readable code returned by an Edge Function, e.g.
+  /// `LAWYER_PROFILE_REQUIRES_DEACTIVATION`. Never displayed verbatim.
+  String? get code => _code;
+  String? _code;
+
+  /// Attaches the server's structured error code so the UI can map it to a
+  /// localised message instead of showing raw server text.
+  ApiException withCode(String? code) {
+    if (code != null && code.trim().isNotEmpty) {
+      _code = code.trim();
+    }
+    return this;
+  }
 
   @override
   String toString() => message;

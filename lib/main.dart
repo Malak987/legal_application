@@ -127,7 +127,7 @@ class _MyAppState extends State<MyApp> {
     if (realtime == null) return;
     final session = _session;
     final user = session.user;
-    final authUser = session.authService.currentUser;
+    final authUser = session.authUser;
     final verified =
         session.status == SessionStatus.signedIn &&
         user != null &&

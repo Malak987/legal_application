@@ -164,6 +164,7 @@ void main() {
       authRedirectUrl: 'https://legal.example/auth/callback',
       allowClientSignup: true,
       sessionStore: MemoryAuthSessionStore(),
+      pkceStore: MemoryPkceVerifierStore(),
     );
     final api = ApiClient(
       client: client,
@@ -226,6 +227,7 @@ void main() {
       supabaseUrl: 'https://qqfzbecwhewswkyxgebu.supabase.co',
       supabaseAnonKey: 'public-anon-key',
       sessionStore: MemoryAuthSessionStore(),
+      pkceStore: MemoryPkceVerifierStore(),
     );
     await expectLater(
       gateway.signIn(email: 'sara@example.com', password: 'secret123'),

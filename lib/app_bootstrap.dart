@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,13 +39,21 @@ SessionController createSupabaseSession(
   SupabaseClientConfig config, {
   http.Client? httpClient,
   AuthSessionStore? sessionStore,
+  PkceVerifierStore? pkceStore,
   UserCacheService? userCache,
   Stream<Uri>? recoveryLinkStream,
+  // Test seams. Production leaves these null so the compiled Dart defines
+  // (`SUPABASE_AUTH_REDIRECT_URL`, `ENABLE_CLIENT_SIGNUP`) decide.
+  String? authRedirectUrl,
+  bool? allowClientSignup,
 }) {
   final gateway = SupabaseAuthGateway(
     config: config,
     client: httpClient,
     sessionStore: sessionStore,
+    pkceStore: pkceStore,
+    authRedirectUrl: authRedirectUrl,
+    allowClientSignup: allowClientSignup,
   );
   final api = ApiClient(
     config: config,

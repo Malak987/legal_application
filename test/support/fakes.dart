@@ -10,17 +10,101 @@ import 'package:legalserviceapp/services/auth_service.dart';
 class MemoryAuthSessionStore implements AuthSessionStore {
   String? refreshToken;
 
+  /// Simulates a keystore that refuses to persist the session.
+  bool failOnWrite = false;
+
   @override
   Future<String?> readRefreshToken() async => refreshToken;
 
   @override
   Future<void> writeRefreshToken(String token) async {
+    if (failOnWrite) throw StateError('secure storage write failed');
     refreshToken = token;
   }
 
   @override
   Future<void> clear() async {
     refreshToken = null;
+  }
+}
+
+/// An in-memory [PkceVerifierStore] for tests.
+///
+/// Mirrors the per-flow-row contract of [SecurePkceVerifierStore] so tests
+/// exercise real isolation between concurrent flows, and can simulate keystore
+/// failures at each stage.
+class MemoryPkceVerifierStore implements PkceVerifierStore {
+  MemoryPkceVerifierStore({this.failOnSave = false, String? initialVerifier}) {
+    if (initialVerifier != null) {
+      rows['seed'] = PendingPkceFlow(
+        id: 'seed',
+        purpose: PkceFlowPurpose.signup,
+        verifier: initialVerifier,
+        createdAtMs: 1,
+      );
+    }
+  }
+
+  /// Rows keyed by flow id — the analogue of distinct keystore entries.
+  final Map<String, PendingPkceFlow> rows = <String, PendingPkceFlow>{};
+
+  bool failOnSave;
+  bool failOnRead = false;
+  bool failOnRemove = false;
+
+  int saves = 0;
+  int removes = 0;
+  int _nextId = 0;
+
+  /// 'read' / 'save' / 'remove' in call order.
+  final List<String> events = <String>[];
+
+  /// Convenience for the old single-verifier assertions: the newest verifier.
+  String? get verifier {
+    final all = rows.values.toList(growable: false);
+    if (all.isEmpty) return null;
+    all.sort((a, b) => b.createdAtMs.compareTo(a.createdAtMs));
+    return all.first.verifier;
+  }
+
+  List<PendingPkceFlow> of(PkceFlowPurpose purpose) => rows.values
+      .where((flow) => flow.purpose == purpose)
+      .toList(growable: false)
+    ..sort((a, b) => b.createdAtMs.compareTo(a.createdAtMs));
+
+  @override
+  Future<List<PendingPkceFlow>> readAll() async {
+    events.add('read');
+    if (failOnRead) throw StateError('keystore unreadable');
+    final all = rows.values.toList(growable: false);
+    all.sort((a, b) => b.createdAtMs.compareTo(a.createdAtMs));
+    return all;
+  }
+
+  @override
+  Future<PendingPkceFlow> save(
+    PkceFlowPurpose purpose,
+    String verifier,
+  ) async {
+    events.add('save');
+    if (failOnSave) throw StateError('keystore unwritable');
+    saves++;
+    final flow = PendingPkceFlow(
+      id: 'flow-${_nextId++}',
+      purpose: purpose,
+      verifier: verifier,
+      createdAtMs: DateTime.now().microsecondsSinceEpoch,
+    );
+    rows[flow.id] = flow;
+    return flow;
+  }
+
+  @override
+  Future<void> remove(String id) async {
+    events.add('remove');
+    if (failOnRemove) throw StateError('keystore delete failed');
+    removes++;
+    rows.remove(id);
   }
 }
 

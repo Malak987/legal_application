@@ -83,6 +83,8 @@ void main() {
       'SUPABASE_URL': defaultSupabaseUrl,
       'SUPABASE_ANON_KEY': _key,
       'SUPABASE_AUTH_REDIRECT_URL': '',
+      // Empty: an unset flag is omitted from the command line entirely.
+      'ENABLE_CLIENT_SIGNUP': '',
     };
     expect(flutterArguments(['run', '-d', 'emulator-5554'], values), [
       'run',
@@ -122,6 +124,51 @@ void main() {
       box.dispose();
     },
   );
+
+  test(
+    'ENABLE_CLIENT_SIGNUP and the redirect reach the flutter command',
+    () async {
+      final box = _Sandbox();
+      final code = await box.run(
+        ['build', 'apk', '--debug'],
+        env: {
+          'SUPABASE_ANON_KEY': _key,
+          'SUPABASE_AUTH_REDIRECT_URL': 'legalserviceapp://auth-callback',
+          'ENABLE_CLIENT_SIGNUP': 'true',
+        },
+      );
+      expect(code, 0, reason: box.err.toString());
+      // Without this define the app compiles registration out entirely, so a
+      // Debug-signup test build is impossible unless the helper forwards it.
+      expect(
+        box.argv,
+        contains('--dart-define=ENABLE_CLIENT_SIGNUP=true'),
+      );
+      expect(
+        box.argv,
+        contains(
+          '--dart-define=SUPABASE_AUTH_REDIRECT_URL=legalserviceapp://auth-callback',
+        ),
+      );
+      expect(box.out.toString(), contains('ENABLE_CLIENT_SIGNUP true'));
+      box.dispose();
+    },
+  );
+
+  test('signup stays off when ENABLE_CLIENT_SIGNUP is not set', () async {
+    final box = _Sandbox();
+    final code = await box.run(
+      ['build', 'apk', '--debug'],
+      env: {'SUPABASE_ANON_KEY': _key},
+    );
+    expect(code, 0, reason: box.err.toString());
+    expect(
+      box.argv!.where((a) => a.startsWith('--dart-define=ENABLE_CLIENT_SIGNUP')),
+      isEmpty,
+      reason: 'an unset flag must not be forwarded as an empty define',
+    );
+    box.dispose();
+  });
 
   test(
     'missing, placeholder and secret keys stop before flutter runs',

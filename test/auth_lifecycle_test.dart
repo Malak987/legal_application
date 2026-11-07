@@ -41,18 +41,11 @@ void main() {
         expect(profile.name, 'Sara');
         expect(calls, ['GET /rest/v1/users']);
         expect(gateway.createAccountCalls, 1);
-        // New PKCE: signup must send a code_challenge for PKCE
-        final signupBody = jsonDecode(requests.single.body) as Map<String, dynamic>;
-        expect(
-          signupBody['code_challenge'],
-          isNotEmpty,
-          reason: 'signup must send a code_challenge for PKCE',
-        );
-        expect(
-          signupBody['code_challenge_method'],
-          's256',
-          reason: 'signup must specify S256 method',
-        );
+        // The PKCE wire contract (code_challenge / code_challenge_method /
+        // code_verifier) is asserted against the real
+        // `SupabaseAuthGateway.createAccount` HTTP requests in
+        // test/pkce_email_confirmation_test.dart. This fake gateway performs no
+        // HTTP, so it cannot observe request bodies.
       },
     );
 
@@ -777,6 +770,7 @@ void main() {
         supabaseUrl: 'https://qqfzbecwhewswkyxgebu.supabase.co',
         supabaseAnonKey: 'public-anon-key',
         sessionStore: MemoryAuthSessionStore(),
+      pkceStore: MemoryPkceVerifierStore(),
       );
 
       await expectLater(
@@ -848,6 +842,7 @@ void main() {
           supabaseUrl: 'https://qqfzbecwhewswkyxgebu.supabase.co',
           supabaseAnonKey: 'public-anon-key',
           sessionStore: MemoryAuthSessionStore(),
+      pkceStore: MemoryPkceVerifierStore(),
         );
 
         final user = await gateway.signIn(
@@ -1025,6 +1020,7 @@ void main() {
         supabaseAnonKey: 'public-anon-key',
         authRedirectUrl: 'https://legal.example/auth/callback',
         sessionStore: MemoryAuthSessionStore(),
+      pkceStore: MemoryPkceVerifierStore(),
       );
 
       await gateway.requestPasswordReset(email: 'sara@example.com');
@@ -1033,9 +1029,13 @@ void main() {
         seen?.url.queryParameters['redirect_to'],
         'https://legal.example/auth/callback',
       );
-      expect(jsonDecode(seen!.body), <String, dynamic>{
-        'email': 'sara@example.com',
-      });
+      // The recovery link is now a PKCE callback, so the request also carries
+      // an S256 challenge. Everything else is unchanged.
+      final body = jsonDecode(seen!.body) as Map<String, dynamic>;
+      expect(body['email'], 'sara@example.com');
+      expect(body['code_challenge_method'], 's256');
+      expect(body['code_challenge'], isA<String>());
+      expect((body['code_challenge'] as String).length, 43);
       gateway.dispose();
     });
 
@@ -1070,6 +1070,7 @@ void main() {
         supabaseAnonKey: 'public-anon-key',
         authRedirectUrl: 'https://legal.example/auth/callback',
         sessionStore: MemoryAuthSessionStore(),
+      pkceStore: MemoryPkceVerifierStore(),
       );
 
       final user = await gateway.restoreSession(
@@ -1098,6 +1099,7 @@ void main() {
           supabaseAnonKey: 'public-anon-key',
           authRedirectUrl: 'legal-test://auth/callback',
           sessionStore: MemoryAuthSessionStore(),
+      pkceStore: MemoryPkceVerifierStore(),
         );
         final callbacks = <Uri>[
           Uri.parse('legal-test://auth/callback#type=recovery&expires_in=3600'),
@@ -1242,6 +1244,7 @@ void main() {
           authRedirectUrl: 'https://legal.example/auth/callback',
           allowClientSignup: true,
           sessionStore: MemoryAuthSessionStore(),
+      pkceStore: MemoryPkceVerifierStore(),
         );
         final api = ApiClient(
           client: client,

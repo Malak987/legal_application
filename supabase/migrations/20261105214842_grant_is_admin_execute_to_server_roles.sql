@@ -1,0 +1,38 @@
+-- 20261105214842_grant_is_admin_execute_to_server_roles
+--
+-- Discovered during Phase 5 live verification of the self-service account
+-- deletion feature (Edge Function `delete-my-account`).
+--
+-- Symptom: every service-role write to public.users failed with
+--     ERROR 42501: permission denied for function is_admin
+-- because `public.guard_user_identity_fields()` evaluates `public.is_admin()`
+-- unconditionally on every UPDATE of public.users, while that function had
+-- EXECUTE granted only to `postgres` and `authenticated`:
+--     public.is_admin()   -> postgres=X, authenticated=X
+--     private.is_admin()  -> postgres=X, authenticated=X, service_role=X
+--
+-- Consequences observed live:
+--   * the profile anonymisation step of account deletion returned 503
+--     PROFILE_ANONYMISATION_FAILED and nothing was deleted;
+--   * any other server-side write to public.users would have failed the same
+--     way (administrative profile updates, migrations).
+--
+-- Why this grant is safe:
+--   * `public.is_admin()` takes no arguments, reads no table directly, and
+--     only reports whether the *caller's own* JWT maps to an admin/owner
+--     profile. It returns false for service_role and supabase_auth_admin
+--     (no JWT claims are present), exactly as an unprivileged caller would.
+--   * It does not grant any data access and does not change any guard's
+--     logic: with the grant in place the guard still rejects every identity
+--     change that previously reached its exception branch.
+--   * `service_role` already has BYPASSRLS plus SELECT/UPDATE/DELETE on
+--     public.users; `supabase_auth_admin` needs it only because the
+--     auth.users -> public.users ON DELETE SET NULL action runs under that
+--     role.
+--   * No RLS policy is created, altered or weakened.
+--
+-- Applied live on project qqfzbecwhewswkyxgebu as migration version
+-- 20261105214842 (name: grant_is_admin_execute_to_server_roles).
+
+GRANT EXECUTE ON FUNCTION public.is_admin() TO service_role;
+GRANT EXECUTE ON FUNCTION public.is_admin() TO supabase_auth_admin;

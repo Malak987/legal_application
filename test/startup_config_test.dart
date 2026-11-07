@@ -154,6 +154,7 @@ void main() {
         config,
         httpClient: MockClient((_) async => http.Response('{}', 200)),
         sessionStore: MemoryAuthSessionStore(),
+      pkceStore: MemoryPkceVerifierStore(),
       );
       final gateway = session.authService.gateway as SupabaseAuthGateway;
       expect(identical(gateway.config, config), isTrue);
@@ -268,6 +269,7 @@ void main() {
           _valid(),
           httpClient: _supabaseProject(requests),
           sessionStore: MemoryAuthSessionStore(),
+      pkceStore: MemoryPkceVerifierStore(),
         );
         session.start();
         while (session.isResolving) {

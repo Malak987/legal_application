@@ -179,8 +179,9 @@ void main() {
           final grid = tester.widget<SliverGrid>(find.byType(SliverGrid));
           final delegate =
               grid.gridDelegate as SliverGridDelegateWithFixedCrossAxisCount;
-          final columns = viewport.width >= 600 ? 2 : 1;
-          expect(delegate.crossAxisCount, columns);
+          // Mobile portrait is always two columns now (320/360/390/430),
+          // and wider layouts stay at two rather than growing oversized cards.
+          expect(delegate.crossAxisCount, 2);
           await reveal(
             tester,
             find.byKey(const ValueKey('home-lawyer-lawyer-0')),
@@ -188,7 +189,7 @@ void main() {
           final first = tester.getRect(
             find.byKey(const ValueKey('home-lawyer-lawyer-0')),
           );
-          if (columns == 2) {
+          {
             final second = tester.getRect(
               find.byKey(const ValueKey('home-lawyer-lawyer-1')),
             );
@@ -202,25 +203,7 @@ void main() {
             );
             expect(
               (first.center.dx - second.center.dx).abs() - first.width,
-              closeTo(16, .01),
-            );
-          } else {
-            final firstBottom =
-                first.bottom +
-                tester.state<ScrollableState>(homeScroll()).position.pixels;
-            await reveal(
-              tester,
-              find.byKey(const ValueKey('home-lawyer-lawyer-1')),
-            );
-            final second = tester.getRect(
-              find.byKey(const ValueKey('home-lawyer-lawyer-1')),
-            );
-            expect(first.left, closeTo(second.left, .01));
-            expect(first.width, closeTo(second.width, .01));
-            expect(
-              second.top +
-                  tester.state<ScrollableState>(homeScroll()).position.pixels,
-              greaterThan(firstBottom),
+              closeTo(12, .01),
             );
           }
           expect(first.left, greaterThanOrEqualTo(0));
@@ -277,7 +260,7 @@ void main() {
           final delegate =
               tester.widget<SliverGrid>(find.byType(SliverGrid)).gridDelegate
                   as SliverGridDelegateWithFixedCrossAxisCount;
-          expect(delegate.crossAxisCount, viewport.width >= 800 ? 2 : 1);
+          expect(delegate.crossAxisCount, 2);
           final first = find.byKey(const ValueKey('home-lawyer-lawyer-0'));
           await reveal(tester, first);
           final rating = find.descendant(of: first, matching: find.text('4.5'));

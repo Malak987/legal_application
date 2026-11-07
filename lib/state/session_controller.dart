@@ -82,6 +82,11 @@ class SessionController extends ChangeNotifier {
 
   SessionStatus get status => _status;
   AuthUser? get user => _user;
+
+  /// The live Supabase Auth identity, if any. Unlike [user], this can be set
+  /// while the profile is still unavailable, so callers can detect the
+  /// "Auth session exists but profile is not loaded" state.
+  AuthUser? get authUser => _auth.currentUser;
   AppProfile? get profile => _profile;
 
   /// Last user-facing error, if any. Cleared when a new attempt starts.
@@ -197,6 +202,16 @@ class SessionController extends ChangeNotifier {
         notifyListeners();
         return;
       }
+      // A duplicate delivery of a code that was already exchanged resolves to
+      // the session that exchange installed. Re-walking the profile load would
+      // both duplicate a request and, because the generation was bumped above,
+      // leave the controller stuck in `resolving` if the read is skipped.
+      if (_profile != null && _user?.uid == user.uid) {
+        _status = SessionStatus.signedIn;
+        _error = null;
+        notifyListeners();
+        return;
+      }
       if (_auth.isPasswordRecovery) {
         _enterPasswordRecovery(user);
       } else {
@@ -207,7 +222,17 @@ class SessionController extends ChangeNotifier {
       _restoring = false;
       _user = null;
       _profile = null;
-      _status = SessionStatus.recoveryLinkInvalid;
+
+      // Only a recovery link belongs on the reset-password screen. A failed
+      // email-confirmation callback (expired or already-used link, missing
+      // PKCE verifier) must fall back to the sign-in flow with an explanation,
+      // not silently present a password-reset form.
+      final isRecoveryLink =
+          error is AuthException && error.code == 'invalid-recovery-link';
+      _status =
+          isRecoveryLink
+              ? SessionStatus.recoveryLinkInvalid
+              : SessionStatus.signedOut;
       _error = _describe(error);
       notifyListeners();
     }
@@ -521,6 +546,113 @@ class SessionController extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  /// True while a self-service account deletion is in flight.
+  ///
+  /// The profile screen uses it to disable the destructive action, which is
+  /// the actual double-submission guard (a second tap cannot start a second
+  /// request while the first one is unresolved).
+  bool get isDeletingAccount => _deletingAccount;
+  bool _deletingAccount = false;
+
+  /// The user id whose account was deleted in this app run.
+  ///
+  /// Set only after the server confirmed the deletion. It lets the UI tell a
+  /// finished deletion apart from an ordinary sign-out, and it is the marker
+  /// that a stale refresh token must never be allowed to resurrect.
+  String? get deletedAccountUid => _deletedAccountUid;
+  String? _deletedAccountUid;
+
+  /// Permanently deletes the signed-in account through the Supabase Edge
+  /// Function and clears every trace of the session locally.
+  ///
+  /// Returns `true` on confirmed deletion. Returns `false` (and leaves the
+  /// session untouched) when the server refused or the network failed, so the
+  /// caller must not navigate as if the account were gone.
+  ///
+  /// Authorisation lives entirely on the server: the request carries no user
+  /// id, and the function deletes only the JWT subject's own Auth account.
+  Future<bool> deleteAccount() async {
+    if (!isSignedIn) {
+      throw AuthException('You are not signed in.');
+    }
+    if (_deletingAccount) return false;
+
+    final deletingUser = _user;
+    final deletingProfileUid = _profile?.uid;
+    _deletingAccount = true;
+    _error = null;
+    notifyListeners();
+
+    try {
+      await _auth.api.deleteMyAccount();
+
+      // From here on the account no longer exists. Clear local credentials and
+      // cached state before touching navigation so no stale token survives.
+      _restoring = false;
+      _generation++;
+      _explicitOperation = false;
+      _deletedAccountUid = deletingUser?.uid ?? deletingProfileUid;
+      try {
+        await _auth.signOut();
+      } catch (_) {
+        // The Auth user is gone; a failing logout call must not resurrect it.
+      }
+      if (deletingUser != null) {
+        try {
+          await _auth.clearCachedProfile(deletingUser.uid);
+        } catch (_) {}
+      }
+      if (deletingProfileUid != null && deletingProfileUid != deletingUser?.uid) {
+        try {
+          await _auth.clearCachedProfile(deletingProfileUid);
+        } catch (_) {}
+      }
+
+      _user = null;
+      _profile = null;
+      _error = null;
+      _status = SessionStatus.signedOut;
+      return true;
+    } on ApiException catch (error) {
+      _error = _deletionMessage(error);
+      return false;
+    } on AuthException catch (error) {
+      _error = error.message;
+      return false;
+    } catch (_) {
+      _error = 'Something went wrong. Please try again.';
+      return false;
+    } finally {
+      _deletingAccount = false;
+      _busy = false;
+      notifyListeners();
+    }
+  }
+
+  /// Maps the server's structured deletion codes to an explainable message.
+  /// Unknown codes never surface raw server text.
+  static String _deletionMessage(ApiException error) {
+    switch (error.code) {
+      case 'AUTHENTICATION_REQUIRED':
+      case 'INVALID_SESSION':
+        return 'Your session has expired. Sign in again and retry.';
+      case 'OWNER_ACCOUNT_PROTECTED':
+        return 'The owner account cannot be deleted from the app.';
+      case 'ADMIN_ACCOUNT_PROTECTED':
+        return 'Administrator accounts must be removed by another administrator.';
+      case 'LAWYER_PROFILE_REQUIRES_DEACTIVATION':
+        return 'Deactivate or reassign your public lawyer profile before deleting the account.';
+      case 'ACCOUNT_DELETE_FAILED':
+      case 'PROFILE_ANONYMISATION_FAILED':
+      case 'PROFILE_DETACH_UNVERIFIED':
+        return 'Your account could not be deleted. Nothing was removed; please try again.';
+      case 'TARGET_NOT_ALLOWED':
+        return 'Only your own account can be deleted.';
+      default:
+        return _describe(error);
+    }
   }
 
   static String _describe(Object error) {

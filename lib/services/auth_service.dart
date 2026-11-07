@@ -1,12 +1,13 @@
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
-import 'dart:crypto' show digest;
 import 'dart:math' as math;
+import 'dart:typed_data';
 
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:crypto/crypto.dart' show sha256;
+import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/supabase_client_config.dart';
 import '../config/supabase_config.dart';
@@ -68,6 +69,259 @@ class SecureAuthSessionStore implements AuthSessionStore {
   Future<void> clear() => _storage.delete(key: _key);
 }
 
+/// Storage for the PKCE `code_verifier` that must survive the gap between
+/// `POST /auth/v1/signup` and the email-confirmation callback.
+///
+/// The verifier is a bearer-equivalent secret for the duration of the flow:
+/// anybody who has it *and* the authorization code can exchange that code for
+/// the user's session. It is therefore kept in the platform keystore rather
+/// than `SharedPreferences`, and it is removed only after a successful token
+/// exchange (or when a new signup supersedes it).
+/// The narrow keystore surface [SecurePkceVerifierStore] needs.
+///
+/// Exists so the isolation logic can be exercised against an in-memory
+/// implementation without mocking all of `flutter_secure_storage`.
+abstract interface class PkceKeystore {
+  Future<Map<String, String>> readAll();
+  Future<void> write(String key, String value);
+  Future<void> delete(String key);
+}
+
+class _FlutterPkceKeystore implements PkceKeystore {
+  const _FlutterPkceKeystore();
+
+  static const FlutterSecureStorage _storage = FlutterSecureStorage();
+
+  @override
+  Future<Map<String, String>> readAll() => _storage.readAll();
+
+  @override
+  Future<void> write(String key, String value) =>
+      _storage.write(key: key, value: value);
+
+  @override
+  Future<void> delete(String key) => _storage.delete(key: key);
+}
+
+/// The authorization request a PKCE verifier belongs to.
+///
+/// Signup and password recovery are independent flows: a pending email
+/// confirmation and a pending password reset must be able to coexist, because
+/// neither can be completed without its own verifier.
+enum PkceFlowPurpose { signup, recovery }
+
+/// One pending authorization request and the verifier that completes it.
+///
+/// [id] is unique per [PkceVerifierStore.save] call, which is what makes
+/// removal *ownership-conditional*: an operation can only ever delete the row
+/// it created, never a newer one belonging to a different operation.
+class PendingPkceFlow {
+  const PendingPkceFlow({
+    required this.id,
+    required this.purpose,
+    required this.verifier,
+    this.createdAtMs = 0,
+  });
+
+  final String id;
+  final PkceFlowPurpose purpose;
+
+  /// The `code_verifier`. Empty when the stored value was corrupt or
+  /// unreadable; such a flow is skipped rather than used as a guess.
+  final String verifier;
+
+  /// Ordering only: the newest flow is the most likely match for a callback.
+  final int createdAtMs;
+
+  bool get isUsable => verifier.isNotEmpty;
+
+  @override
+  String toString() =>
+      'PendingPkceFlow(${purpose.name}, usable: $isUsable)'; // never the value
+}
+
+/// Storage for pending PKCE `code_verifier` values.
+///
+/// Contract, and why it is shaped this way:
+///
+/// * **One row per flow, never one shared slot.** A valid `code_verifier` is
+///   bearer-equivalent for as long as its authorization code lives. Keeping
+///   signup and recovery in separate rows means starting one flow cannot
+///   destroy the other's ability to finish.
+/// * **`save` returns the created row.** The caller keeps [PendingPkceFlow.id]
+///   and rolls back with exactly that id, so a rollback can never overwrite a
+///   newer flow written by another operation.
+/// * **`remove` takes an id and is idempotent.** No "clear everything" verb is
+///   exposed, so no code path can mass-delete another flow's verifier.
+/// * **`readAll` may throw.** Callers must fail closed and never fabricate a
+///   verifier when storage is unreadable.
+abstract interface class PkceVerifierStore {
+  /// Every pending flow, newest first. May throw if storage is unreadable.
+  Future<List<PendingPkceFlow>> readAll();
+
+  /// Persists [verifier] under a fresh unique id for [purpose].
+  Future<PendingPkceFlow> save(PkceFlowPurpose purpose, String verifier);
+
+  /// Removes exactly one flow. No-op when the id is already gone.
+  Future<void> remove(String id);
+}
+
+/// Keystore-backed [PkceVerifierStore].
+///
+/// Each flow is a separate entry under [keyPrefix], so writers of different
+/// flows never share a key and therefore cannot clobber each other — including
+/// across processes. Values are JSON so the timestamp used for newest-first
+/// ordering travels with the verifier.
+///
+/// Limitations (deliberate, see docs/AUTH_PKCE_ARCHITECTURE.md):
+/// * No cross-process mutex. Instead, correctness comes from per-flow keys and
+///   id-scoped removal, which are safe under concurrent writers.
+/// * Per-purpose count is bounded ([maxFlowsPerPurpose]) so a device cannot
+///   accumulate secrets indefinitely; the oldest flow of that purpose is
+///   evicted. A verifier older than that many same-purpose requests may be
+///   missing when its link is finally tapped.
+/// * No TTL: a confirmation email may legitimately be opened days later.
+class SecurePkceVerifierStore implements PkceVerifierStore {
+  SecurePkceVerifierStore({PkceKeystore? keystore})
+    : _storage = keystore ?? const _FlutterPkceKeystore();
+
+  static const String keyPrefix = 'legal_supabase_pkce_v2';
+
+  /// Pre-scoped single-slot key from the previous implementation. Read once so
+  /// a device mid-flight across the upgrade can still finish its confirmation.
+  static const String legacyKey = 'legal_supabase_pkce_verifier_v1';
+
+  static const String legacyFlowId = 'legacy-v1';
+
+  /// Oldest-evicting bound, per purpose.
+  static const int maxFlowsPerPurpose = 5;
+
+  final PkceKeystore _storage;
+
+  static String _keyFor(PkceFlowPurpose purpose, String id) =>
+      '$keyPrefix:${purpose.name}:$id';
+
+  @override
+  Future<List<PendingPkceFlow>> readAll() async {
+    final all = await _storage.readAll();
+    final flows = <PendingPkceFlow>[];
+
+    for (final entry in all.entries) {
+      if (!entry.key.startsWith('$keyPrefix:')) continue;
+      final parts = entry.key.split(':');
+      if (parts.length != 3) continue;
+      final purpose = PkceFlowPurpose.values.firstWhere(
+        (value) => value.name == parts[1],
+        orElse: () => PkceFlowPurpose.signup,
+      );
+      final parsed = _decode(entry.value);
+      flows.add(
+        PendingPkceFlow(
+          id: parts[2],
+          purpose: purpose,
+          verifier: parsed.verifier,
+          createdAtMs: parsed.createdAtMs,
+        ),
+      );
+    }
+
+    // Adopt the pre-scoped slot as a signup flow so an upgrade does not strand
+    // a confirmation that was already requested.
+    final legacy = (all[legacyKey] ?? '').trim();
+    if (legacy.isNotEmpty) {
+      flows.add(
+        PendingPkceFlow(
+          id: legacyFlowId,
+          purpose: PkceFlowPurpose.signup,
+          verifier: legacy,
+        ),
+      );
+    }
+
+    flows.sort((a, b) => b.createdAtMs.compareTo(a.createdAtMs));
+    return flows;
+  }
+
+  @override
+  Future<PendingPkceFlow> save(
+    PkceFlowPurpose purpose,
+    String verifier,
+  ) async {
+    final flow = PendingPkceFlow(
+      id: _randomId(),
+      purpose: purpose,
+      verifier: verifier,
+      createdAtMs: DateTime.now().millisecondsSinceEpoch,
+    );
+    await _storage.write(
+      _keyFor(purpose, flow.id),
+      jsonEncode(<String, dynamic>{
+        'verifier': verifier,
+        'created_at': flow.createdAtMs,
+      }),
+    );
+    await _prune(purpose);
+    return flow;
+  }
+
+  @override
+  Future<void> remove(String id) async {
+    if (id == legacyFlowId || id.isEmpty) {
+      // Also clear the legacy slot when it is the flow being consumed.
+      await _storage.delete(legacyKey);
+      return;
+    }
+    for (final purpose in PkceFlowPurpose.values) {
+      await _storage.delete(_keyFor(purpose, id));
+    }
+  }
+
+  /// Evicts the oldest flows of [purpose] beyond [maxFlowsPerPurpose].
+  Future<void> _prune(PkceFlowPurpose purpose) async {
+    final sameFlow = (await readAll())
+        .where((flow) => flow.purpose == purpose && flow.id != legacyFlowId)
+        .toList(growable: false);
+    if (sameFlow.length <= maxFlowsPerPurpose) return;
+    for (final flow in sameFlow.skip(maxFlowsPerPurpose)) {
+      await _storage.delete(_keyFor(purpose, flow.id));
+    }
+  }
+
+  static _DecodedVerifier _decode(String? raw) {
+    final value = (raw ?? '').trim();
+    if (value.isEmpty) return const _DecodedVerifier('', 0);
+    try {
+      final decoded = jsonDecode(value);
+      if (decoded is Map) {
+        final verifier = (decoded['verifier'] ?? '').toString().trim();
+        final createdAt = int.tryParse('${decoded['created_at']}') ?? 0;
+        return _DecodedVerifier(verifier, createdAt);
+      }
+    } catch (_) {
+      // Not JSON: treat the whole value as the verifier (defensive).
+    }
+    return _DecodedVerifier(value, 0);
+  }
+
+  static final math.Random _idRandom = math.Random.secure();
+
+  static String _randomId() {
+    final bytes = Uint8List(9);
+    for (var index = 0; index < bytes.length; index++) {
+      bytes[index] = _idRandom.nextInt(256);
+    }
+    return base64Url.encode(bytes).replaceAll(RegExp(r'=+$'), '');
+  }
+}
+
+class _DecodedVerifier {
+  const _DecodedVerifier(this.verifier, this.createdAtMs);
+
+  final String verifier;
+  final int createdAtMs;
+}
+
+
 /// Auth operations used by the application/session controller.
 abstract interface class AuthGateway {
   /// Emits explicit sign-in/sign-out changes. Implementations do not emit an
@@ -123,9 +377,9 @@ class SupabaseAuthGateway implements AuthGateway {
     String? supabaseUrl,
     String? supabaseAnonKey,
     AuthSessionStore? sessionStore,
+    PkceVerifierStore? pkceStore,
     String? authRedirectUrl,
     bool? allowClientSignup,
-    SharedPreferences? sharedPrefs,
   }) : _client = client ?? http.Client(),
        _allowClientSignup =
            allowClientSignup ?? SupabaseConfig.enableClientSignup,
@@ -136,9 +390,11 @@ class SupabaseAuthGateway implements AuthGateway {
          anonKey: supabaseAnonKey,
        ),
        _sessionStore = sessionStore ?? SecureAuthSessionStore(),
+       // The PKCE verifier lives in the platform keystore, never in
+       // SharedPreferences (world-readable on a rooted/unlocked device).
+       _pkceStore = pkceStore ?? SecurePkceVerifierStore(),
        _authRedirectUrl =
-           (authRedirectUrl ?? SupabaseConfig.authRedirectUrl).trim(),
-       _sharedPrefs = sharedPrefs;
+           (authRedirectUrl ?? SupabaseConfig.authRedirectUrl).trim();
 
   static const Duration _requestTimeout = Duration(seconds: 20);
   static const Duration _refreshSkew = Duration(seconds: 60);
@@ -148,8 +404,8 @@ class SupabaseAuthGateway implements AuthGateway {
   final bool _ownsClient;
   final SupabaseClientConfig _config;
   final AuthSessionStore _sessionStore;
+  final PkceVerifierStore _pkceStore;
   final String _authRedirectUrl;
-  final SharedPreferences? _sharedPrefs;
   final StreamController<AuthUser?> _authController =
       StreamController<AuthUser?>.broadcast();
   final StreamController<AuthUser?> _sessionController =
@@ -167,24 +423,51 @@ class SupabaseAuthGateway implements AuthGateway {
   bool _isPasswordRecovery = false;
   bool _disposed = false;
 
-  static const String _pkceCodeVerifierKey = 'pkce_code_verifier';
+  /// RFC 7636 §4.2 requires 43–128 chars from the unreserved set. 32 CSPRNG
+  /// bytes base64url-encoded without padding is exactly 43 chars.
+  static const int _pkceVerifierBytes = 32;
 
-  /// Generates a random 32-byte code_verifier and returns it.
+  /// Bounded memory of authorization codes already exchanged, so a duplicated
+  /// deep-link delivery cannot trigger a second token exchange. Supabase
+  /// authorization codes are single-use; the second exchange would fail and
+  /// could otherwise tear down a healthy session.
+  final LinkedHashSet<String> _consumedPkceCodes = LinkedHashSet<String>();
+  static const int _maxTrackedCodes = 16;
+
+  /// Generates a cryptographically secure PKCE `code_verifier`.
+  ///
+  /// One [math.Random.secure] source — the platform CSPRNG — produces every
+  /// byte of the verifier; the generator is never re-seeded or re-created per
+  /// byte, and no non-cryptographic fallback exists. The 32 bytes are
+  /// base64url-encoded without padding, giving exactly 43 characters within
+  /// RFC 7636's 43–128 window.
   static String _generatePkceVerifier() {
     final random = math.Random.secure();
-    final bytes = List<int>.generate(32, (_) => random.nextInt(256));
-    final verifier = base64Url.encode(bytes);
-    return verifier.replaceAll(RegExp(r'=+$'), '');
+    final bytes = Uint8List(_pkceVerifierBytes);
+    for (var index = 0; index < bytes.length; index++) {
+      bytes[index] = random.nextInt(256);
+    }
+    return _base64UrlNoPadding(bytes);
   }
 
-  /// Derives a code_challenge (S256) from the verifier.
+  /// Derives the S256 `code_challenge` from the exact verifier:
+  /// `BASE64URL(SHA256(ASCII(code_verifier)))`, no padding.
   static String _generatePkceChallenge(String codeVerifier) {
-    // SHA-256 of the verifier
-    final bytes = digest.convert(utf8.encode(codeVerifier)).bytes;
-    // Base64url encode without padding
-    final challenge = base64Url.encode(bytes);
-    return challenge.replaceAll(RegExp(r'=+$'), '');
+    final digestBytes = sha256.convert(utf8.encode(codeVerifier)).bytes;
+    return _base64UrlNoPadding(digestBytes);
   }
+
+  static String _base64UrlNoPadding(List<int> bytes) =>
+      base64Url.encode(bytes).replaceAll(RegExp(r'=+$'), '');
+
+  /// Exposed for the PKCE contract tests only; production code derives the
+  /// challenge inside [createAccount] from the verifier it just persisted.
+  @visibleForTesting
+  static String debugDerivePkceChallenge(String verifier) =>
+      _generatePkceChallenge(verifier);
+
+  @visibleForTesting
+  static String debugGeneratePkceVerifier() => _generatePkceVerifier();
 
   /// The validated configuration used for every Auth request.
   SupabaseClientConfig get config => _config;
@@ -264,10 +547,16 @@ class SupabaseAuthGateway implements AuthGateway {
   Future<AuthUser?> _restoreCallbackSession(Uri callbackUri) async {
     final callback = <String, String>{...callbackUri.queryParameters};
     if (callbackUri.fragment.isNotEmpty) {
+      Map<String, String> fragment;
       try {
-        callback.addAll(Uri.splitQueryString(callbackUri.fragment));
+        fragment = Uri.splitQueryString(callbackUri.fragment);
       } catch (_) {
         throw _invalidRecoveryLink();
+      }
+      for (final entry in fragment.entries) {
+        // Query parameters win: the verifier link puts the real outcome in
+        // the query string, and a stale fragment must not overwrite it.
+        callback.putIfAbsent(entry.key, () => entry.value);
       }
     }
 
@@ -290,17 +579,21 @@ class SupabaseAuthGateway implements AuthGateway {
       throw _invalidRecoveryLink();
     }
 
-    // PKCE flow: if a `code` parameter is present and no access_token/refres h_token,
-    // exchange the code for tokens before proceeding.
-    final code = (callback['code'] ?? '').trim();
-    if (code.isNotEmpty && (accessToken.isEmpty || refreshToken.isEmpty)) {
-      return _handlePkceCode(code, callbackUri);
-    }
-
     final accessToken = (callback['access_token'] ?? '').trim();
     final refreshToken = (callback['refresh_token'] ?? '').trim();
+
+    // PKCE flow: an email-confirmation / magic-link callback carries a `code`
+    // and no tokens. Exchange it before anything else looks at the tokens.
+    final code = (callback['code'] ?? '').trim();
+    if (code.isNotEmpty && (accessToken.isEmpty || refreshToken.isEmpty)) {
+      return _handlePkceCode(code, callbackUri, isRecovery: type == 'recovery');
+    }
+
     if (accessToken.isEmpty || refreshToken.isEmpty) {
-      throw _invalidRecoveryLink();
+      // Only a recovery link is expected to carry implicit tokens. An email
+      // confirmation that lost its `code` is a broken link, and telling the
+      // user to "request a new password-reset link" would be misleading.
+      throw type == 'recovery' ? _invalidRecoveryLink() : _invalidPkceLink();
     }
     final expiresIn = int.tryParse(callback['expires_in'] ?? '');
     final expiresAt = int.tryParse(callback['expires_at'] ?? '');
@@ -344,26 +637,77 @@ class SupabaseAuthGateway implements AuthGateway {
     );
   }
 
-  Future<AuthUser?> _handlePkceCode(String code, Uri callbackUri) async {
+  /// Exchanges an email-confirmation / magic-link `code` for a session.
+  ///
+  /// Supabase's PKCE grant is `POST /auth/v1/token?grant_type=pkce` with the
+  /// JSON body `{"auth_code": <code>, "code_verifier": <verifier>}`. Both are
+  /// required; GoTrue answers 400
+  /// `both auth code and code verifier should be non-empty` when either is
+  /// missing. The verifier must be the *same* value that produced the
+  /// `code_challenge` sent with `POST /auth/v1/signup`.
+  Future<AuthUser?> _handlePkceCode(
+    String code,
+    Uri callbackUri, {
+    bool isRecovery = false,
+  }) async {
     _ensureConfigured();
+
+    // A repeated delivery of the same link (warm-start + cold-start, or a
+    // double tap in the browser) must not attempt a second exchange: the
+    // authorization code is single-use, and the second attempt would either
+    // fail loudly or needlessly destroy a session that already succeeded.
+    if (_consumedPkceCodes.contains(code)) {
+      return _currentUser;
+    }
+
     final sessionGeneration = ++_sessionGeneration;
 
-    // Read persisted PKCE code verifier
-    final storedVerifier = _sharedPrefs?.getString(_pkceCodeVerifierKey) ?? '';
-
-    if (storedVerifier.isEmpty) {
-      // Missing verifier: cannot complete the exchange without the original
-      // verifier. This link may have been forged or expired.
-      _sessionGeneration++;
+    // Pick the verifier that belongs to THIS flow. A callback's `type` tells
+    // us which; without one we accept either purpose, newest first, because
+    // Supabase does not always label confirmation callbacks.
+    final PendingPkceFlow flow;
+    try {
+      final pending = await _pkceStore.readAll();
+      final expected =
+          isRecovery ? PkceFlowPurpose.recovery : PkceFlowPurpose.signup;
+      final matching = pending
+          .where((candidate) => candidate.isUsable)
+          .toList(growable: false);
+      // Prefer the flow purpose implied by the callback, then any usable flow
+      // (oldest links may predate a purpose change on the server side).
+      flow = matching.firstWhere(
+        (candidate) => candidate.purpose == expected,
+        orElse:
+            () => matching.isEmpty
+                ? const PendingPkceFlow(
+                  id: '',
+                  purpose: PkceFlowPurpose.signup,
+                  verifier: '',
+                )
+                : matching.first,
+      );
+    } catch (_) {
+      // Storage could be unavailable (device locked, keystore reset). The
+      // exchange cannot proceed, but the session state is untouched.
       throw _invalidPkceLink();
     }
+    if (sessionGeneration != _sessionGeneration) {
+      throw _supersededSessionOperation();
+    }
+    if (!flow.isUsable) {
+      // No verifier: the user registered on another device, cleared app data,
+      // or the link is forged/expired. Never exchange without it.
+      throw _invalidPkceLink();
+    }
+    final storedVerifier = flow.verifier;
 
     final response = await _send(
       'POST',
-      _authUri('token', const <String, String>{'grant_type': 'pkce', 'code': code}),
-      body: jsonEncode(<String, String>{
+      _authUri('token', const <String, String>{'grant_type': 'pkce'}),
+      body: <String, dynamic>{
+        'auth_code': code,
         'code_verifier': storedVerifier,
-      }),
+      },
     );
     if (sessionGeneration != _sessionGeneration) {
       throw _supersededSessionOperation();
@@ -373,6 +717,9 @@ class SupabaseAuthGateway implements AuthGateway {
       if (response.statusCode == 400 ||
           response.statusCode == 401 ||
           response.statusCode == 403) {
+        // Expired (default 5 minute window), reused, or verifier mismatch.
+        // The verifier is deliberately kept: a transient server rejection must
+        // not destroy a flow the user may still complete.
         throw _invalidPkceLink();
       }
       throw _mapSupabaseError(decoded, response.statusCode);
@@ -382,25 +729,67 @@ class SupabaseAuthGateway implements AuthGateway {
     if (accessToken.isEmpty || refreshToken.isEmpty) {
       throw _invalidPkceLink();
     }
-    final expiresIn = int.tryParse(decoded['expires_in'] ?? '');
+    final expiresIn = int.tryParse((decoded['expires_in'] ?? '').toString());
     final user = _extractUser(decoded);
-    _isPasswordRecovery = false;
+    // A PKCE recovery callback must land on the reset-password screen; an
+    // email-confirmation / magic-link callback must not.
+    _isPasswordRecovery = isRecovery;
 
-    // Clear verifier after successful exchange
-    if (_sharedPrefs != null) {
-      await _sharedPrefs!.remove(_pkceCodeVerifierKey);
-    }
-
-    return _installSession(
+    // Install first, then forget the verifier: clearing it before the session
+    // is durable would make a transient install failure unrecoverable. If the
+    // install fails the verifier is kept, so the user can retry.
+    final AuthUser installed;
+    try {
+      installed = await _installSession(
       accessToken: accessToken,
       refreshToken: refreshToken,
       user: user,
       expiresIn: expiresIn,
       emit: true,
       persistenceRequired: true,
-      accountCreated: false,
-      expectedGeneration: sessionGeneration,
-    );
+        accountCreated: false,
+        expectedGeneration: sessionGeneration,
+      );
+    } on AuthException {
+      // Session could not be persisted (e.g. keystore failure). Keep the
+      // verifier: it is the only way to complete this flow later.
+      rethrow;
+    }
+
+    _rememberConsumedCode(code);
+    try {
+      // Only this flow's row: a concurrent pending flow keeps its verifier.
+      await _pkceStore.remove(flow.id);
+    } catch (_) {
+      // A leftover verifier is harmless once its authorization code has been
+      // consumed, and it is bounded by the store's eviction policy.
+    }
+    return installed;
+  }
+
+  /// Abandons exactly the flow this operation created, and nothing else.
+  ///
+  /// This replaces the previous "restore the old verifier" rollback, which was
+  /// unsafe: writing a remembered value back could overwrite a *newer* flow
+  /// created by another operation while this one was in flight. Because each
+  /// flow owns its own storage row, discarding by id is inherently
+  /// ownership-conditional — no read-compare-write window exists, and it is
+  /// safe across processes.
+  ///
+  /// Best effort: the caller is already reporting the original failure, and a
+  /// rollback error must not replace it.
+  Future<void> _discardFlow(PendingPkceFlow flow) async {
+    try {
+      await _pkceStore.remove(flow.id);
+    } catch (_) {}
+  }
+
+  void _rememberConsumedCode(String code) {
+    if (code.isEmpty) return;
+    _consumedPkceCodes.add(code);
+    while (_consumedPkceCodes.length > _maxTrackedCodes) {
+      _consumedPkceCodes.remove(_consumedPkceCodes.first);
+    }
   }
 
   AuthException _invalidPkceLink() => AuthException(
@@ -495,13 +884,30 @@ class SupabaseAuthGateway implements AuthGateway {
     }
     final sessionGeneration = ++_sessionGeneration;
 
-    // Generate PKCE verifier and challenge for secure confirmation flow
+    // PKCE: generate the verifier, derive the S256 challenge from that exact
+    // verifier, and persist the verifier BEFORE the signup request. If the
+    // verifier cannot be persisted, signup must not happen — otherwise the
+    // confirmation link arrives with no way to complete the exchange and the
+    // account is stranded unconfirmed.
     final codeVerifier = _generatePkceVerifier();
     final codeChallenge = _generatePkceChallenge(codeVerifier);
-
-    // Store the verifier for use during confirmation exchange
-    if (_sharedPrefs != null) {
-      await _sharedPrefs!.setString(_pkceCodeVerifierKey, codeVerifier);
+    final PendingPkceFlow flow;
+    try {
+      // A brand-new row, owned by this call. No other flow's verifier is
+      // read, replaced, or removed here — starting a signup cannot break a
+      // pending password reset (or an earlier confirmation).
+      flow = await _pkceStore.save(PkceFlowPurpose.signup, codeVerifier);
+      final stored = await _pkceStore.readAll();
+      final mine = stored.where((candidate) => candidate.id == flow.id);
+      if (mine.isEmpty || mine.first.verifier != codeVerifier) {
+        await _discardFlow(flow);
+        throw const FormatException('PKCE verifier did not persist.');
+      }
+    } catch (_) {
+      throw AuthException(
+        'Secure storage is unavailable, so email confirmation cannot be completed on this device. Please retry, or free up storage and try again.',
+        code: 'pkce-storage-failed',
+      );
     }
 
     final response = await _send(
@@ -526,10 +932,16 @@ class SupabaseAuthGateway implements AuthGateway {
     );
 
     if (sessionGeneration != _sessionGeneration) {
+      // Another auth operation superseded this one; this flow cannot complete.
+      await _discardFlow(flow);
       throw _supersededSessionOperation();
     }
     final decoded = _decodeJson(response.body);
     if (response.statusCode < 200 || response.statusCode >= 300) {
+      // The account was not created, so this flow will never receive a
+      // callback: discard exactly this row. Untouched flows (another signup,
+      // a pending recovery) keep their verifiers.
+      await _discardFlow(flow);
       throw _mapSupabaseError(decoded, response.statusCode);
     }
 
@@ -538,6 +950,7 @@ class SupabaseAuthGateway implements AuthGateway {
     if (accessToken.isEmpty || refreshToken.isEmpty) {
       // Supabase is configured to require email confirmation. A user object may
       // be returned, but without a session the app must not enter protected UI.
+      // This IS a live pending confirmation, so the new verifier stays.
       await _clearSession(notify: true);
       throw AuthException(
         'Your account was created. Check your email to confirm it, then sign in.',
@@ -570,16 +983,39 @@ class SupabaseAuthGateway implements AuthGateway {
         code: 'auth-redirect-not-configured',
       );
     }
+    // The recovery link is delivered as a PKCE callback (`?code=…`). Without a
+    // stored verifier the app could not exchange it, so the same
+    // persist-before-send rule as signup applies.
+    final codeVerifier = _generatePkceVerifier();
+    final codeChallenge = _generatePkceChallenge(codeVerifier);
+    final PendingPkceFlow flow;
+    try {
+      // Recovery gets its own row, so requesting a reset never destroys a
+      // pending signup confirmation (and vice versa).
+      flow = await _pkceStore.save(PkceFlowPurpose.recovery, codeVerifier);
+    } catch (_) {
+      throw AuthException(
+        'Secure storage is unavailable, so the password-reset link cannot be completed on this device. Please retry.',
+        code: 'pkce-storage-failed',
+      );
+    }
+
     final response = await _send(
       'POST',
       _authUri(
         'recover',
         redirect.isEmpty ? null : <String, String>{'redirect_to': redirect},
       ),
-      body: <String, dynamic>{'email': email.trim()},
+      body: <String, dynamic>{
+        'email': email.trim(),
+        'code_challenge': codeChallenge,
+        'code_challenge_method': 's256',
+      },
     );
     final decoded = _decodeJson(response.body);
     if (response.statusCode < 200 || response.statusCode >= 300) {
+      // No recovery email was sent, so this flow will never be completed.
+      await _discardFlow(flow);
       throw _mapSupabaseError(decoded, response.statusCode);
     }
   }

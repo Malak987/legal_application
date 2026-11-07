@@ -1,5 +1,6 @@
 {
   "SUPABASE_URL": "https://qqfzbecwhewswkyxgebu.supabase.co",
-  "SUPABASE_ANON_KEY": "sb_publishable_dXTh0U7bu2nKkKMFV1xxuA_4O1Tt5oj",
-  "SUPABASE_AUTH_REDIRECT_URL": "https://legal-dashboard-1.web.app/auth/callback"
+  "SUPABASE_ANON_KEY": "<public publishable key, sb_publishable_...>",
+  "SUPABASE_AUTH_REDIRECT_URL": "legalserviceapp://auth-callback",
+  "ENABLE_CLIENT_SIGNUP": "true"
 }
