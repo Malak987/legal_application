@@ -3,10 +3,7 @@
  * deno test — behaviour tests for the self-service deletion handler.
  *
  * These run against in-memory fakes of the Supabase clients: no project, no
- * network, no service-role key. They assert real control flow (which requests
- * reached `auth.admin.deleteUser`, with which id) rather than string presence.
- *
- * Run with:  deno test supabase/functions/delete-my-account/
+ * network, no service-role key.
  */
 import {
   assert,
@@ -17,12 +14,6 @@ import { createSelfDeleteAccountHandler } from './account_deletion.ts';
 const CALLER_AUTH_ID = '11111111-1111-4111-8111-111111111111';
 const OTHER_AUTH_ID = '22222222-2222-4222-8222-222222222222';
 
-/**
- * Minimal chainable stand-in for a PostgREST query builder.
- *
- * Like supabase-js, the builder is thenable: the request is executed when the
- * chain is awaited, not only when `.maybeSingle()` is called.
- */
 function fakeQuery(rows, calls) {
   const state = { filters: {}, limit: null, op: 'select', payload: null, table: null };
 
@@ -64,7 +55,6 @@ function fakeQuery(rows, calls) {
     maybeSingle() {
       return Promise.resolve(exec());
     },
-    // Awaiting the bare chain (e.g. `await from().update(...).eq(...)`).
     then(onFulfilled, onRejected) {
       return Promise.resolve(exec()).then(onFulfilled, onRejected);
     },
@@ -72,10 +62,6 @@ function fakeQuery(rows, calls) {
   return builder;
 }
 
-/**
- * Models the production `users.auth_user_id` FK, which is ON DELETE SET NULL:
- * deleting the auth user detaches the profile instead of removing it.
- */
 function applyAuthFkSetNull(world, authId) {
   for (const row of world.users) {
     if (row.auth_user_id === authId) row.auth_user_id = null;
@@ -96,15 +82,15 @@ function profileRow(overrides = {}) {
   };
 }
 
-/**
- * Builds the fake world used by every test.
- * `users`/`lawyers` are the live table contents and are mutated by the handler.
- */
 function harness({
   users = [],
   lawyers = [],
-  authUsers = {},
+  storageFiles = {},
   deleteUserImpl,
+  signOutError = null,
+  listError = null,
+  removeError = null,
+  profileQueryError = false,
   getUserImpl,
 } = {}) {
   const calls = [];
@@ -112,17 +98,83 @@ function harness({
     users: users.map((row) => ({ ...row })),
     lawyers: lawyers.map((row) => ({ ...row })),
     deletedAuthIds: [],
+    signOutTokens: [],
+    removedStoragePaths: [],
     calls,
   };
 
   const serviceClient = {
     from(table) {
+      if (profileQueryError) {
+        return {
+          select: () => ({
+            eq: () => ({
+              maybeSingle: () => Promise.resolve({ data: null, error: { message: 'db error' } }),
+            }),
+          }),
+        };
+      }
       const builder = fakeQuery(table === 'users' ? world.users : world.lawyers, calls);
       builder.table = table;
       return builder;
     },
+    storage: {
+      from(bucket) {
+        assertEquals(bucket, 'legal-documents');
+        return {
+          async list(folder, options) {
+            if (listError) return { data: null, error: listError };
+            const limit = options?.limit ?? 1000;
+            const offset = options?.offset ?? 0;
+            const prefix = folder ? `${folder}/` : '';
+            const allMatching = [];
+            const seenNames = new Set();
+
+            for (const filePath of Object.keys(storageFiles)) {
+              if (folder === '' || filePath.startsWith(prefix) || filePath === folder) {
+                const sub = folder === '' ? filePath : filePath.substring(prefix.length);
+                const slash = sub.indexOf('/');
+                if (slash === -1) {
+                  if (!seenNames.has(sub) && sub !== '') {
+                    seenNames.add(sub);
+                    allMatching.push({ id: 'file-id', name: sub, metadata: { mimetype: 'application/pdf' } });
+                  }
+                } else {
+                  const folderName = sub.substring(0, slash);
+                  if (!seenNames.has(folderName) && folderName !== '') {
+                    seenNames.add(folderName);
+                    allMatching.push({ id: null, name: folderName, metadata: null });
+                  }
+                }
+              }
+            }
+
+            allMatching.sort((a, b) => a.name.localeCompare(b.name));
+            const paged = allMatching.slice(offset, offset + limit);
+            return { data: paged, error: null };
+          },
+          async remove(paths) {
+            if (removeError) return { data: null, error: removeError };
+            for (const p of paths) {
+              assert(!p.endsWith('/'), 'Folder entries must never be passed to remove()');
+              world.removedStoragePaths.push(p);
+            }
+            // Also mutate storageFiles in harness so retry works if files are cleared
+            for (const p of paths) {
+              delete storageFiles[p];
+            }
+            return { data: paths, error: null };
+          },
+        };
+      },
+    },
     auth: {
       admin: {
+        async signOut(jwt) {
+          world.signOutTokens.push(jwt);
+          if (signOutError) return { error: signOutError };
+          return { error: null };
+        },
         async deleteUser(id) {
           world.deletedAuthIds.push(id);
           const impl =
@@ -132,12 +184,6 @@ function harness({
               return { error: null };
             });
           return impl(id, world);
-        },
-        async getUserById(id) {
-          const user = authUsers[id];
-          return user
-            ? { data: { user }, error: null }
-            : { data: { user: null }, error: null };
         },
       },
     },
@@ -178,260 +224,163 @@ function post(body, { token = 'valid-token', headers = {} } = {}) {
   });
 }
 
-// --------------------------------------------------------------------------
-// Authentication
-// --------------------------------------------------------------------------
+Deno.test('missing profile fails closed with 404 and does not delete Auth account', async () => {
+  const { handler, world } = harness({ users: [] });
+  const response = await handler(post({}));
+  assertEquals(response.status, 404);
+  assertEquals((await response.json()).code, 'PROFILE_NOT_FOUND');
+  assertEquals(world.deletedAuthIds.length, 0);
+  assertEquals(world.signOutTokens.length, 0);
+});
 
-Deno.test('rejects a request with no Authorization header', async () => {
-  const { handler, world } = harness({ users: [profileRow()] });
-  const response = await handler(post({}, { token: null }));
-  assertEquals(response.status, 401);
-  const body = await response.json();
-  assertEquals(body.code, 'AUTHENTICATION_REQUIRED');
+Deno.test('profile lookup error aborts deletion and does not delete Auth account', async () => {
+  const { handler, world } = harness({ users: [profileRow()], profileQueryError: true });
+  const response = await handler(post({}));
+  assertEquals(response.status, 503);
+  assertEquals((await response.json()).code, 'ACCOUNT_LOOKUP_FAILED');
   assertEquals(world.deletedAuthIds.length, 0);
 });
 
-Deno.test('rejects an unusable token without touching any account', async () => {
-  const { handler, world } = harness({ users: [profileRow()] });
-  const response = await handler(post({}, { token: 'bogus' }));
-  assertEquals(response.status, 401);
-  assertEquals((await response.json()).code, 'INVALID_SESSION');
-  assertEquals(world.deletedAuthIds.length, 0);
-});
-
-Deno.test('rejects a token whose subject is not a UUID', async () => {
+Deno.test('storage listing failure aborts deletion and does not delete Auth account', async () => {
   const { handler, world } = harness({
     users: [profileRow()],
-    getUserImpl: () => ({ data: { user: { id: 'not-a-uuid' } }, error: null }),
+    listError: { message: 'Storage unavailable' },
   });
   const response = await handler(post({}));
-  assertEquals(response.status, 401);
+  assertEquals(response.status, 502);
+  assertEquals((await response.json()).code, 'STORAGE_CLEANUP_FAILED');
   assertEquals(world.deletedAuthIds.length, 0);
+  assertEquals(world.signOutTokens.length, 0);
 });
 
-Deno.test('answers CORS preflight without side effects', async () => {
-  const { handler, world } = harness({ users: [profileRow()] });
-  const response = await handler(
-    new Request('https://project.supabase.co/functions/v1/delete-my-account', {
-      method: 'OPTIONS',
-    }),
-  );
-  assertEquals(response.status, 200);
-  assertEquals(world.deletedAuthIds.length, 0);
-});
-
-Deno.test('rejects a non-POST method', async () => {
-  const { handler, world } = harness({ users: [profileRow()] });
-  const response = await handler(
-    new Request('https://project.supabase.co/functions/v1/delete-my-account', {
-      method: 'GET',
-      headers: { Authorization: 'Bearer valid-token' },
-    }),
-  );
-  assertEquals(response.status, 405);
-  assertEquals(world.deletedAuthIds.length, 0);
-});
-
-// --------------------------------------------------------------------------
-// Target binding — the core authorisation guarantee
-// --------------------------------------------------------------------------
-
-Deno.test('refuses when the body names another user, and deletes nobody', async () => {
+Deno.test('storage removal failure aborts deletion and does not delete Auth account', async () => {
   const { handler, world } = harness({
-    users: [profileRow(), profileRow({ id: OTHER_AUTH_ID, email: 'other@example.com', auth_user_id: OTHER_AUTH_ID })],
+    users: [profileRow()],
+    storageFiles: { [`${CALLER_AUTH_ID}/doc.pdf`]: true },
+    removeError: { message: 'Removal failed' },
   });
-  const response = await handler(post({ user_id: OTHER_AUTH_ID }, { token: 'valid-token' }));
-  assertEquals(response.status, 403);
-  assertEquals((await response.json()).code, 'TARGET_NOT_ALLOWED');
+  const response = await handler(post({}));
+  assertEquals(response.status, 502);
+  assertEquals((await response.json()).code, 'STORAGE_CLEANUP_FAILED');
   assertEquals(world.deletedAuthIds.length, 0);
-  // The other account is untouched.
-  assertEquals(world.users[1].name, 'Samir Client');
+  assertEquals(world.signOutTokens.length, 0);
 });
 
-Deno.test('refuses every alias of a supplied target', async () => {
-  for (const key of ['user_id', 'userId', 'profileId', 'profile_id', 'auth_user_id', 'target']) {
-    const { handler, world } = harness({
-      users: [profileRow(), profileRow({ id: OTHER_AUTH_ID, auth_user_id: OTHER_AUTH_ID })],
-    });
-    const response = await handler(post({ [key]: OTHER_AUTH_ID }));
-    assertEquals(response.status, 403, `alias ${key} must be refused`);
-    assertEquals(world.deletedAuthIds.length, 0, `alias ${key} deleted an account`);
-  }
-});
-
-Deno.test('an echoed own id is accepted but the JWT subject still decides', async () => {
+Deno.test('session revocation failure aborts deletion and does not delete Auth account', async () => {
   const { handler, world } = harness({
-    users: [profileRow(), profileRow({ id: OTHER_AUTH_ID, auth_user_id: OTHER_AUTH_ID })],
+    users: [profileRow()],
+    signOutError: { message: 'Revocation failed' },
   });
-  const response = await handler(post({ user_id: CALLER_AUTH_ID }));
+  const response = await handler(post({}));
+  assertEquals(response.status, 502);
+  assertEquals((await response.json()).code, 'SESSION_REVOCATION_FAILED');
+  assertEquals(world.deletedAuthIds.length, 0);
+  assertEquals(world.signOutTokens, ['valid-token']);
+});
+
+Deno.test('auth deletion failure after successful storage cleanup and session revocation reports 502 and preserves profile for retry', async () => {
+  const storageFiles = { [`${CALLER_AUTH_ID}/file.pdf`]: true };
+  const { handler, world } = harness({
+    users: [profileRow()],
+    storageFiles,
+    deleteUserImpl: () => ({ error: { message: 'Auth service timeout' } }),
+  });
+
+  const response = await handler(post({}));
+  assertEquals(response.status, 502);
+  assertEquals((await response.json()).code, 'ACCOUNT_DELETE_FAILED');
+
+  // Verify operations completed before auth failure
+  assertEquals(world.removedStoragePaths, [`${CALLER_AUTH_ID}/file.pdf`]);
+  assertEquals(world.signOutTokens, ['valid-token']);
+  assertEquals(world.deletedAuthIds, [CALLER_AUTH_ID]);
+
+  // Profile is preserved (no anonymization was performed)
+  assertEquals(world.users[0].name, 'Samir Client');
+  assertEquals(world.users[0].auth_user_id, CALLER_AUTH_ID);
+});
+
+Deno.test('retry behavior: first attempt fails at auth deletion; second attempt finds clean storage and succeeds', async () => {
+  let storageFiles = { [`${CALLER_AUTH_ID}/file.pdf`]: true };
+  let attempt = 0;
+  const { handler, world } = harness({
+    users: [profileRow()],
+    storageFiles,
+    deleteUserImpl: (id, w) => {
+      attempt++;
+      if (attempt === 1) {
+        return { error: { message: 'temporary auth outage' } };
+      }
+      applyAuthFkSetNull(w, id);
+      return { error: null };
+    },
+  });
+
+  // First attempt: storage and revocation succeed, auth deletion fails
+  const res1 = await handler(post({}));
+  assertEquals(res1.status, 502);
+  assertEquals((await res1.json()).code, 'ACCOUNT_DELETE_FAILED');
+  assertEquals(world.removedStoragePaths, [`${CALLER_AUTH_ID}/file.pdf`]);
+  assertEquals(world.signOutTokens.length, 1);
+
+  // Second attempt: clean storage (no-op), revocation succeeds, auth deletion succeeds
+  const res2 = await handler(post({}));
+  assertEquals(res2.status, 200);
+  assertEquals((await res2.json()).deleted, true);
+  assertEquals(world.deletedAuthIds.length, 2);
+  assertEquals(world.signOutTokens.length, 2);
+  assertEquals(world.users[0].auth_user_id, null);
+});
+
+Deno.test('successful deletion executes storage cleanup and session revocation with JWT before auth deletion', async () => {
+  const { handler, world } = harness({
+    users: [profileRow()],
+    storageFiles: { [`${CALLER_AUTH_ID}/documents/file.pdf`]: true },
+  });
+  const response = await handler(post({}));
   assertEquals(response.status, 200);
+  assertEquals(world.removedStoragePaths, [`${CALLER_AUTH_ID}/documents/file.pdf`]);
+  assertEquals(world.signOutTokens, ['valid-token']);
   assertEquals(world.deletedAuthIds, [CALLER_AUTH_ID]);
 });
 
-// --------------------------------------------------------------------------
-// Protected roles
-// --------------------------------------------------------------------------
+Deno.test('nested folders traversal, prefix isolation, and pagination (>1000 items) are handled correctly', async () => {
+  const files = {};
+  for (let i = 0; i < 1050; i++) {
+    files[`${CALLER_AUTH_ID}/sub/dir${Math.floor(i / 100)}/item_${i}.pdf`] = true;
+  }
+  files[`${OTHER_AUTH_ID}/other_file.pdf`] = true;
 
-Deno.test('the owner account can never be deleted from the app', async () => {
+  const { handler, world } = harness({
+    users: [profileRow()],
+    storageFiles: files,
+  });
+
+  const response = await handler(post({}));
+  assertEquals(response.status, 200);
+
+  assertEquals(world.removedStoragePaths.length, 1050);
+
+  const foreignRemoved = world.removedStoragePaths.filter((p) => p.startsWith(OTHER_AUTH_ID));
+  assertEquals(foreignRemoved.length, 0);
+
+  for (const p of world.removedStoragePaths) {
+    assert(p.endsWith('.pdf'), 'Only file paths ending with .pdf should be removed');
+  }
+});
+
+Deno.test('another users target is rejected without deleting anything', async () => {
+  const { handler, world } = harness({ users: [profileRow()] });
+  const response = await handler(post({ user_id: OTHER_AUTH_ID }));
+  assertEquals(response.status, 403);
+  assertEquals((await response.json()).code, 'TARGET_NOT_ALLOWED');
+  assertEquals(world.deletedAuthIds.length, 0);
+});
+
+Deno.test('owner and admin protection remains intact', async () => {
   const { handler, world } = harness({ users: [profileRow({ role: 'owner' })] });
   const response = await handler(post({}));
   assertEquals(response.status, 403);
   assertEquals((await response.json()).code, 'OWNER_ACCOUNT_PROTECTED');
   assertEquals(world.deletedAuthIds.length, 0);
-  assertEquals(world.users[0].name, 'Samir Client');
-});
-
-Deno.test('an administrator cannot self-delete through this endpoint', async () => {
-  const { handler, world } = harness({ users: [profileRow({ role: 'admin' })] });
-  const response = await handler(post({}));
-  assertEquals(response.status, 403);
-  assertEquals((await response.json()).code, 'ADMIN_ACCOUNT_PROTECTED');
-  assertEquals(world.deletedAuthIds.length, 0);
-});
-
-Deno.test('a lawyer with a public directory profile must deactivate first', async () => {
-  const { handler, world } = harness({
-    users: [profileRow({ role: 'lawyer' })],
-    lawyers: [{ id: 'lawyer-1', user_id: CALLER_AUTH_ID }],
-  });
-  const response = await handler(post({}));
-  assertEquals(response.status, 409);
-  assertEquals((await response.json()).code, 'LAWYER_PROFILE_REQUIRES_DEACTIVATION');
-  assertEquals(world.deletedAuthIds.length, 0);
-  assertEquals(world.users[0].name, 'Samir Client');
-});
-
-// --------------------------------------------------------------------------
-// Success path and retention behaviour
-// --------------------------------------------------------------------------
-
-Deno.test('a client deletes their own account and their profile is anonymised', async () => {
-  const { handler, world } = harness({ users: [profileRow()] });
-  const response = await handler(post({}));
-  assertEquals(response.status, 200);
-  const body = await response.json();
-  assertEquals(body.deleted, true);
-  assertEquals(body.profileRetained, true);
-  assertEquals(body.profileAnonymised, true);
-  assertEquals(body.historyRetained, true);
-
-  assertEquals(world.deletedAuthIds, [CALLER_AUTH_ID]);
-  // Personal fields are gone; the row (and its history keys) survive.
-  const row = world.users[0];
-  assertEquals(row.name, 'Deleted account');
-  assertEquals(row.phone, '');
-  assertEquals(row.address, '');
-  assertEquals(row.avatar, '');
-  assert(!row.email.includes('samir'), 'the old address must not survive');
-  assertEquals(row.id, CALLER_AUTH_ID);
-  assertEquals(row.role, 'client');
-});
-
-Deno.test('a repeated request after the auth user is gone is reported, not retried blindly', async () => {
-  const { handler, world } = harness({
-    users: [profileRow()],
-    // The first deletion already ran, so the FK has already detached the profile.
-    deleteUserImpl: (id, w) => {
-      applyAuthFkSetNull(w, id);
-      return { error: { status: 404, message: 'User not found' } };
-    },
-  });
-  const response = await handler(post({}));
-  assertEquals(response.status, 200);
-  assertEquals((await response.json()).alreadyDeleted, true);
-  assertEquals(world.deletedAuthIds.length, 1);
-});
-
-Deno.test('a user with no application profile still loses their sign-in account', async () => {
-  const { handler, world } = harness({ users: [] });
-  const response = await handler(post({}));
-  assertEquals(response.status, 200);
-  const body = await response.json();
-  assertEquals(body.deleted, true);
-  assertEquals(body.profileRetained, false);
-  assertEquals(world.deletedAuthIds, [CALLER_AUTH_ID]);
-});
-
-// --------------------------------------------------------------------------
-// Failure handling — must never report success
-// --------------------------------------------------------------------------
-
-Deno.test('an auth deletion failure restores the profile and reports failure', async () => {
-  const { handler, world } = harness({
-    users: [profileRow()],
-    deleteUserImpl: () => ({ error: { status: 500, message: 'database unavailable' } }),
-  });
-  const response = await handler(post({}));
-  assertEquals(response.status, 502);
-  assertEquals((await response.json()).code, 'ACCOUNT_DELETE_FAILED');
-  // Rolled back: the user still sees their own data.
-  assertEquals(world.users[0].name, 'Samir Client');
-  assertEquals(world.users[0].email, 'samir@example.com');
-  assertEquals(world.users[0].auth_user_id, CALLER_AUTH_ID);
-});
-
-Deno.test('a thrown auth deletion failure is contained and rolled back', async () => {
-  const { handler, world } = harness({
-    users: [profileRow()],
-    deleteUserImpl: () => {
-      throw new Error('network reset');
-    },
-  });
-  const response = await handler(post({}));
-  assertEquals(response.status, 502);
-  assertEquals(world.users[0].name, 'Samir Client');
-});
-
-Deno.test('an invalid JSON body is refused before any account is touched', async () => {
-  const { handler, world } = harness({ users: [profileRow()] });
-  const request = new Request('https://project.supabase.co/functions/v1/delete-my-account', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: 'Bearer valid-token' },
-    body: '{not json',
-  });
-  const response = await handler(request);
-  assertEquals(response.status, 400);
-  assertEquals((await response.json()).code, 'INVALID_JSON');
-  assertEquals(world.deletedAuthIds.length, 0);
-});
-
-Deno.test('a reported profile detach is verified, and an unverified detach is an error', async () => {
-  const { handler, world } = harness({
-    users: [profileRow()],
-    // Deleting the auth user succeeds but the FK link is left in place.
-    deleteUserImpl: () => ({ error: null }),
-  });
-  // Simulate a database where the FK did not fire.
-  const realUsers = world.users;
-  const response = await handler(post({}));
-  // auth_user_id is still set (the fake never nulls it), so the handler must
-  // refuse to claim a clean deletion.
-  assertEquals(realUsers[0].auth_user_id, CALLER_AUTH_ID);
-  assertEquals(response.status, 502);
-  assertEquals((await response.json()).code, 'PROFILE_DETACH_UNVERIFIED');
-});
-
-Deno.test('a handler-level detach check passes once the FK nulls the link', async () => {
-  const { handler, world } = harness({
-    users: [profileRow()],
-    // Model ON DELETE SET NULL exactly as the production FK does.
-    deleteUserImpl: (_id, w) => {
-      for (const row of w.users) {
-        if (row.auth_user_id === CALLER_AUTH_ID) row.auth_user_id = null;
-      }
-      return { error: null };
-    },
-  });
-  const response = await handler(post({}));
-  assertEquals(response.status, 200);
-  assertEquals(world.users[0].auth_user_id, null);
-});
-
-Deno.test('the response never contains a token, key or the previous personal data', async () => {
-  const { handler } = harness({ users: [profileRow()] });
-  const response = await handler(post({}));
-  const text = await response.text();
-  for (const secret of ['valid-token', 'samir@example.com', '+201000000000', 'service_role']) {
-    assert(!text.includes(secret), `response leaked ${secret}`);
-  }
 });

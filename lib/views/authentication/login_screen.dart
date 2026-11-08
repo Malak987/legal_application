@@ -9,7 +9,6 @@ import '../../widgets/detailstext1.dart';
 
 import '../home/homescreen.dart';
 import '../samaha/samaha_entry_point.dart';
-import 'authwidgets/auth_tab.dart';
 import 'forgot_password.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -202,25 +201,6 @@ class _LoginScreenState extends State<LoginScreen>
                           ),
                           const SizedBox(height: 20),
                           const SamahaDirectoryEntryButton(),
-                          const SizedBox(height: 12),
-                          const Text('or continue with'),
-                          const SizedBox(height: 20),
-                          FadeTransition(
-                            opacity: _fadeAnimation,
-                            child: const Row(
-                              children: [
-                                AuthTab(
-                                  image: 'images/icons8-facebook-48.png',
-                                  text: 'Facebook',
-                                ),
-                                SizedBox(width: 12),
-                                AuthTab(
-                                  image: 'images/icons8-google-48.png',
-                                  text: 'Google',
-                                ),
-                              ],
-                            ),
-                          ),
                           const SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,

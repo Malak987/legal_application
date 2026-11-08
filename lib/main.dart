@@ -131,7 +131,7 @@ class _MyAppState extends State<MyApp> {
         user != null &&
         authUser?.uid == user.uid &&
         (changedUser == null || changedUser.uid == user.uid);
-    unawaited(realtime.setSession(verified ? user!.uid : null));
+    unawaited(realtime.setSession(verified ? user.uid : null));
   }
 
   void _syncCallbackRoute() {

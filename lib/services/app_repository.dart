@@ -1122,8 +1122,7 @@ class AppRepository {
           );
         }
       }
-      if (pageExactTotal != null &&
-          result.hasMore != (result.items.length < pageExactTotal)) {
+      if (result.hasMore != (result.items.length < pageExactTotal)) {
         throw ApiException.invalidResponse(
           'Supabase returned inconsistent page metadata.',
         );
@@ -1154,7 +1153,7 @@ class AppRepository {
 
       if (result.items.isEmpty) {
         if (result.hasMore ||
-            (expectedTotal != null && rowsById.length != expectedTotal)) {
+            (rowsById.length != expectedTotal)) {
           throw ApiException.invalidResponse(
             'Supabase returned an incomplete authenticated collection.',
           );
@@ -1169,7 +1168,7 @@ class AppRepository {
       cursor = lastId;
 
       if (!result.hasMore) {
-        if (expectedTotal != null && rowsById.length != expectedTotal) {
+        if (rowsById.length != expectedTotal) {
           throw ApiException.invalidResponse(
             'Supabase returned fewer records than its exact count.',
           );
