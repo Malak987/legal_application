@@ -43,6 +43,15 @@ jobs:
           set -e
           tail -120 /tmp/analyze.txt
 
+      - name: format check
+        id: format
+        run: |
+          set +e
+          dart format --output=none --set-exit-if-changed lib test tool > /tmp/format.txt 2>&1
+          echo "format_exit=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          head -60 /tmp/format.txt
+
       - name: test
         id: test
         run: |
@@ -87,6 +96,9 @@ jobs:
               '',
               '### flutter analyze (exit ' + '${{ steps.analyze.outputs.analyze_exit }}' + ')',
               '```', clip(read('/tmp/analyze.txt'), 6000), '```',
+              '',
+              '### dart format (exit ' + '${{ steps.format.outputs.format_exit }}' + ')',
+              '```', clip(read('/tmp/format.txt'), 4000), '```',
               '',
               '### flutter test (exit ' + '${{ steps.test.outputs.test_exit }}' + ')',
               '```', clip(read('/tmp/test.txt'), 6000), '```',
