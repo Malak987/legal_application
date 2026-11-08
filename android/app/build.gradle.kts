@@ -31,6 +31,19 @@ if (isReleaseTask) {
 }
 
 
+// Release signing material. `android/key.properties` is git-ignored and is
+// supplied by the release engineer or by CI secrets; it must never be
+// committed. When it is absent the build still succeeds with the debug key so
+// local `flutter build apk --release` keeps working, but it prints a loud
+// warning because a debug-signed artifact cannot be uploaded to Google Play.
+val keystorePropertiesFile = rootProject.file("key.properties")
+val keystoreProperties = java.util.Properties().apply {
+    if (keystorePropertiesFile.exists()) {
+        keystorePropertiesFile.inputStream().use { load(it) }
+    }
+}
+val hasReleaseSigningConfig = keystorePropertiesFile.exists()
+
 android {
     namespace = legalAndroidApplicationId
     compileSdk = 36
@@ -59,11 +72,37 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        if (hasReleaseSigningConfig) {
+            create("release") {
+                storeFile = keystoreProperties["storeFile"]?.let { rootProject.file(it as String) }
+                storePassword = keystoreProperties["storePassword"] as String?
+                keyAlias = keystoreProperties["keyAlias"] as String?
+                keyPassword = keystoreProperties["keyPassword"] as String?
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            if (hasReleaseSigningConfig) {
+                signingConfig = signingConfigs.getByName("release")
+            } else {
+                // Debug keys keep local release builds working, but the output
+                // is NOT publishable: Google Play rejects debug-signed bundles.
+                logger.lifecycle(
+                    "\n" + """
+                    ************************************************************
+                    WARNING: android/key.properties was not found.
+                    This release artifact is signed with the DEBUG key and will
+                    be REJECTED by Google Play. Create a release keystore and
+                    supply key.properties before shipping:
+                      storeFile, storePassword, keyAlias, keyPassword
+                    ************************************************************
+                    """.trimIndent() + "\n"
+                )
+                signingConfig = signingConfigs.getByName("debug")
+            }
         }
     }
 }
