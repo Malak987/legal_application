@@ -54,21 +54,6 @@ class SupabaseConfig {
     defaultValue: false,
   );
 
-  /// Explicit opt-in for the public lawyer catalogue read path. Keep disabled
-  /// until the target database's security migration and hosted checks have been
-  /// approved; configuring Supabase Auth alone must not change data routing.
-  static const bool useSupabaseLawyerCatalog = bool.fromEnvironment(
-    'USE_SUPABASE_LAWYER_CATALOG',
-    defaultValue: false,
-  );
-
-  /// Explicit opt-in for owner-scoped favorite reads and writes. Keep disabled
-  /// until the reviewed favorites RLS/RPC contract is approved on the target.
-  static const bool useSupabaseFavorites = bool.fromEnvironment(
-    'USE_SUPABASE_FAVORITES',
-    defaultValue: false,
-  );
-
   /// True when the compiled Supabase URL and public key passed validation.
   static bool get isConfigured => SupabaseClientConfig.environment.isValid;
 }
