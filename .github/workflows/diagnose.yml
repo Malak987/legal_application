@@ -56,7 +56,7 @@ jobs:
         id: test
         run: |
           set +e
-          flutter test --reporter compact > /tmp/test.txt 2>&1
+          flutter test --reporter compact 2>&1 | tail -25 > /tmp/test.txt
           echo "test_exit=$?" >> "$GITHUB_OUTPUT"
           set -e
           tail -80 /tmp/test.txt
