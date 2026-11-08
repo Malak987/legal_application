@@ -287,8 +287,9 @@ class AppRepository {
       query: <String, String>{'id': 'eq.$id'},
       returnRepresentation: true,
     );
-    if (response is! List || response.isEmpty)
+    if (response is! List || response.isEmpty) {
       throw ApiException('Case not found.', 404);
+    }
   }
 
   Future<List<Map<String, dynamic>>>
@@ -343,8 +344,9 @@ class AppRepository {
       query: <String, String>{'id': 'eq.$id'},
       returnRepresentation: true,
     );
-    if (response is! List || response.isEmpty)
+    if (response is! List || response.isEmpty) {
       throw ApiException('Task not found.', 404);
+    }
   }
 
   // -------------------------------------------------------------------------

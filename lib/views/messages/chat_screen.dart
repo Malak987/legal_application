@@ -289,6 +289,7 @@ class _ChatScreenState extends State<ChatScreen> {
         )) {
       return;
     }
+    if (!mounted) return;
     await Navigator.push(
       context,
       MaterialPageRoute(

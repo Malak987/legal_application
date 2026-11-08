@@ -61,7 +61,7 @@ jobs:
         working-directory: supabase/functions/delete-my-account
         run: |
           set +e
-          deno test --allow-none account_deletion_test.ts > /tmp/deno.txt 2>&1
+          deno test --allow-read --allow-env account_deletion_test.ts > /tmp/deno.txt 2>&1
           echo "deno_exit=$?" >> "$GITHUB_OUTPUT"
           set -e
           cat /tmp/deno.txt

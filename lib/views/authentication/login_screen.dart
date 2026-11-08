@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen>
   // protected screen is shown.
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _obscurePassword = true;
+  final bool _obscurePassword = true;
   bool _isLoading = false;
 
   @override

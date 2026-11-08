@@ -51,7 +51,7 @@ jobs:
 
       - name: Run delete-my-account test suite
         working-directory: supabase/functions/delete-my-account
-        run: deno test --allow-none account_deletion_test.ts
+        run: deno test --allow-read --allow-env account_deletion_test.ts
 
       - name: Type-check the Edge Function entrypoint
         working-directory: supabase/functions/delete-my-account

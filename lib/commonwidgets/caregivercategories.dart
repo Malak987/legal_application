@@ -167,8 +167,8 @@ class LegalServiceCategories extends StatelessWidget {
                             ? null
                             : LinearGradient(
                               colors: [
-                                color.withOpacity(0.8),
-                                color.withOpacity(0.4),
+                                color.withValues(alpha: 0.8),
+                                color.withValues(alpha: 0.4),
                               ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
