@@ -3,35 +3,41 @@
 --
 -- WHY THIS MIGRATION EXISTS
 -- ------------------------
--- Migration 20261107140057_complete_user_account_case_chat_cascade.sql created
--- two BEFORE DELETE triggers with bodies that reference columns which do NOT
--- exist on public.chats (its columns are id, participants, participant_names,
--- last_message, created_at, updated_at, booking_id, case_id — there is no
--- `user_id` and no `lawyer_id`):
+-- CORRECTED 2026-11-08. An earlier version of this header claimed production
+-- had applied broken SQL and been hot-patched afterwards. That was wrong.
+-- The authoritative record is supabase_migrations.schema_migrations.statements,
+-- which stores the exact text of every applied migration. It shows:
 --
---   private.purge_lawyer_chats_before_delete()  -> DELETE FROM chats WHERE lawyer_id = OLD.id
---   private.purge_user_chats_before_delete()    -> DELETE FROM chats WHERE user_id   = OLD.id
+--   * 20261107140036 and 20261107140057 were APPLIED with the CORRECT bodies
+--     (participants-array matching), together with DROP TRIGGER IF EXISTS /
+--     CREATE TRIGGER and a REVOKE. Production was never broken.
+--   * The CHECKED-IN files for those two versions are the corrupted variants:
+--     they use `DELETE FROM public.chats WHERE lawyer_id = OLD.id` and
+--     `WHERE user_id = OLD.id`, but public.chats has neither column (its
+--     columns are id, participants, participant_names, last_message,
+--     created_at, updated_at, booking_id, case_id). They also omit the
+--     trigger-creation and REVOKE statements entirely.
 --
--- PL/pgSQL does not validate column references at CREATE time, so the migration
--- applied successfully. At runtime, however, the first DELETE of a row from
--- public.users (which is exactly what ON DELETE CASCADE does when the Auth user
--- is removed) fires purge_user_chats_before_delete and raises
+-- Because both versions are already recorded as applied, `supabase db push`
+-- will never re-run them on this project, so the repository stays wrong unless
+-- it is repaired. Any environment built from the repository alone (new branch,
+-- restore, disaster recovery) would install the broken bodies, and the first
+-- DELETE from public.users — exactly what ON DELETE CASCADE performs when the
+-- Auth user is removed — would raise
 --   ERROR 42703: column "user_id" does not exist
--- aborting the whole statement and therefore the whole account deletion.
---
--- The running project was subsequently patched by hand to the corrected bodies
--- below, so production is healthy today — but the repository is NOT: the
--- checked-in migration still holds the broken definitions, and 20261107140057
--- is already recorded in supabase_migrations.schema_migrations, so a plain
--- `supabase db push` will never re-run it. Any environment built from the
--- repository alone (new branch, restore, disaster recovery) would get the
--- broken trigger and account deletion would fail again.
+-- and abort the entire account deletion.
 --
 -- WHAT THIS MIGRATION DOES
 -- ------------------------
 -- Re-asserts the corrected function bodies so that the repository and the
 -- database agree again. Chats are matched through the `participants` text[]
 -- column (for a user) or through booking/case ownership (for a lawyer).
+--
+-- It does NOT recreate the triggers or the REVOKE: production already has
+-- them (created by the original applied migrations), and re-issuing them is
+-- out of scope here. A repository-only rebuild would still need those two
+-- statements — see the review report; adding them is proposed as a separate
+-- idempotent migration.
 --
 -- SAFETY
 -- ------
