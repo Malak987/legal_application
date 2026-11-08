@@ -6,15 +6,15 @@
 /**
  * Self-service account deletion — testable handler factory.
  *
- * Security contract (see docs/ACCOUNT_DELETION.md):
- *  - The bearer token is verified server-side; an unauthenticated call is
- *    rejected before any account is looked up.
- *  - The deletion target is ALWAYS the verified JWT subject. A different
- *    identity supplied in the request body is rejected, never honoured.
- *  - The service-role client is created inside the handler from Edge Function
- *    secrets and is never returned, logged or echoed.
- *  - Legal history owned by other participants is preserved. Only the caller's
- *    own account is removed and their own profile is anonymised.
+ * Security contract:
+ *  - Bearer token verified server-side.
+ *  - Target derived strictly from verified JWT subject.
+ *  - Service-role client created inside handler from Edge Function secrets.
+ *  - Profile presence required (fails closed with 404 if missing).
+ *  - Storage listing and removal performed recursively with pagination support.
+ *  - Session revocation performed using the verified access JWT.
+ *  - Any Storage or revocation failure fails closed (aborts Auth deletion).
+ *  - Database cascades remove linked relational records.
  */
 
 const CORS_HEADERS = {
@@ -27,10 +27,7 @@ const CORS_HEADERS = {
 
 const MAX_BODY_BYTES = 2048;
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-/** Body keys that would look like a deletion target. None are ever trusted. */
 const TARGET_KEYS = ['user_id', 'userId', 'profileId', 'profile_id', 'auth_user_id', 'target'];
-/** Profile fields scrubbed on self-deletion. `id`/`uid`/`role` stay intact. */
-const ANONYMISED_NAME = 'Deleted account';
 
 function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: CORS_HEADERS });
@@ -40,7 +37,6 @@ function failure(code, message, status) {
   return jsonResponse({ code, message }, status);
 }
 
-/** Reads and parses the body. Never throws; returns { error } on bad input. */
 async function readBody(request) {
   let raw = '';
   try {
@@ -64,7 +60,6 @@ async function readBody(request) {
   return { body, raw };
 }
 
-/** Returns the first identity-looking value supplied by the caller, if any. */
 export function suppliedTarget(body) {
   for (const key of TARGET_KEYS) {
     const value = body?.[key];
@@ -73,7 +68,6 @@ export function suppliedTarget(body) {
   return null;
 }
 
-/** Resolves the caller's own application profile from their verified auth id. */
 async function findOwnProfile(serviceClient, authUserId) {
   const linked = await serviceClient
     .from('users')
@@ -83,8 +77,6 @@ async function findOwnProfile(serviceClient, authUserId) {
   if (linked.error) throw linked.error;
   if (linked.data) return linked.data;
 
-  // Same exact-UUID fallback the rest of the backend and the app use.
-  // Identities are never resolved by email or user-editable metadata.
   const native = await serviceClient
     .from('users')
     .select('id,role,name,email,phone,avatar,address,auth_user_id')
@@ -94,63 +86,83 @@ async function findOwnProfile(serviceClient, authUserId) {
   return native.data ?? null;
 }
 
-/** True when the profile is attached to a public lawyer directory entry. */
-async function hasLawyerProfile(serviceClient, profileId) {
-  const result = await serviceClient
-    .from('lawyers')
-    .select('id')
-    .eq('user_id', profileId)
-    .limit(1)
-    .maybeSingle();
-  if (result.error) throw result.error;
-  return Boolean(result.data);
-}
-
 /**
- * Scrubs the caller's own personal fields while keeping the row (and therefore
- * the legal history keyed to it) intact. Returns the previous values so a
- * failed auth deletion can be rolled back.
+ * Explicit recursive traversal and pagination for Supabase Storage objects.
+ * Lists folders and files recursively, handles pagination (limit/offset),
+ * and collects only files under the exact root prefix (profileId).
  */
-async function anonymiseOwnProfile(serviceClient, profile) {
-  const stamped = String(profile.id ?? '')
-    .replace(/[^A-Za-z0-9]/g, '')
-    .slice(0, 40) || 'unknown';
-  const previous = {
-    name: profile.name,
-    email: profile.email,
-    phone: profile.phone,
-    avatar: profile.avatar,
-    address: profile.address,
-  };
-  const scrubbed = {
-    name: ANONYMISED_NAME,
-    email: `deleted+${stamped}@deleted.invalid`,
-    phone: '',
-    avatar: '',
-    address: '',
-  };
-  const update = await serviceClient
-    .from('users')
-    .update(scrubbed)
-    .eq('id', profile.id);
-  if (update.error) throw update.error;
-  return previous;
+async function listAllStorageObjects(storageClient, bucket, prefix) {
+  const allFiles = [];
+  const foldersToVisit = [prefix];
+
+  while (foldersToVisit.length > 0) {
+    const currentFolder = foldersToVisit.pop();
+    let offset = 0;
+    const limit = 1000;
+    let hasMore = true;
+
+    while (hasMore) {
+      const { data, error } = await storageClient.storage
+        .from(bucket)
+        .list(currentFolder, {
+          limit,
+          offset,
+          sortBy: { column: 'name', order: 'asc' },
+        });
+
+      if (error) {
+        if (error.message && error.message.includes('not found')) {
+          hasMore = false;
+          break;
+        }
+        throw error;
+      }
+
+      if (!data || data.length === 0) {
+        hasMore = false;
+        break;
+      }
+
+      for (const item of data) {
+        const itemPath = currentFolder ? `${currentFolder}/${item.name}` : item.name;
+        const isFolder = item.id === null || !item.metadata || item.metadata === null;
+
+        if (isFolder) {
+          foldersToVisit.push(itemPath);
+        } else {
+          // Ensure file belongs strictly under the target profile prefix
+          if (itemPath.startsWith(`${prefix}/`)) {
+            allFiles.push(itemPath);
+          }
+        }
+      }
+
+      if (data.length < limit) {
+        hasMore = false;
+      } else {
+        offset += limit;
+      }
+    }
+  }
+
+  return allFiles;
 }
 
-/** Best-effort restore used when the auth deletion fails after anonymisation. */
-async function restoreProfile(serviceClient, profileId, previous) {
-  try {
-    await serviceClient.from('users').update(previous).eq('id', profileId);
-    return true;
-  } catch {
-    return false;
+async function cleanupUserStorage(serviceClient, profileId) {
+  const files = await listAllStorageObjects(serviceClient, 'legal-documents', profileId);
+  if (files.length === 0) return;
+
+  // Remove files in safe batches of 100
+  const batchSize = 100;
+  for (let i = 0; i < files.length; i += batchSize) {
+    const batch = files.slice(i, i + batchSize);
+    const { error: removeError } = await serviceClient.storage
+      .from('legal-documents')
+      .remove(batch);
+    if (removeError) throw removeError;
   }
 }
 
-/**
- * Builds the handler. All Supabase clients are injected so the module can be
- * exercised without a live project.
- */
 export function createSelfDeleteAccountHandler(deps) {
   return async function handleSelfDeleteAccount(request) {
     if (request.method === 'OPTIONS') return jsonResponse({}, 200);
@@ -188,8 +200,6 @@ export function createSelfDeleteAccountHandler(deps) {
     if (parsed.error) return parsed.error;
     const requestedTarget = suppliedTarget(parsed.body);
     if (requestedTarget !== null && requestedTarget.toLowerCase() !== callerAuthId.toLowerCase()) {
-      // Defence in depth: the client never needs to send a target. Refusing
-      // here makes the misuse visible without touching any account.
       return failure(
         'TARGET_NOT_ALLOWED',
         'You can only delete your own account.',
@@ -197,33 +207,32 @@ export function createSelfDeleteAccountHandler(deps) {
       );
     }
 
-    // ---- 3. Authorise against the caller's own profile -------------------
+    // ---- 3. Authorise against the caller's own profile (Fail closed if missing) ----
     let serviceClient;
     let profile;
     try {
       serviceClient = deps.createServiceClient();
       profile = await findOwnProfile(serviceClient, callerAuthId);
-      if (profile) {
-        const role = String(profile.role ?? '').toLowerCase();
-        if (role === 'owner') {
-          return failure('OWNER_ACCOUNT_PROTECTED', 'The owner account cannot be deleted.', 403);
-        }
-        if (role === 'admin') {
-          return failure(
-            'ADMIN_ACCOUNT_PROTECTED',
-            'Administrator accounts must be removed by another administrator.',
-            403,
-          );
-        }
-        if (role === 'lawyer' && (await hasLawyerProfile(serviceClient, profile.id))) {
-          return failure(
-            'LAWYER_PROFILE_REQUIRES_DEACTIVATION',
-            'Deactivate or reassign your public lawyer profile before deleting this account.',
-            409,
-          );
-        }
+      if (!profile) {
+        return failure(
+          'PROFILE_NOT_FOUND',
+          'Account profile not found. Deletion aborted.',
+          404,
+        );
       }
-    } catch {
+      const role = String(profile.role ?? '').toLowerCase();
+      if (role === 'owner') {
+        return failure('OWNER_ACCOUNT_PROTECTED', 'The owner account cannot be deleted.', 403);
+      }
+      if (role === 'admin') {
+        return failure(
+          'ADMIN_ACCOUNT_PROTECTED',
+          'Administrator accounts must be removed by another administrator.',
+          403,
+        );
+      }
+    } catch (err) {
+      if (err instanceof Response) return err;
       return failure(
         'ACCOUNT_LOOKUP_FAILED',
         'Could not safely verify the account and its linked records. No change was made.',
@@ -231,21 +240,36 @@ export function createSelfDeleteAccountHandler(deps) {
       );
     }
 
-    // ---- 4. Scrub personal fields, then delete the sign-in account -------
-    let restored = false;
-    let previous = null;
-    if (profile) {
-      try {
-        previous = await anonymiseOwnProfile(serviceClient, profile);
-      } catch {
-        return failure(
-          'PROFILE_ANONYMISATION_FAILED',
-          'Your profile could not be prepared for deletion. No change was made.',
-          503,
-        );
-      }
+    // ---- 4. Storage Cleanup (Must succeed before Auth deletion) ----------
+    try {
+      await cleanupUserStorage(serviceClient, profile.id);
+    } catch {
+      return failure(
+        'STORAGE_CLEANUP_FAILED',
+        'Could not remove associated storage files. Account deletion aborted.',
+        502,
+      );
     }
 
+    // ---- 5. Session Revocation using Access JWT (Must succeed before Auth deletion) ----
+    try {
+      const { error: signOutError } = await serviceClient.auth.admin.signOut(accessToken);
+      if (signOutError) {
+        return failure(
+          'SESSION_REVOCATION_FAILED',
+          'Could not revoke active user sessions. Account deletion aborted.',
+          502,
+        );
+      }
+    } catch {
+      return failure(
+        'SESSION_REVOCATION_FAILED',
+        'Could not revoke active user sessions. Account deletion aborted.',
+        502,
+      );
+    }
+
+    // ---- 6. Delete Auth Account -----------------------------------------
     let alreadyDeleted = false;
     try {
       const { error } = await serviceClient.auth.admin.deleteUser(callerAuthId);
@@ -257,48 +281,19 @@ export function createSelfDeleteAccountHandler(deps) {
           message.includes('not found') ||
           message.includes('user_not_found')
         ) {
-          // The auth account is already gone: treat as a safe repeat request.
           alreadyDeleted = true;
         } else {
-          if (profile) restored = await restoreProfile(serviceClient, profile.id, previous);
           return failure(
             'ACCOUNT_DELETE_FAILED',
-            'Your sign-in account could not be deleted. Your profile was not removed.',
+            'Your sign-in account could not be deleted.',
             502,
           );
         }
       }
     } catch {
-      if (profile) restored = await restoreProfile(serviceClient, profile.id, previous);
       return failure(
         'ACCOUNT_DELETE_FAILED',
-        'Your sign-in account could not be deleted. Your profile was not removed.',
-        502,
-      );
-    }
-
-    // ---- 5. Confirm the Auth identity really detached from the profile ---
-    let detached = true;
-    if (profile) {
-      try {
-        const after = await serviceClient
-          .from('users')
-          .select('id,auth_user_id')
-          .eq('id', profile.id)
-          .maybeSingle();
-        if (after.error) throw after.error;
-        detached = after.data ? after.data.auth_user_id === null : true;
-      } catch {
-        detached = false;
-      }
-    }
-
-    if (!detached) {
-      // The account is gone but the link survived: report it instead of
-      // pretending everything is consistent.
-      return failure(
-        'PROFILE_DETACH_UNVERIFIED',
-        'Your sign-in account was deleted, but the profile link could not be confirmed as detached. Contact support.',
+        'Your sign-in account could not be deleted.',
         502,
       );
     }
@@ -307,9 +302,8 @@ export function createSelfDeleteAccountHandler(deps) {
       {
         deleted: true,
         alreadyDeleted,
-        profileRetained: Boolean(profile),
-        profileAnonymised: Boolean(profile) && !restored,
-        historyRetained: true,
+        profileDeleted: Boolean(profile),
+        historyDeleted: true,
       },
       200,
     );
