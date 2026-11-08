@@ -101,7 +101,7 @@ jobs:
               '```', clip(read('/tmp/format.txt'), 4000), '```',
               '',
               '### flutter test (exit ' + '${{ steps.test.outputs.test_exit }}' + ')',
-              '```', clip(read('/tmp/test.txt'), 6000), '```',
+              '```', clip(read('/tmp/test.txt')[-2500:], 3000), '```',
               '',
               '### deno test (exit ' + '${{ steps.deno.outputs.deno_exit }}' + ')',
               '```', clip(read('/tmp/deno.txt'), 6000), '```',
