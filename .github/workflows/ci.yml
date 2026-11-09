@@ -89,3 +89,30 @@ jobs:
         run: |
           python3 supabase/functions/delete-my-account/bundle.py
           git diff --exit-code -- supabase/functions/delete-my-account/dist/index.ts
+
+  migrations:
+    # Guards the recovered migration set. `supabase/migrations/` must stay
+    # byte-exact against the production fidelity oracle, and
+    # `supabase/migrations_executable/` must stay exactly what the generator
+    # produces from it. Both checks are pure stdlib Python - no database and no
+    # Supabase CLI needed, and neither touches production.
+    name: Recovered migrations are intact
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify migrations match the production checksum oracle
+        run: python3 tools/migration_recovery/verify_migrations.py
+
+      - name: Verify the executable set is in sync with the archive
+        run: python3 tools/migration_recovery/make_executable.py --check
+
+      - name: Regenerate and fail on drift
+        run: |
+          python3 tools/migration_recovery/make_executable.py
+          git diff --exit-code -- supabase/migrations_executable/
