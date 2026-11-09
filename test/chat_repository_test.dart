@@ -148,8 +148,7 @@ void main() {
                 request.url.path.endsWith('/chats')) {
               requests.add(request);
               final cursorFilter = request.url.queryParameters['id'];
-              final cursor =
-                  cursorFilter == null ? null : cursorFilter.substring(3);
+              final cursor = cursorFilter?.substring(3);
               final candidates =
                   cursor == null
                       ? allChats

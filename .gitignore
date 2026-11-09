@@ -47,5 +47,30 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Gradle / AGP build output. `android/build/**` must never be committed: it is
+# regenerated on every build and only bloats the repository.
+/android/build/
+/android/.gradle/
+/android/local.properties
+/android/captures/
+
+# Android release signing material — never commit keystores or passwords.
+/android/key.properties
+*.jks
+*.keystore
+
+# iOS signing material — never commit certificates or provisioning profiles.
+*.p8
+*.p12
+*.mobileprovision
+/ios/Flutter/Generated.xcconfig
+/ios/Runner/GoogleService-Info.plist
+
+# Desktop / web build output
+/Flutter/ephemeral/
+/windows/flutter/ephemeral/
+/linux/flutter/ephemeral/
+/macos/Flutter/ephemeral/
+
 # Widget Preview related
 .widget_preview/

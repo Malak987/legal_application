@@ -1,0 +1,121 @@
+name: CI
+
+# Verifies the Flutter application and the Supabase Edge Function test suite on
+# every push and pull request. These are the checks that cannot be executed in
+# the sandboxed workspace (no Flutter SDK / Deno available locally).
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  flutter:
+    name: Flutter analyze & test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Report toolchain
+        run: flutter --version
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze --fatal-infos
+
+      - name: Run tests
+        run: flutter test --reporter expanded
+
+  format:
+    # Advisory only. The codebase is not currently dart-format clean (74 files
+    # differ: mixed CRLF/LF line endings plus formatting drift), so this check
+    # reports the deviation without blocking. Normalise it in a dedicated
+    # formatting commit, then promote this job to a required one.
+    name: Formatting (advisory)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed lib test tool
+
+  edge-functions:
+    name: Edge Function tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Run delete-my-account test suite
+        working-directory: supabase/functions/delete-my-account
+        run: deno test --allow-read --allow-env account_deletion_test.ts
+
+      - name: Type-check the Edge Function entrypoint
+        working-directory: supabase/functions/delete-my-account
+        run: deno check index.ts account_deletion.ts
+
+  bundle-drift:
+    name: Edge Function bundle is in sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Regenerate bundle and fail on drift
+        run: |
+          python3 supabase/functions/delete-my-account/bundle.py
+          git diff --exit-code -- supabase/functions/delete-my-account/dist/index.ts
+
+  migrations:
+    # Guards the recovered migration set. `supabase/migrations/` must stay
+    # byte-exact against the production fidelity oracle, and
+    # `supabase/migrations_executable/` must stay exactly what the generator
+    # produces from it. Both checks are pure stdlib Python - no database and no
+    # Supabase CLI needed, and neither touches production.
+    name: Recovered migrations are intact
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify migrations match the production checksum oracle
+        run: python3 tools/migration_recovery/verify_migrations.py
+
+      - name: Run the migration integrity test suite
+        run: python3 tools/migration_recovery/test_migration_checks.py
+
+      - name: Verify the executable set is in sync with the archive
+        run: python3 tools/migration_recovery/make_executable.py --check
+
+      - name: Regenerate and fail on drift
+        run: |
+          python3 tools/migration_recovery/make_executable.py
+          git diff --exit-code -- supabase/migrations_executable/

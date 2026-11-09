@@ -7,11 +7,19 @@ import '../authentication/login_screen.dart';
 
 /// Self-service account deletion screen.
 ///
-/// The flow is deliberately deliberate: the user reads what will be deleted,
+/// The flow is deliberately cautious: the user reads what will be deleted,
 /// types the confirmation word, and only then can the destructive button be
 /// pressed. The actual double-submission guard is
 /// `SessionController.isDeletingAccount` — while a deletion is in flight the
 /// button is disabled and a second request cannot start.
+///
+/// The wording must describe what the backend actually does. Deletion is
+/// COMPLETE, not anonymisation: `public.users.auth_user_id` cascades from
+/// `auth.users`, and every dependent row (cases, bookings, bookings slots,
+/// reviews, tasks, notifications, wallet, favorites) is removed by
+/// `ON DELETE CASCADE`, while `private.purge_user_chats_before_delete()`
+/// removes the caller's chats and their messages. Do not reintroduce
+/// "records are kept anonymously" copy here.
 class DeleteAccountScreen extends StatefulWidget {
   const DeleteAccountScreen({super.key});
 
@@ -68,9 +76,9 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
           title: const Text('تأكيد الحذف النهائي'),
           content: const SingleChildScrollView(
             child: Text(
-              'سيتم حذف حسابك وبياناتك الشخصية نهائيًا، ولا يمكن التراجع عن هذا الإجراء.\n\n'
-              'قد تُحفظ السجلات القانونية اللازمة (مثل القضايا والحجوزات والفواتير) '
-              'لأغراض قانونية، لكنها لن تبقى مرتبطة باسمك أو بريدك.',
+              'سيتم حذف حسابك وجميع بياناتك نهائيًا، ولا يمكن التراجع عن هذا الإجراء.\n\n'
+              'يشمل ذلك بياناتك الشخصية، وقضاياك، وحجوزاتك، ومحادثاتك، ومراجعاتك، '
+              'وملفاتك المخزّنة. لن يُحتفظ بأي نسخة منها بعد الحذف.',
             ),
           ),
           actions: [
@@ -173,9 +181,8 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                             'رقم الهاتف، العنوان، والصورة.'),
                         _bullet('سيتم حذف تفضيلاتك وإشعاراتك ومراجعاتك وحجوزاتك '
                             'المرتبطة بحسابك.'),
-                        _bullet('قد تُحفظ السجلات القانونية الواجبة قانونيًا '
-                            '(كالقضايا والمحادثات المرتبطة بها) بصيغة مجهولة الهوية '
-                            'دون اسمك أو بيانات التواصل معك.'),
+                        _bullet('سيتم حذف قضاياك وحجوزاتك ومحادثاتك ومراجعاتك '
+                            'وملفاتك المخزّنة بالكامل، دون الاحتفاظ بأي نسخة منها.'),
                         _bullet('لا يمكن استعادة الحساب أو محتواه بعد الحذف.'),
                         if (profile != null) ...[
                           const SizedBox(height: 14),

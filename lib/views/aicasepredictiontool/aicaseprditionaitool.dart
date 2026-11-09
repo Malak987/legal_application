@@ -431,7 +431,7 @@ class CasePredictionToolState extends State<CasePredictionTool>
 
   Widget _buildJurisdictionDropdown() {
     return DropdownButtonFormField<String>(
-      value: _jurisdiction,
+      initialValue: _jurisdiction,
       decoration: _dropdownDecoration("Jurisdiction", Feather.map_pin),
       isExpanded: true, // Allow text to fill width
       items: _jurisdictions.map((String value) {
@@ -451,7 +451,7 @@ class CasePredictionToolState extends State<CasePredictionTool>
 
   Widget _buildCaseTypeDropdown() {
     return DropdownButtonFormField<String>(
-      value: _caseType,
+      initialValue: _caseType,
       decoration: _dropdownDecoration("Case Type", Feather.briefcase),
       isExpanded: true,
       items: _caseTypes.map((String value) {

@@ -1,4 +1,132 @@
+# Codemagic CI/CD configuration for the Legal App.
+#
+# Secrets are referenced by name only and are provisioned in the Codemagic UI
+# as encrypted environment variables. No credential value is stored in Git.
+#
+#   SUPABASE_URL                  https://<project-ref>.supabase.co
+#   SUPABASE_ANON_KEY             public anon/publishable key (NOT service_role)
+#   SUPABASE_AUTH_REDIRECT_URL    legalserviceapp://auth-callback
+#   LEGAL_ANDROID_APPLICATION_ID  approved Android application id
+#   CM_KEYSTORE / CM_KEYSTORE_PASSWORD / CM_KEY_PASSWORD / CM_KEY_ALIAS
+#
+# `flutter analyze` and `flutter test` run at the start of every build so a
+# broken or untested tree never produces a store artifact.
+
 workflows:
+  verify:
+    name: Verify (analyze + test)
+    max_build_duration: 30
+    instance_type: linux_x2
+    environment:
+      flutter: stable
+    scripts:
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Analyze
+        script: flutter analyze --fatal-infos
+      - name: Test
+        script: flutter test --reporter expanded
+    triggering:
+      events:
+        - push
+        - pull_request
+
+  android-release-build:
+    name: Legal App Android Release Build
+    max_build_duration: 60
+    instance_type: linux_x2
+    environment:
+      flutter: stable
+      groups:
+        - android_signing
+        - supabase
+    scripts:
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Analyze
+        script: flutter analyze --fatal-infos
+      - name: Test
+        script: flutter test
+      - name: Validate Android signing variables
+        script: |
+          set -e
+          # Presence check only - the values are never echoed or logged.
+          missing=""
+          [ -n "$CM_KEYSTORE" ]          || missing="$missing CM_KEYSTORE"
+          [ -n "$CM_KEYSTORE_PASSWORD" ] || missing="$missing CM_KEYSTORE_PASSWORD"
+          [ -n "$CM_KEY_ALIAS" ]         || missing="$missing CM_KEY_ALIAS"
+          [ -n "$CM_KEY_PASSWORD" ]      || missing="$missing CM_KEY_PASSWORD"
+          if [ -n "$missing" ]; then
+            echo "ERROR: required Android signing variable(s) are unset or empty:$missing"
+            echo "Add them to the 'android_signing' group in Codemagic. Values are never printed."
+            exit 1
+          fi
+          echo "Android signing: all 4 required variables are present."
+      - name: Decode release keystore
+        script: |
+          set -e
+          echo "$CM_KEYSTORE" | base64 --decode > "$CM_BUILD_DIR/keystore.jks"
+          if [ ! -s "$CM_BUILD_DIR/keystore.jks" ]; then
+            echo "ERROR: decoded keystore is empty - CM_KEYSTORE is not valid base64."
+            exit 1
+          fi
+          echo "Keystore decoded to \$CM_BUILD_DIR/keystore.jks."
+      - name: Write key.properties
+        script: |
+          set -e
+          mkdir -p "$CM_BUILD_DIR/android"
+          # IMPORTANT: the heredoc delimiter must stay UNQUOTED (<<EOF, not
+          # <<'EOF'). A quoted delimiter disables variable expansion and would
+          # write the literal text "$CM_KEYSTORE_PASSWORD" instead of its value,
+          # which silently breaks release signing.
+          cat > "$CM_BUILD_DIR/android/key.properties" <<EOF
+          storeFile=$CM_BUILD_DIR/keystore.jks
+          storePassword=$CM_KEYSTORE_PASSWORD
+          keyAlias=$CM_KEY_ALIAS
+          keyPassword=$CM_KEY_PASSWORD
+          EOF
+          echo "key.properties written (values are not printed)."
+      - name: Verify Android signing config (values masked)
+        script: |
+          set -e
+          f="$CM_BUILD_DIR/android/key.properties"
+          if [ ! -f "$f" ]; then
+            echo "ERROR: key.properties was not created at \$CM_BUILD_DIR/android/key.properties"
+            exit 1
+          fi
+          # Catch the exact historical failure mode: variables left unexpanded.
+          if grep -qE '\$\{?(CM_BUILD_DIR|CM_KEYSTORE|CM_KEYSTORE_PASSWORD|CM_KEY_ALIAS|CM_KEY_PASSWORD)' "$f"; then
+            echo "ERROR: key.properties still contains unexpanded variables."
+            echo "       Check that the heredoc delimiter in this step is <<EOF and not <<'EOF'."
+            exit 1
+          fi
+          # Every required key present and non-empty. Keys only, never values.
+          for k in storeFile storePassword keyAlias keyPassword; do
+            if [ -z "$(sed -n "s/^$k=//p" "$f")" ]; then
+              echo "ERROR: '$k' is missing or empty in key.properties."
+              exit 1
+            fi
+          done
+          echo "key.properties keys present: $(cut -d= -f1 "$f" | tr '\n' ' ')"
+          # storeFile must resolve to the keystore decoded in the previous step.
+          sf=$(sed -n 's/^storeFile=//p' "$f")
+          if [ ! -f "$sf" ]; then
+            echo "ERROR: storeFile does not point at an existing keystore: $sf"
+            exit 1
+          fi
+          echo "Android release signing verified (storeFile resolves; secrets not printed)."
+      - name: Build AAB (Release)
+        script: |
+          flutter build appbundle --release \
+            --dart-define=SUPABASE_URL=$SUPABASE_URL \
+            --dart-define=SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY \
+            --dart-define=SUPABASE_AUTH_REDIRECT_URL=$SUPABASE_AUTH_REDIRECT_URL
+    artifacts:
+      - build/app/outputs/bundle/release/*.aab
+    triggering:
+      events:
+        - tag
+
   ios-release-build:
     name: Legal App iOS Release Build
     max_build_duration: 60
@@ -7,14 +135,24 @@ workflows:
       flutter: stable
       xcode: latest
       cocoapods: default
+      groups:
+        - supabase
     scripts:
       - name: Install dependencies
         script: flutter pub get
+      - name: Analyze
+        script: flutter analyze --fatal-infos
+      - name: Test
+        script: flutter test
       - name: Build IPA (Release)
         script: |
           flutter build ipa --release \
             --dart-define=SUPABASE_URL=$SUPABASE_URL \
             --dart-define=SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY \
-            --dart-define=SUPABASE_AUTH_REDIRECT_URL=$SUPABASE_AUTH_REDIRECT_URL
+            --dart-define=SUPABASE_AUTH_REDIRECT_URL=$SUPABASE_AUTH_REDIRECT_URL \
+            --dart-define=LEGAL_IOS_BUNDLE_ID=$LEGAL_IOS_BUNDLE_ID
     artifacts:
       - build/ios/ipa/*.ipa
+    triggering:
+      events:
+        - tag

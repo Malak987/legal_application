@@ -167,8 +167,8 @@ class LegalServiceCategories extends StatelessWidget {
                             ? null
                             : LinearGradient(
                               colors: [
-                                color.withOpacity(0.8),
-                                color.withOpacity(0.4),
+                                color.withValues(alpha: 0.8),
+                                color.withValues(alpha: 0.4),
                               ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
@@ -182,7 +182,7 @@ class LegalServiceCategories extends StatelessWidget {
                             ? const []
                             : [
                               BoxShadow(
-                                color: color.withOpacity(0.4),
+                                color: color.withValues(alpha: 0.4),
                                 blurRadius: 8,
                                 offset: const Offset(2, 4),
                               ),

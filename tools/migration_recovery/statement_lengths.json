@@ -1,0 +1,31 @@
+{
+  "_comment": [
+    "Statement boundary data for the five migrations whose `statements` arrays in",
+    "supabase_migrations.schema_migrations hold MORE THAN ONE element.",
+    "",
+    "Background: Supabase stores an applied migration either as one element (the",
+    "whole file, executed through the simple query protocol) or as an array of",
+    "individual statements split on top-level `;` terminators. Where it split, the",
+    "terminator itself was consumed, so array_to_string(statements, E'\\n') - the",
+    "fidelity oracle used to recover these files byte-exactly - yields SQL with NO",
+    "top-level semicolons, i.e. text that no PostgreSQL client can execute.",
+    "",
+    "This file records, per version, the byte length of each statement as stored.",
+    "Because the joined text is exactly statements joined by a single '\\n', the end",
+    "offset of statement i is  sum(len[0..i]) + i.  make_executable.py re-inserts a",
+    "';' at each of those offsets, restoring the terminators the splitter removed.",
+    "",
+    "Source query (read-only, against project qqfzbecwhewswkyxgebu):",
+    "  SELECT version, array_to_string(array(",
+    "           SELECT length(x)::text FROM unnest(statements) AS x), ',')",
+    "    FROM supabase_migrations.schema_migrations",
+    "   WHERE cardinality(statements) > 1 ORDER BY version;",
+    "",
+    "Invariant asserted by make_executable.py:  sum(lens) + (n - 1) == len(joined)."
+  ],
+  "20261025140000": [890,357,258,176,981,305,157,69,71,160,63,171,80,165,269,46,60,350,354,240,236,407,373,189,193,170,190,211,221,2307,65,178,238,101,88,98,99,106,86,88,75,85,86,93,83,85,72,82,83,90,71,73,60,70,71,78,102,93,251,86,185,157,361,132,64,61,221,65,286,214,76,64,78,86,306,71,61,71,173,87,77,139,69,69,238,88,77,208,61,61,61,116,144,111,233,86,253,252,71,163,66,214,79,79,79,171,236,166,319,91,77,65,412,405,57,276,60,414,159,289,196,220,306,163,47,104,104,45,278,112,45,105,88,45,185,49,247,79,52,223,60,53,416,118,112,115,600,89,92,60,56,71,47,343,411,513,308,415,313,157,417,6],
+  "20261025141000": [280,723,567,281,125,61,90,253,273,1782,690,91,73,151,694,91,73,151,4206,65,205,70,72,59,69,86,88,75,85,88,286,238,65,243,65,394,65,238,71,244,311,254,647,81,97,66,144,72,150,6],
+  "20261025142000": [669,608,180,141,93,613,711,1083,1106,669,1009,76,194,301,200,1417,6632,1331,1634,4550,1120,4424,2495,1391,1301,5028,1757,4093,3540,833,1368,1189,1285,1439,1200,527,1080,609,78,197,723,1513,1204,331,95,141,106,99,139,119,86,102,123,86,127,91,95,93,90,93,90,98,101,97,91,91,100,108,91,85,117,84,97,83,107,74,90,111,74,100,79,83,81,78,81,78,86,89,85,79,79,88,96,79,73,72,85,71,6],
+  "20261025143000": [216,241,62,100,79,670,102,73,164,217,61,72,216,70,418,106,93,221,90,78,146,78,248,1592,106,94,5426,96,84,456,6],
+  "20261025144000": [294,776,105,294,189,180,50,343,2085,134,122,5478,175,163,569,88,76,549,91,79,6]
+}

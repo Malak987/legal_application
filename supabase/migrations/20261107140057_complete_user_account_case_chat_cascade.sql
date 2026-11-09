@@ -1,27 +1,28 @@
--- Migration: complete_user_account_case_chat_cascade
--- Timestamp: 20261107140057
--- Ensures user profile cascade, case user_id cascade, and chat message/conversation purging.
 
-ALTER TABLE IF EXISTS public.users
-  DROP CONSTRAINT IF EXISTS users_auth_user_id_fkey,
-  ADD CONSTRAINT users_auth_user_id_fkey FOREIGN KEY (auth_user_id) REFERENCES auth.users(id) ON DELETE CASCADE;
+-- A client deleting their account must not leave their cases behind either.
+ALTER TABLE public.cases
+  DROP CONSTRAINT cases_user_id_fkey,
+  ADD CONSTRAINT cases_user_id_fkey
+    FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
 
-ALTER TABLE IF EXISTS public.cases
-  DROP CONSTRAINT IF EXISTS cases_user_id_fkey,
-  ADD CONSTRAINT cases_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
-
-CREATE OR REPLACE FUNCTION private.purge_lawyer_chats_before_delete()
-RETURNS TRIGGER AS $$
-BEGIN
-  DELETE FROM public.chats WHERE lawyer_id = OLD.id;
-  RETURN OLD;
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
-
+-- Chats are linked through a participants array rather than a foreign key.
+-- Remove the whole conversation when one of its account participants is deleted.
 CREATE OR REPLACE FUNCTION private.purge_user_chats_before_delete()
-RETURNS TRIGGER AS $$
+RETURNS trigger
+LANGUAGE plpgsql
+SET search_path = pg_catalog, public, pg_temp
+AS $function$
 BEGIN
-  DELETE FROM public.chats WHERE user_id = OLD.id;
+  DELETE FROM public.chats AS c
+   WHERE c.participants @> ARRAY[OLD.id]::text[];
   RETURN OLD;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$function$;
+
+DROP TRIGGER IF EXISTS purge_user_chats_before_delete ON public.users;
+CREATE TRIGGER purge_user_chats_before_delete
+BEFORE DELETE ON public.users
+FOR EACH ROW
+EXECUTE FUNCTION private.purge_user_chats_before_delete();
+
+REVOKE ALL ON FUNCTION private.purge_user_chats_before_delete() FROM PUBLIC, anon, authenticated;
