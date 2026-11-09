@@ -20,7 +20,11 @@ array_to_string(statements, E'\n')   -- over supabase_migrations.schema_migratio
 ```
 
 Run `python3 tools/migration_recovery/verify_migrations.py` to re-check it; it
-exits 0 only at `EXPECTED 38  OK 38  MISMATCH 0  MISSING 0  EXTRA 0`.
+exits 0 only at
+`EXPECTED 38  OK 38  MISMATCH 0  MISSING 0  EXTRA 0  DUPLICATE 0`. `MISMATCH`,
+`MISSING`, `EXTRA` and `DUPLICATE` are all fatal: the Supabase CLI refuses to
+push a set containing duplicate versions, and an extra version would let a
+freshly built database diverge from production.
 
 **The archive is authoritative for provenance, but five of its files are not
 runnable SQL.** This directory exists to fix exactly that, and nothing else.

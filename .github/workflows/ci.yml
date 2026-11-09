@@ -109,6 +109,9 @@ jobs:
       - name: Verify migrations match the production checksum oracle
         run: python3 tools/migration_recovery/verify_migrations.py
 
+      - name: Run the migration integrity test suite
+        run: python3 tools/migration_recovery/test_migration_checks.py
+
       - name: Verify the executable set is in sync with the archive
         run: python3 tools/migration_recovery/make_executable.py --check
 

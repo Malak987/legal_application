@@ -53,7 +53,6 @@ app.*.map.json
 /android/.gradle/
 /android/local.properties
 /android/captures/
-/android/app/src/main/java/
 
 # Android release signing material — never commit keystores or passwords.
 /android/key.properties
